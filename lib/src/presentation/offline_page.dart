@@ -166,7 +166,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: List<Widget>.generate(
                                     playerTwoPieces.length,
-                                        (int index) => GestureDetector(
+                                    (int index) => GestureDetector(
                                       onTap: () {
                                         if (piece.item1 == 2 && piece.item2 == playerTwoPieces[index]) {
                                           StoreProvider.of<AppState>(context)
@@ -178,8 +178,10 @@ class _OfflinePageState extends State<OfflinePage> {
                                       },
                                       child: DottedBorder(
                                         borderType: BorderType.Circle,
-                                        dashPattern: const<double> [10, 10],
-                                        color: piece.item1 == 2 && piece.item2 == playerTwoPieces[index] ? Colors.black38 : Colors.transparent,
+                                        dashPattern: const <double>[10, 10],
+                                        color: piece.item1 == 2 && piece.item2 == playerTwoPieces[index]
+                                            ? Colors.black38
+                                            : Colors.transparent,
                                         strokeWidth: 2,
                                         child: Padding(
                                           padding: const EdgeInsets.all(3),
@@ -188,9 +190,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                             height: 24 + (playerTwoPieces[index] - 1) * 10,
                                             decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
-                                              boxShadow: <BoxShadow>[
-                                                BoxShadow(blurRadius: 10,offset: Offset(1,3))
-                                              ],
+                                              boxShadow: <BoxShadow>[BoxShadow(blurRadius: 10, offset: Offset(1, 3))],
                                               color: Colors.deepPurple,
                                             ),
                                           ),
@@ -249,7 +249,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                             shape: BoxShape.circle,
                                             color: table[index].item1 == 1 ? Colors.green : Colors.deepPurple,
                                             boxShadow: const <BoxShadow>[
-                                              BoxShadow(blurRadius: 10,offset: Offset(1,3))
+                                              BoxShadow(blurRadius: 10, offset: Offset(1, 3))
                                             ],
                                           ),
                                           duration: const Duration(milliseconds: 300),
@@ -288,13 +288,15 @@ class _OfflinePageState extends State<OfflinePage> {
                                               .dispatch(const SetSelectedPiece(Tuple2<int, int>(-1, -1)));
                                         } else {
                                           StoreProvider.of<AppState>(context)
-                                            .dispatch(SetSelectedPiece(Tuple2<int, int>(1, playerOnePieces[index])));
+                                              .dispatch(SetSelectedPiece(Tuple2<int, int>(1, playerOnePieces[index])));
                                         }
                                       },
                                       child: DottedBorder(
                                         borderType: BorderType.Circle,
-                                        dashPattern: const<double> [10, 10],
-                                        color: piece.item1 == 1 && piece.item2 == playerOnePieces[index] ? Colors.black38 : Colors.transparent,
+                                        dashPattern: const <double>[10, 10],
+                                        color: piece.item1 == 1 && piece.item2 == playerOnePieces[index]
+                                            ? Colors.black38
+                                            : Colors.transparent,
                                         strokeWidth: 2,
                                         child: Padding(
                                           padding: const EdgeInsets.all(3),
@@ -303,9 +305,7 @@ class _OfflinePageState extends State<OfflinePage> {
                                             height: 24 + (playerOnePieces[index] - 1) * 10,
                                             decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
-                                              boxShadow: <BoxShadow>[
-                                                BoxShadow(blurRadius: 10,offset: Offset(1,3))
-                                              ],
+                                              boxShadow: <BoxShadow>[BoxShadow(blurRadius: 10, offset: Offset(1, 3))],
                                               color: Colors.green,
                                             ),
                                           ),

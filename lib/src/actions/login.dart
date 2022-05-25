@@ -6,7 +6,7 @@ class Login with _$Login implements AppAction {
     required String email,
     required String password,
     required ActionResult onResult,
-}) = LoginStart;
+  }) = LoginStart;
 
   @Implements<UserAction>()
   const factory Login.successful(AppUser user) = LoginSuccessful;

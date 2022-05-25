@@ -11,7 +11,7 @@ class AuthApi {
   final FirebaseStorage _storage;
 
   Future<AppUser> create(
-      {required String email, required String password, required String username, required String photoUrl}) async {
+      {required String email, required String password, required String username, required String photoUrl,}) async {
     final UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     await _auth.currentUser!.updateDisplayName(username);
     await _auth.currentUser!.updatePhotoURL(photoUrl);
@@ -67,7 +67,7 @@ class AuthApi {
     final ListResult results = await _storage.ref('profile_photos').listAll();
 
     final List<String> photoUrls = <String>[];
-    for (final Reference ref in results.items){
+    for (final Reference ref in results.items) {
       final String downloadUrl = await ref.getDownloadURL();
       photoUrls.add(downloadUrl);
     }

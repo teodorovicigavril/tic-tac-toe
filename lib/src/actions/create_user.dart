@@ -8,7 +8,7 @@ class CreateUser with _$CreateUser implements AppAction {
     required String username,
     required String photoUrl,
     required ActionResult onResult,
-}) = CreateUserStart;
+  }) = CreateUserStart;
 
   @Implements<UserAction>()
   const factory CreateUser.successful(AppUser user) = CreateUserSuccessful;

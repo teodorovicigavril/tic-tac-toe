@@ -34,5 +34,3 @@ class SetAvailablePlayerOnePiece with _$SetAvailablePlayerOnePiece implements Ap
 class SetAvailablePlayerTwoPiece with _$SetAvailablePlayerTwoPiece implements AppAction {
   const factory SetAvailablePlayerTwoPiece(int piece) = SetAvailablePlayerTwoPiece$;
 }
-
-

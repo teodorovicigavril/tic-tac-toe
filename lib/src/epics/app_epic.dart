@@ -30,7 +30,7 @@ class AppEpic {
   }
 
   Stream<AppAction> _getCurrentUserStart(Stream<GetCurrentUserStart> actions, EpicStore<AppState> store) {
-    return actions.flatMap((GetCurrentUserStart action){
+    return actions.flatMap((GetCurrentUserStart action) {
       return Stream<void>.value(null)
           .asyncMap((_) => _authApi.getCurrentUser())
           .map<GetCurrentUser>($GetCurrentUser.successful)
@@ -41,7 +41,13 @@ class AppEpic {
   Stream<AppAction> _createUserStart(Stream<CreateUserStart> actions, EpicStore<AppState> store) {
     return actions.flatMap((CreateUserStart action) {
       return Stream<void>.value(null)
-          .asyncMap((_) => _authApi.create(email: action.email, password: action.password, username: action.username, photoUrl: action.photoUrl,))
+          .asyncMap((_) => _authApi.create(
+                email: action.email,
+                password: action.password,
+                username: action.username,
+                photoUrl: action.photoUrl,
+              ),
+      )
           .map<CreateUser>($CreateUser.successful)
           .onErrorReturnWith($CreateUser.error)
           .doOnData(action.onResult);
@@ -57,7 +63,6 @@ class AppEpic {
     });
   }
 
-
   Stream<AppAction> _getProfilePhotosStart(Stream<GetProfilePhotosStart> actions, EpicStore<AppState> store) {
     return actions.flatMap((GetProfilePhotosStart action) {
       return Stream<void>.value(null)
@@ -66,5 +71,4 @@ class AppEpic {
           .onErrorReturnWith($GetProfilePhotos.error);
     });
   }
-
 }

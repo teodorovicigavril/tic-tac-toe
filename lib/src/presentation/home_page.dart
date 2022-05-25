@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
-import 'package:tic_tac_toe/src/containers/user_container.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
 
 class HomePage extends StatefulWidget {

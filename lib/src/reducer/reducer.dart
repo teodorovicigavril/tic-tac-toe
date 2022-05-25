@@ -24,7 +24,6 @@ Reducer<AppState> _reducer = combineReducers<AppState>(<Reducer<AppState>>[
   TypedReducer<AppState, SetPieceToTable>(_setPieceToTable),
   TypedReducer<AppState, SetAvailablePlayerOnePiece>(_setAvailablePlayerOnePiece),
   TypedReducer<AppState, SetAvailablePlayerTwoPiece>(_setAvailablePlayerTwoPiece),
-
 ]);
 
 AppState _userAction(AppState state, UserAction action) {
