@@ -12,6 +12,8 @@ class AppState with _$AppState {
         int selectedProfilePhoto,
     @Default(<Color>[Colors.grey, Colors.grey, Colors.grey])
         List<Color> difficultyColors,
+    @Default(0)
+        int gameStatus, // 0 -started, 1 - win, 2 - lose, 3 - tie
     @Default(<Tuple2<int, int>>[
       Tuple2<int, int>(-1, -1),
       Tuple2<int, int>(-1, -1),
@@ -30,5 +32,6 @@ class AppState with _$AppState {
         List<int> availablePlayerTwoPieces,
     @Default(Tuple2<int, int>(-1, -1))
         Tuple2<int, int> selectedPiece,
+    @Default(1) int playerTurn,
   }) = AppState$;
 }

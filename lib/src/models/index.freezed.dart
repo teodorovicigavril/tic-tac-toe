@@ -22,7 +22,11 @@ AppUser _$AppUserFromJson(Map<String, dynamic> json) {
 class _$AppUserTearOff {
   const _$AppUserTearOff();
 
-  AppUser$ call({required String uid, required String email, required String username, required String photoUrl}) {
+  AppUser$ call(
+      {required String uid,
+      required String email,
+      required String username,
+      required String photoUrl}) {
     return AppUser$(
       uid: uid,
       email: email,
@@ -53,7 +57,8 @@ mixin _$AppUser {
 
 /// @nodoc
 abstract class $AppUserCopyWith<$Res> {
-  factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) then) = _$AppUserCopyWithImpl<$Res>;
+  factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) then) =
+      _$AppUserCopyWithImpl<$Res>;
   $Res call({String uid, String email, String username, String photoUrl});
 }
 
@@ -95,14 +100,17 @@ class _$AppUserCopyWithImpl<$Res> implements $AppUserCopyWith<$Res> {
 
 /// @nodoc
 abstract class $AppUser$CopyWith<$Res> implements $AppUserCopyWith<$Res> {
-  factory $AppUser$CopyWith(AppUser$ value, $Res Function(AppUser$) then) = _$AppUser$CopyWithImpl<$Res>;
+  factory $AppUser$CopyWith(AppUser$ value, $Res Function(AppUser$) then) =
+      _$AppUser$CopyWithImpl<$Res>;
   @override
   $Res call({String uid, String email, String username, String photoUrl});
 }
 
 /// @nodoc
-class _$AppUser$CopyWithImpl<$Res> extends _$AppUserCopyWithImpl<$Res> implements $AppUser$CopyWith<$Res> {
-  _$AppUser$CopyWithImpl(AppUser$ _value, $Res Function(AppUser$) _then) : super(_value, (v) => _then(v as AppUser$));
+class _$AppUser$CopyWithImpl<$Res> extends _$AppUserCopyWithImpl<$Res>
+    implements $AppUser$CopyWith<$Res> {
+  _$AppUser$CopyWithImpl(AppUser$ _value, $Res Function(AppUser$) _then)
+      : super(_value, (v) => _then(v as AppUser$));
 
   @override
   AppUser$ get _value => super._value as AppUser$;
@@ -138,9 +146,14 @@ class _$AppUser$CopyWithImpl<$Res> extends _$AppUserCopyWithImpl<$Res> implement
 /// @nodoc
 @JsonSerializable()
 class _$AppUser$ implements AppUser$ {
-  const _$AppUser$({required this.uid, required this.email, required this.username, required this.photoUrl});
+  const _$AppUser$(
+      {required this.uid,
+      required this.email,
+      required this.username,
+      required this.photoUrl});
 
-  factory _$AppUser$.fromJson(Map<String, dynamic> json) => _$$AppUser$FromJson(json);
+  factory _$AppUser$.fromJson(Map<String, dynamic> json) =>
+      _$$AppUser$FromJson(json);
 
   @override
   final String uid;
@@ -177,7 +190,8 @@ class _$AppUser$ implements AppUser$ {
 
   @JsonKey(ignore: true)
   @override
-  $AppUser$CopyWith<AppUser$> get copyWith => _$AppUser$CopyWithImpl<AppUser$>(this, _$identity);
+  $AppUser$CopyWith<AppUser$> get copyWith =>
+      _$AppUser$CopyWithImpl<AppUser$>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -187,7 +201,10 @@ class _$AppUser$ implements AppUser$ {
 
 abstract class AppUser$ implements AppUser {
   const factory AppUser$(
-      {required String uid, required String email, required String username, required String photoUrl}) = _$AppUser$;
+      {required String uid,
+      required String email,
+      required String username,
+      required String photoUrl}) = _$AppUser$;
 
   factory AppUser$.fromJson(Map<String, dynamic> json) = _$AppUser$.fromJson;
 
@@ -201,7 +218,8 @@ abstract class AppUser$ implements AppUser {
   String get photoUrl;
   @override
   @JsonKey(ignore: true)
-  $AppUser$CopyWith<AppUser$> get copyWith => throw _privateConstructorUsedError;
+  $AppUser$CopyWith<AppUser$> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -213,7 +231,12 @@ class _$AppStateTearOff {
       AppUser? user,
       List<String> photoUrls = const <String>[],
       int selectedProfilePhoto = 0,
-      List<Color> difficultyColors = const <Color>[Colors.grey, Colors.grey, Colors.grey],
+      List<Color> difficultyColors = const <Color>[
+        Colors.grey,
+        Colors.grey,
+        Colors.grey
+      ],
+      int gameStatus = 0,
       List<Tuple2<int, int>> table = const <Tuple2<int, int>>[
         Tuple2<int, int>(-1, -1),
         Tuple2<int, int>(-1, -1),
@@ -227,17 +250,20 @@ class _$AppStateTearOff {
       ],
       List<int> availablePlayerOnePieces = const <int>[1, 2, 3, 4, 5, 6],
       List<int> availablePlayerTwoPieces = const <int>[1, 2, 3, 4, 5, 6],
-      Tuple2<int, int> selectedPiece = const Tuple2<int, int>(-1, -1)}) {
+      Tuple2<int, int> selectedPiece = const Tuple2<int, int>(-1, -1),
+      int playerTurn = 1}) {
     return AppState$(
       selectedDifficulty: selectedDifficulty,
       user: user,
       photoUrls: photoUrls,
       selectedProfilePhoto: selectedProfilePhoto,
       difficultyColors: difficultyColors,
+      gameStatus: gameStatus,
       table: table,
       availablePlayerOnePieces: availablePlayerOnePieces,
       availablePlayerTwoPieces: availablePlayerTwoPieces,
       selectedPiece: selectedPiece,
+      playerTurn: playerTurn,
     );
   }
 }
@@ -252,28 +278,35 @@ mixin _$AppState {
   List<String> get photoUrls => throw _privateConstructorUsedError;
   int get selectedProfilePhoto => throw _privateConstructorUsedError;
   List<Color> get difficultyColors => throw _privateConstructorUsedError;
+  int get gameStatus =>
+      throw _privateConstructorUsedError; // 0 -started, 1 - win, 2 - lose, 3 - tie
   List<Tuple2<int, int>> get table => throw _privateConstructorUsedError;
   List<int> get availablePlayerOnePieces => throw _privateConstructorUsedError;
   List<int> get availablePlayerTwoPieces => throw _privateConstructorUsedError;
   Tuple2<int, int> get selectedPiece => throw _privateConstructorUsedError;
+  int get playerTurn => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AppStateCopyWith<AppState> get copyWith => throw _privateConstructorUsedError;
+  $AppStateCopyWith<AppState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppStateCopyWith<$Res> {
-  factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) = _$AppStateCopyWithImpl<$Res>;
+  factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
+      _$AppStateCopyWithImpl<$Res>;
   $Res call(
       {int selectedDifficulty,
       AppUser? user,
       List<String> photoUrls,
       int selectedProfilePhoto,
       List<Color> difficultyColors,
+      int gameStatus,
       List<Tuple2<int, int>> table,
       List<int> availablePlayerOnePieces,
       List<int> availablePlayerTwoPieces,
-      Tuple2<int, int> selectedPiece});
+      Tuple2<int, int> selectedPiece,
+      int playerTurn});
 
   $AppUserCopyWith<$Res>? get user;
 }
@@ -293,10 +326,12 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
     Object? photoUrls = freezed,
     Object? selectedProfilePhoto = freezed,
     Object? difficultyColors = freezed,
+    Object? gameStatus = freezed,
     Object? table = freezed,
     Object? availablePlayerOnePieces = freezed,
     Object? availablePlayerTwoPieces = freezed,
     Object? selectedPiece = freezed,
+    Object? playerTurn = freezed,
   }) {
     return _then(_value.copyWith(
       selectedDifficulty: selectedDifficulty == freezed
@@ -319,6 +354,10 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
           ? _value.difficultyColors
           : difficultyColors // ignore: cast_nullable_to_non_nullable
               as List<Color>,
+      gameStatus: gameStatus == freezed
+          ? _value.gameStatus
+          : gameStatus // ignore: cast_nullable_to_non_nullable
+              as int,
       table: table == freezed
           ? _value.table
           : table // ignore: cast_nullable_to_non_nullable
@@ -335,6 +374,10 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
           ? _value.selectedPiece
           : selectedPiece // ignore: cast_nullable_to_non_nullable
               as Tuple2<int, int>,
+      playerTurn: playerTurn == freezed
+          ? _value.playerTurn
+          : playerTurn // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
@@ -352,7 +395,8 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
 /// @nodoc
 abstract class $AppState$CopyWith<$Res> implements $AppStateCopyWith<$Res> {
-  factory $AppState$CopyWith(AppState$ value, $Res Function(AppState$) then) = _$AppState$CopyWithImpl<$Res>;
+  factory $AppState$CopyWith(AppState$ value, $Res Function(AppState$) then) =
+      _$AppState$CopyWithImpl<$Res>;
   @override
   $Res call(
       {int selectedDifficulty,
@@ -360,17 +404,20 @@ abstract class $AppState$CopyWith<$Res> implements $AppStateCopyWith<$Res> {
       List<String> photoUrls,
       int selectedProfilePhoto,
       List<Color> difficultyColors,
+      int gameStatus,
       List<Tuple2<int, int>> table,
       List<int> availablePlayerOnePieces,
       List<int> availablePlayerTwoPieces,
-      Tuple2<int, int> selectedPiece});
+      Tuple2<int, int> selectedPiece,
+      int playerTurn});
 
   @override
   $AppUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
-class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res> implements $AppState$CopyWith<$Res> {
+class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
+    implements $AppState$CopyWith<$Res> {
   _$AppState$CopyWithImpl(AppState$ _value, $Res Function(AppState$) _then)
       : super(_value, (v) => _then(v as AppState$));
 
@@ -384,10 +431,12 @@ class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res> impleme
     Object? photoUrls = freezed,
     Object? selectedProfilePhoto = freezed,
     Object? difficultyColors = freezed,
+    Object? gameStatus = freezed,
     Object? table = freezed,
     Object? availablePlayerOnePieces = freezed,
     Object? availablePlayerTwoPieces = freezed,
     Object? selectedPiece = freezed,
+    Object? playerTurn = freezed,
   }) {
     return _then(AppState$(
       selectedDifficulty: selectedDifficulty == freezed
@@ -410,6 +459,10 @@ class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res> impleme
           ? _value.difficultyColors
           : difficultyColors // ignore: cast_nullable_to_non_nullable
               as List<Color>,
+      gameStatus: gameStatus == freezed
+          ? _value.gameStatus
+          : gameStatus // ignore: cast_nullable_to_non_nullable
+              as int,
       table: table == freezed
           ? _value.table
           : table // ignore: cast_nullable_to_non_nullable
@@ -426,6 +479,10 @@ class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res> impleme
           ? _value.selectedPiece
           : selectedPiece // ignore: cast_nullable_to_non_nullable
               as Tuple2<int, int>,
+      playerTurn: playerTurn == freezed
+          ? _value.playerTurn
+          : playerTurn // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -438,7 +495,12 @@ class _$AppState$ implements AppState$ {
       this.user,
       this.photoUrls = const <String>[],
       this.selectedProfilePhoto = 0,
-      this.difficultyColors = const <Color>[Colors.grey, Colors.grey, Colors.grey],
+      this.difficultyColors = const <Color>[
+        Colors.grey,
+        Colors.grey,
+        Colors.grey
+      ],
+      this.gameStatus = 0,
       this.table = const <Tuple2<int, int>>[
         Tuple2<int, int>(-1, -1),
         Tuple2<int, int>(-1, -1),
@@ -452,7 +514,8 @@ class _$AppState$ implements AppState$ {
       ],
       this.availablePlayerOnePieces = const <int>[1, 2, 3, 4, 5, 6],
       this.availablePlayerTwoPieces = const <int>[1, 2, 3, 4, 5, 6],
-      this.selectedPiece = const Tuple2<int, int>(-1, -1)});
+      this.selectedPiece = const Tuple2<int, int>(-1, -1),
+      this.playerTurn = 1});
 
   @JsonKey()
   @override
@@ -470,6 +533,9 @@ class _$AppState$ implements AppState$ {
   final List<Color> difficultyColors;
   @JsonKey()
   @override
+  final int gameStatus;
+  @JsonKey()
+  @override // 0 -started, 1 - win, 2 - lose, 3 - tie
   final List<Tuple2<int, int>> table;
   @JsonKey()
   @override
@@ -480,10 +546,13 @@ class _$AppState$ implements AppState$ {
   @JsonKey()
   @override
   final Tuple2<int, int> selectedPiece;
+  @JsonKey()
+  @override
+  final int playerTurn;
 
   @override
   String toString() {
-    return 'AppState(selectedDifficulty: $selectedDifficulty, user: $user, photoUrls: $photoUrls, selectedProfilePhoto: $selectedProfilePhoto, difficultyColors: $difficultyColors, table: $table, availablePlayerOnePieces: $availablePlayerOnePieces, availablePlayerTwoPieces: $availablePlayerTwoPieces, selectedPiece: $selectedPiece)';
+    return 'AppState(selectedDifficulty: $selectedDifficulty, user: $user, photoUrls: $photoUrls, selectedProfilePhoto: $selectedProfilePhoto, difficultyColors: $difficultyColors, gameStatus: $gameStatus, table: $table, availablePlayerOnePieces: $availablePlayerOnePieces, availablePlayerTwoPieces: $availablePlayerTwoPieces, selectedPiece: $selectedPiece, playerTurn: $playerTurn)';
   }
 
   @override
@@ -491,15 +560,25 @@ class _$AppState$ implements AppState$ {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AppState$ &&
-            const DeepCollectionEquality().equals(other.selectedDifficulty, selectedDifficulty) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedDifficulty, selectedDifficulty) &&
             const DeepCollectionEquality().equals(other.user, user) &&
             const DeepCollectionEquality().equals(other.photoUrls, photoUrls) &&
-            const DeepCollectionEquality().equals(other.selectedProfilePhoto, selectedProfilePhoto) &&
-            const DeepCollectionEquality().equals(other.difficultyColors, difficultyColors) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedProfilePhoto, selectedProfilePhoto) &&
+            const DeepCollectionEquality()
+                .equals(other.difficultyColors, difficultyColors) &&
+            const DeepCollectionEquality()
+                .equals(other.gameStatus, gameStatus) &&
             const DeepCollectionEquality().equals(other.table, table) &&
-            const DeepCollectionEquality().equals(other.availablePlayerOnePieces, availablePlayerOnePieces) &&
-            const DeepCollectionEquality().equals(other.availablePlayerTwoPieces, availablePlayerTwoPieces) &&
-            const DeepCollectionEquality().equals(other.selectedPiece, selectedPiece));
+            const DeepCollectionEquality().equals(
+                other.availablePlayerOnePieces, availablePlayerOnePieces) &&
+            const DeepCollectionEquality().equals(
+                other.availablePlayerTwoPieces, availablePlayerTwoPieces) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedPiece, selectedPiece) &&
+            const DeepCollectionEquality()
+                .equals(other.playerTurn, playerTurn));
   }
 
   @override
@@ -510,14 +589,17 @@ class _$AppState$ implements AppState$ {
       const DeepCollectionEquality().hash(photoUrls),
       const DeepCollectionEquality().hash(selectedProfilePhoto),
       const DeepCollectionEquality().hash(difficultyColors),
+      const DeepCollectionEquality().hash(gameStatus),
       const DeepCollectionEquality().hash(table),
       const DeepCollectionEquality().hash(availablePlayerOnePieces),
       const DeepCollectionEquality().hash(availablePlayerTwoPieces),
-      const DeepCollectionEquality().hash(selectedPiece));
+      const DeepCollectionEquality().hash(selectedPiece),
+      const DeepCollectionEquality().hash(playerTurn));
 
   @JsonKey(ignore: true)
   @override
-  $AppState$CopyWith<AppState$> get copyWith => _$AppState$CopyWithImpl<AppState$>(this, _$identity);
+  $AppState$CopyWith<AppState$> get copyWith =>
+      _$AppState$CopyWithImpl<AppState$>(this, _$identity);
 }
 
 abstract class AppState$ implements AppState {
@@ -527,10 +609,12 @@ abstract class AppState$ implements AppState {
       List<String> photoUrls,
       int selectedProfilePhoto,
       List<Color> difficultyColors,
+      int gameStatus,
       List<Tuple2<int, int>> table,
       List<int> availablePlayerOnePieces,
       List<int> availablePlayerTwoPieces,
-      Tuple2<int, int> selectedPiece}) = _$AppState$;
+      Tuple2<int, int> selectedPiece,
+      int playerTurn}) = _$AppState$;
 
   @override
   int get selectedDifficulty;
@@ -543,6 +627,8 @@ abstract class AppState$ implements AppState {
   @override
   List<Color> get difficultyColors;
   @override
+  int get gameStatus;
+  @override // 0 -started, 1 - win, 2 - lose, 3 - tie
   List<Tuple2<int, int>> get table;
   @override
   List<int> get availablePlayerOnePieces;
@@ -551,6 +637,9 @@ abstract class AppState$ implements AppState {
   @override
   Tuple2<int, int> get selectedPiece;
   @override
+  int get playerTurn;
+  @override
   @JsonKey(ignore: true)
-  $AppState$CopyWith<AppState$> get copyWith => throw _privateConstructorUsedError;
+  $AppState$CopyWith<AppState$> get copyWith =>
+      throw _privateConstructorUsedError;
 }

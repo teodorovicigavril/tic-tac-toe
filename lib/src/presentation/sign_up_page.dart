@@ -67,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
   void initState() {
     super.initState();
 
-    _store = _store = StoreProvider.of<AppState>(context, listen: false)..dispatch(const GetProfilePhotos());
+    _store = StoreProvider.of<AppState>(context, listen: false)..dispatch(const GetProfilePhotos());
   }
 
   @override

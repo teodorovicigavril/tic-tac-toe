@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
@@ -5,6 +7,7 @@ import 'package:tic_tac_toe/src/models/index.dart';
 import 'package:tuple/tuple.dart';
 
 AppState reducer(AppState state, dynamic action) {
+  print(action);
   if (action is! AppAction) {
     throw ArgumentError('All actions should implement AppAction');
   }
@@ -24,6 +27,9 @@ Reducer<AppState> _reducer = combineReducers<AppState>(<Reducer<AppState>>[
   TypedReducer<AppState, SetPieceToTable>(_setPieceToTable),
   TypedReducer<AppState, SetAvailablePlayerOnePiece>(_setAvailablePlayerOnePiece),
   TypedReducer<AppState, SetAvailablePlayerTwoPiece>(_setAvailablePlayerTwoPiece),
+  TypedReducer<AppState, SetInitGame>(_setInitGame),
+  TypedReducer<AppState, SetGameStatus>(_setGameStatus),
+  TypedReducer<AppState, SetPlayerTurn>(_setPlayerTurn),
 ]);
 
 AppState _userAction(AppState state, UserAction action) {
@@ -59,7 +65,7 @@ AppState _setSelectedPiece(AppState state, SetSelectedPiece action) {
 }
 
 AppState _setPieceToTable(AppState state, SetPieceToTable action) {
-  return state.copyWith(
+  final AppState newState = state.copyWith(
     table: state.table.asMap().entries.map((MapEntry<int, Tuple2<int, int>> e) {
       if (e.key == action.position) {
         return action.piece;
@@ -68,12 +74,65 @@ AppState _setPieceToTable(AppState state, SetPieceToTable action) {
       }
     }).toList(),
   );
+  return newState;
 }
 
 AppState _setAvailablePlayerOnePiece(AppState state, SetAvailablePlayerOnePiece action) {
-  return state.copyWith(availablePlayerOnePieces: <int>[...state.availablePlayerOnePieces]..remove(action.piece));
+  if (action.remove) {
+    return state.copyWith(availablePlayerOnePieces: <int>[...state.availablePlayerOnePieces]..remove(action.piece));
+  } else {
+    return state.copyWith(
+      availablePlayerOnePieces: state.availablePlayerOnePieces.map((int piece) {
+        if (piece == action.piece) {
+          return -piece;
+        }
+        return piece;
+      }).toList(),
+    );
+  }
 }
 
 AppState _setAvailablePlayerTwoPiece(AppState state, SetAvailablePlayerTwoPiece action) {
-  return state.copyWith(availablePlayerTwoPieces: <int>[...state.availablePlayerTwoPieces]..remove(action.piece));
+  if (action.remove) {
+    return state.copyWith(availablePlayerTwoPieces: <int>[...state.availablePlayerTwoPieces]..remove(action.piece));
+  } else {
+    return state.copyWith(
+      availablePlayerTwoPieces: state.availablePlayerTwoPieces.map((int piece) {
+        if (piece == action.piece) {
+          return -piece;
+        }
+        return piece;
+      }).toList(),
+    );
+  }
+}
+
+AppState _setInitGame(AppState state, SetInitGame action) {
+  return state.copyWith(
+    availablePlayerOnePieces: <int>[1, 2, 3, 4, 5, 6],
+    availablePlayerTwoPieces: <int>[1, 2, 3, 4, 5, 6],
+    selectedDifficulty: action.difficulty,
+    gameStatus: 0,
+    difficultyColors: <Color>[Colors.grey, Colors.grey, Colors.grey],
+    selectedPiece: const Tuple2<int, int>(-1, -1),
+    table: <Tuple2<int, int>>[
+      const Tuple2<int, int>(-1, -1),
+      const Tuple2<int, int>(-1, -1),
+      const Tuple2<int, int>(-1, -1),
+      const Tuple2<int, int>(-1, -1),
+      const Tuple2<int, int>(-1, -1),
+      const Tuple2<int, int>(-1, -1),
+      const Tuple2<int, int>(-1, -1),
+      const Tuple2<int, int>(-1, -1),
+      const Tuple2<int, int>(-1, -1),
+    ],
+  );
+}
+
+AppState _setGameStatus(AppState state, SetGameStatus action) {
+  return state.copyWith(gameStatus: action.status);
+}
+
+AppState _setPlayerTurn(AppState state, SetPlayerTurn action) {
+  return state.copyWith(playerTurn: action.player);
 }

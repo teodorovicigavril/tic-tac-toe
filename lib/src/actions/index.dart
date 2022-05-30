@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
 import 'package:tuple/tuple.dart';
@@ -15,6 +16,8 @@ part 'logout.dart';
 part 'get_profile_photos.dart';
 
 part 'set.dart';
+
+part 'set_turn_table.dart';
 
 abstract class AppAction {}
 

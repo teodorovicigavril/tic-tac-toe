@@ -26,11 +26,26 @@ class SetPieceToTable with _$SetPieceToTable implements AppAction {
 }
 
 @freezed
+class SetGameStatus with _$SetGameStatus implements AppAction {
+  const factory SetGameStatus(int status) = SetGameStatus$;
+}
+
+@freezed
 class SetAvailablePlayerOnePiece with _$SetAvailablePlayerOnePiece implements AppAction {
-  const factory SetAvailablePlayerOnePiece(int piece) = SetAvailablePlayerOnePiece$;
+  const factory SetAvailablePlayerOnePiece({required int piece, required bool remove}) = SetAvailablePlayerOnePiece$;
 }
 
 @freezed
 class SetAvailablePlayerTwoPiece with _$SetAvailablePlayerTwoPiece implements AppAction {
-  const factory SetAvailablePlayerTwoPiece(int piece) = SetAvailablePlayerTwoPiece$;
+  const factory SetAvailablePlayerTwoPiece({required int piece, required bool remove}) = SetAvailablePlayerTwoPiece$;
+}
+
+@freezed
+class SetInitGame with _$SetInitGame implements AppAction {
+  const factory SetInitGame([@Default(-1) int difficulty]) = SetInitGame$;
+}
+
+@freezed
+class SetPlayerTurn with _$SetPlayerTurn implements AppAction {
+  const factory SetPlayerTurn(int player) = SetPlayerTurn$;
 }
