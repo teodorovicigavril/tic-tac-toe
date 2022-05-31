@@ -113,20 +113,20 @@ Tuple2<int, int> findBestMove(List<Tuple2<int, int>> table, List<int> myPieces) 
 }
 
 Tuple2<int, int> findBestMoveEasy(List<Tuple2<int, int>> table, List<int> myPieces) {
-  while(true) {
+  while (true) {
     final int randomSize = myPieces[Random().nextInt(myPieces.length)];
     final int randomPosition = Random().nextInt(9);
 
-    if(!isMovesLeft(table, randomSize, 1) && randomSize > 0) {
+    if (!isMovesLeft(table, randomSize, 1) && randomSize > 0) {
       return Tuple2<int, int>(-1, randomSize);
     }
 
-    if (table[randomPosition].item1 == -1 || (table[randomPosition].item1 == 1 && table[randomPosition].item2 < randomSize)){
+    if ((table[randomPosition].item1 == -1)
+        || (table[randomPosition].item1 == 1 && table[randomPosition].item2 < randomSize)) {
       return Tuple2<int, int>(randomPosition, randomSize);
     }
   }
 }
-
 
 bool checkTie(List<int> playerOnePieces, List<int> playerTwoPieces) {
   if (playerOnePieces.isEmpty && playerTwoPieces.isEmpty) {
