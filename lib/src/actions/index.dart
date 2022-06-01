@@ -19,6 +19,12 @@ part 'set.dart';
 
 part 'set_turn_table.dart';
 
+part 'add_score.dart';
+
+part 'listen_for_scores.dart';
+
+part 'get_user.dart';
+
 abstract class AppAction {}
 
 abstract class ErrorAction implements AppAction {
@@ -32,3 +38,11 @@ abstract class UserAction implements AppAction {
 }
 
 typedef ActionResult = void Function(AppAction action);
+
+abstract class PendingAction {
+  String get pendingId;
+}
+
+abstract class ActionStart implements PendingAction {}
+
+abstract class ActionDone implements PendingAction {}

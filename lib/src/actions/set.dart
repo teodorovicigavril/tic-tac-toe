@@ -49,3 +49,8 @@ class SetInitGame with _$SetInitGame implements AppAction {
 class SetPlayerTurn with _$SetPlayerTurn implements AppAction {
   const factory SetPlayerTurn(int player) = SetPlayerTurn$;
 }
+
+@freezed
+class DecreaseScore with _$DecreaseScore implements AppAction {
+  const factory DecreaseScore(int points) = DecreaseScore$;
+}

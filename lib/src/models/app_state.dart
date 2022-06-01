@@ -33,5 +33,9 @@ class AppState with _$AppState {
     @Default(Tuple2<int, int>(-1, -1))
         Tuple2<int, int> selectedPiece,
     @Default(1) int playerTurn,
+    @Default(109) int score,
+    @Default(<Score>[]) List<Score> scores,
+    @Default(<String>{}) Set<String> pending,
+    @Default(<String, AppUser>{}) Map<String, AppUser> users,
   }) = AppState$;
 }

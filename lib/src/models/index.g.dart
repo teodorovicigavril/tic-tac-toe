@@ -20,3 +20,19 @@ Map<String, dynamic> _$$AppUser$ToJson(_$AppUser$ instance) =>
       'username': instance.username,
       'photoUrl': instance.photoUrl,
     };
+
+_$Score$ _$$Score$FromJson(Map<String, dynamic> json) => _$Score$(
+      id: json['id'] as String,
+      uid: json['uid'] as String,
+      difficulty: json['difficulty'] as int,
+      score: json['score'] as int,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+    );
+
+Map<String, dynamic> _$$Score$ToJson(_$Score$ instance) => <String, dynamic>{
+      'id': instance.id,
+      'uid': instance.uid,
+      'difficulty': instance.difficulty,
+      'score': instance.score,
+      'createdAt': instance.createdAt.toIso8601String(),
+    };

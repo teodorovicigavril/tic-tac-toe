@@ -251,7 +251,11 @@ class _$AppStateTearOff {
       List<int> availablePlayerOnePieces = const <int>[1, 2, 3, 4, 5, 6],
       List<int> availablePlayerTwoPieces = const <int>[1, 2, 3, 4, 5, 6],
       Tuple2<int, int> selectedPiece = const Tuple2<int, int>(-1, -1),
-      int playerTurn = 1}) {
+      int playerTurn = 1,
+      int score = 109,
+      List<Score> scores = const <Score>[],
+      Set<String> pending = const <String>{},
+      Map<String, AppUser> users = const <String, AppUser>{}}) {
     return AppState$(
       selectedDifficulty: selectedDifficulty,
       user: user,
@@ -264,6 +268,10 @@ class _$AppStateTearOff {
       availablePlayerTwoPieces: availablePlayerTwoPieces,
       selectedPiece: selectedPiece,
       playerTurn: playerTurn,
+      score: score,
+      scores: scores,
+      pending: pending,
+      users: users,
     );
   }
 }
@@ -285,6 +293,10 @@ mixin _$AppState {
   List<int> get availablePlayerTwoPieces => throw _privateConstructorUsedError;
   Tuple2<int, int> get selectedPiece => throw _privateConstructorUsedError;
   int get playerTurn => throw _privateConstructorUsedError;
+  int get score => throw _privateConstructorUsedError;
+  List<Score> get scores => throw _privateConstructorUsedError;
+  Set<String> get pending => throw _privateConstructorUsedError;
+  Map<String, AppUser> get users => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateCopyWith<AppState> get copyWith =>
@@ -306,7 +318,11 @@ abstract class $AppStateCopyWith<$Res> {
       List<int> availablePlayerOnePieces,
       List<int> availablePlayerTwoPieces,
       Tuple2<int, int> selectedPiece,
-      int playerTurn});
+      int playerTurn,
+      int score,
+      List<Score> scores,
+      Set<String> pending,
+      Map<String, AppUser> users});
 
   $AppUserCopyWith<$Res>? get user;
 }
@@ -332,6 +348,10 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
     Object? availablePlayerTwoPieces = freezed,
     Object? selectedPiece = freezed,
     Object? playerTurn = freezed,
+    Object? score = freezed,
+    Object? scores = freezed,
+    Object? pending = freezed,
+    Object? users = freezed,
   }) {
     return _then(_value.copyWith(
       selectedDifficulty: selectedDifficulty == freezed
@@ -378,6 +398,22 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
           ? _value.playerTurn
           : playerTurn // ignore: cast_nullable_to_non_nullable
               as int,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
+      scores: scores == freezed
+          ? _value.scores
+          : scores // ignore: cast_nullable_to_non_nullable
+              as List<Score>,
+      pending: pending == freezed
+          ? _value.pending
+          : pending // ignore: cast_nullable_to_non_nullable
+              as Set<String>,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as Map<String, AppUser>,
     ));
   }
 
@@ -409,7 +445,11 @@ abstract class $AppState$CopyWith<$Res> implements $AppStateCopyWith<$Res> {
       List<int> availablePlayerOnePieces,
       List<int> availablePlayerTwoPieces,
       Tuple2<int, int> selectedPiece,
-      int playerTurn});
+      int playerTurn,
+      int score,
+      List<Score> scores,
+      Set<String> pending,
+      Map<String, AppUser> users});
 
   @override
   $AppUserCopyWith<$Res>? get user;
@@ -437,6 +477,10 @@ class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
     Object? availablePlayerTwoPieces = freezed,
     Object? selectedPiece = freezed,
     Object? playerTurn = freezed,
+    Object? score = freezed,
+    Object? scores = freezed,
+    Object? pending = freezed,
+    Object? users = freezed,
   }) {
     return _then(AppState$(
       selectedDifficulty: selectedDifficulty == freezed
@@ -483,6 +527,22 @@ class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
           ? _value.playerTurn
           : playerTurn // ignore: cast_nullable_to_non_nullable
               as int,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
+      scores: scores == freezed
+          ? _value.scores
+          : scores // ignore: cast_nullable_to_non_nullable
+              as List<Score>,
+      pending: pending == freezed
+          ? _value.pending
+          : pending // ignore: cast_nullable_to_non_nullable
+              as Set<String>,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as Map<String, AppUser>,
     ));
   }
 }
@@ -515,7 +575,11 @@ class _$AppState$ implements AppState$ {
       this.availablePlayerOnePieces = const <int>[1, 2, 3, 4, 5, 6],
       this.availablePlayerTwoPieces = const <int>[1, 2, 3, 4, 5, 6],
       this.selectedPiece = const Tuple2<int, int>(-1, -1),
-      this.playerTurn = 1});
+      this.playerTurn = 1,
+      this.score = 109,
+      this.scores = const <Score>[],
+      this.pending = const <String>{},
+      this.users = const <String, AppUser>{}});
 
   @JsonKey()
   @override
@@ -549,10 +613,22 @@ class _$AppState$ implements AppState$ {
   @JsonKey()
   @override
   final int playerTurn;
+  @JsonKey()
+  @override
+  final int score;
+  @JsonKey()
+  @override
+  final List<Score> scores;
+  @JsonKey()
+  @override
+  final Set<String> pending;
+  @JsonKey()
+  @override
+  final Map<String, AppUser> users;
 
   @override
   String toString() {
-    return 'AppState(selectedDifficulty: $selectedDifficulty, user: $user, photoUrls: $photoUrls, selectedProfilePhoto: $selectedProfilePhoto, difficultyColors: $difficultyColors, gameStatus: $gameStatus, table: $table, availablePlayerOnePieces: $availablePlayerOnePieces, availablePlayerTwoPieces: $availablePlayerTwoPieces, selectedPiece: $selectedPiece, playerTurn: $playerTurn)';
+    return 'AppState(selectedDifficulty: $selectedDifficulty, user: $user, photoUrls: $photoUrls, selectedProfilePhoto: $selectedProfilePhoto, difficultyColors: $difficultyColors, gameStatus: $gameStatus, table: $table, availablePlayerOnePieces: $availablePlayerOnePieces, availablePlayerTwoPieces: $availablePlayerTwoPieces, selectedPiece: $selectedPiece, playerTurn: $playerTurn, score: $score, scores: $scores, pending: $pending, users: $users)';
   }
 
   @override
@@ -578,7 +654,11 @@ class _$AppState$ implements AppState$ {
             const DeepCollectionEquality()
                 .equals(other.selectedPiece, selectedPiece) &&
             const DeepCollectionEquality()
-                .equals(other.playerTurn, playerTurn));
+                .equals(other.playerTurn, playerTurn) &&
+            const DeepCollectionEquality().equals(other.score, score) &&
+            const DeepCollectionEquality().equals(other.scores, scores) &&
+            const DeepCollectionEquality().equals(other.pending, pending) &&
+            const DeepCollectionEquality().equals(other.users, users));
   }
 
   @override
@@ -594,7 +674,11 @@ class _$AppState$ implements AppState$ {
       const DeepCollectionEquality().hash(availablePlayerOnePieces),
       const DeepCollectionEquality().hash(availablePlayerTwoPieces),
       const DeepCollectionEquality().hash(selectedPiece),
-      const DeepCollectionEquality().hash(playerTurn));
+      const DeepCollectionEquality().hash(playerTurn),
+      const DeepCollectionEquality().hash(score),
+      const DeepCollectionEquality().hash(scores),
+      const DeepCollectionEquality().hash(pending),
+      const DeepCollectionEquality().hash(users));
 
   @JsonKey(ignore: true)
   @override
@@ -614,7 +698,11 @@ abstract class AppState$ implements AppState {
       List<int> availablePlayerOnePieces,
       List<int> availablePlayerTwoPieces,
       Tuple2<int, int> selectedPiece,
-      int playerTurn}) = _$AppState$;
+      int playerTurn,
+      int score,
+      List<Score> scores,
+      Set<String> pending,
+      Map<String, AppUser> users}) = _$AppState$;
 
   @override
   int get selectedDifficulty;
@@ -639,7 +727,246 @@ abstract class AppState$ implements AppState {
   @override
   int get playerTurn;
   @override
+  int get score;
+  @override
+  List<Score> get scores;
+  @override
+  Set<String> get pending;
+  @override
+  Map<String, AppUser> get users;
+  @override
   @JsonKey(ignore: true)
   $AppState$CopyWith<AppState$> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+Score _$ScoreFromJson(Map<String, dynamic> json) {
+  return Score$.fromJson(json);
+}
+
+/// @nodoc
+class _$ScoreTearOff {
+  const _$ScoreTearOff();
+
+  Score$ call(
+      {required String id,
+      required String uid,
+      required int difficulty,
+      required int score,
+      required DateTime createdAt}) {
+    return Score$(
+      id: id,
+      uid: uid,
+      difficulty: difficulty,
+      score: score,
+      createdAt: createdAt,
+    );
+  }
+
+  Score fromJson(Map<String, Object?> json) {
+    return Score.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Score = _$ScoreTearOff();
+
+/// @nodoc
+mixin _$Score {
+  String get id => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
+  int get difficulty => throw _privateConstructorUsedError;
+  int get score => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ScoreCopyWith<Score> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ScoreCopyWith<$Res> {
+  factory $ScoreCopyWith(Score value, $Res Function(Score) then) =
+      _$ScoreCopyWithImpl<$Res>;
+  $Res call(
+      {String id, String uid, int difficulty, int score, DateTime createdAt});
+}
+
+/// @nodoc
+class _$ScoreCopyWithImpl<$Res> implements $ScoreCopyWith<$Res> {
+  _$ScoreCopyWithImpl(this._value, this._then);
+
+  final Score _value;
+  // ignore: unused_field
+  final $Res Function(Score) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? uid = freezed,
+    Object? difficulty = freezed,
+    Object? score = freezed,
+    Object? createdAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      difficulty: difficulty == freezed
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as int,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class $Score$CopyWith<$Res> implements $ScoreCopyWith<$Res> {
+  factory $Score$CopyWith(Score$ value, $Res Function(Score$) then) =
+      _$Score$CopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String id, String uid, int difficulty, int score, DateTime createdAt});
+}
+
+/// @nodoc
+class _$Score$CopyWithImpl<$Res> extends _$ScoreCopyWithImpl<$Res>
+    implements $Score$CopyWith<$Res> {
+  _$Score$CopyWithImpl(Score$ _value, $Res Function(Score$) _then)
+      : super(_value, (v) => _then(v as Score$));
+
+  @override
+  Score$ get _value => super._value as Score$;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? uid = freezed,
+    Object? difficulty = freezed,
+    Object? score = freezed,
+    Object? createdAt = freezed,
+  }) {
+    return _then(Score$(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      difficulty: difficulty == freezed
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as int,
+      score: score == freezed
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$Score$ implements Score$ {
+  const _$Score$(
+      {required this.id,
+      required this.uid,
+      required this.difficulty,
+      required this.score,
+      required this.createdAt});
+
+  factory _$Score$.fromJson(Map<String, dynamic> json) =>
+      _$$Score$FromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String uid;
+  @override
+  final int difficulty;
+  @override
+  final int score;
+  @override
+  final DateTime createdAt;
+
+  @override
+  String toString() {
+    return 'Score(id: $id, uid: $uid, difficulty: $difficulty, score: $score, createdAt: $createdAt)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Score$ &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.uid, uid) &&
+            const DeepCollectionEquality()
+                .equals(other.difficulty, difficulty) &&
+            const DeepCollectionEquality().equals(other.score, score) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(uid),
+      const DeepCollectionEquality().hash(difficulty),
+      const DeepCollectionEquality().hash(score),
+      const DeepCollectionEquality().hash(createdAt));
+
+  @JsonKey(ignore: true)
+  @override
+  $Score$CopyWith<Score$> get copyWith =>
+      _$Score$CopyWithImpl<Score$>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$Score$ToJson(this);
+  }
+}
+
+abstract class Score$ implements Score {
+  const factory Score$(
+      {required String id,
+      required String uid,
+      required int difficulty,
+      required int score,
+      required DateTime createdAt}) = _$Score$;
+
+  factory Score$.fromJson(Map<String, dynamic> json) = _$Score$.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get uid;
+  @override
+  int get difficulty;
+  @override
+  int get score;
+  @override
+  DateTime get createdAt;
+  @override
+  @JsonKey(ignore: true)
+  $Score$CopyWith<Score$> get copyWith => throw _privateConstructorUsedError;
 }

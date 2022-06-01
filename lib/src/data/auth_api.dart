@@ -75,4 +75,10 @@ class AuthApi {
     await FirebaseAuth.instance.signOut();
     return photoUrls;
   }
+
+  Future<AppUser> getUser(String uid) async{
+    final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore.doc('users/$uid').get();
+
+    return AppUser.fromJson(snapshot.data()!);
+  }
 }

@@ -6,14 +6,16 @@ import 'package:redux_epics/redux_epics.dart';
 import 'package:rxdart/transformers.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
 import 'package:tic_tac_toe/src/data/auth_api.dart';
+import 'package:tic_tac_toe/src/data/game_api.dart';
 import 'package:tic_tac_toe/src/game_api/game_logic.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
 import 'package:tuple/tuple.dart';
 
 class AppEpic {
-  AppEpic(this._authApi);
+  AppEpic(this._authApi, this._gameApi);
 
   final AuthApi _authApi;
+  final GameApi _gameApi;
 
   Epic<AppState> getEpics() {
     return combineEpics(<Epic<AppState>>[
@@ -23,6 +25,9 @@ class AppEpic {
       TypedEpic<AppState, LogoutStart>(_logoutStart),
       TypedEpic<AppState, GetProfilePhotosStart>(_getProfilePhotosStart),
       TypedEpic<AppState, SetTurnTableStart>(_setTurnTableStart),
+      TypedEpic<AppState, AddScoreStart>(_addScoreStart),
+      TypedEpic<AppState, GetUserStart>(_getUserStart),
+      _listenForScores,
     ]);
   }
 
@@ -80,6 +85,33 @@ class AppEpic {
     });
   }
 
+  Stream<AppAction> _listenForScores(Stream<dynamic> actions, EpicStore<AppState> store) {
+    return actions.whereType<ListenForScoresStart>().flatMap((ListenForScoresStart action) {
+      return _gameApi
+          .listenForScores()
+          .expand((List<Score> scores) {
+            return <AppAction>[
+              ListenForScores.event(scores),
+              ...scores
+                  .where((Score score) => store.state.users[score.uid] == null)
+                  .map((Score score) => GetUser(score.uid))
+                  .toSet()
+            ];
+          })
+          .takeUntil<dynamic>(actions.where((dynamic event) => event is ListenForScoresDone))
+          .onErrorReturnWith($ListenForScores.error);
+    });
+  }
+
+  Stream<AppAction> _getUserStart(Stream<GetUserStart> actions, EpicStore<AppState> store) {
+    return actions.flatMap((GetUserStart action) {
+      return Stream<void>.value(null)
+          .asyncMap((_) => _authApi.getUser(action.uid))
+          .map<GetUser>($GetUser.successful)
+          .onErrorReturnWith($GetUser.error);
+    });
+  }
+
   // Stream<AppAction> _setPieceToTable(Stream<SetPieceToTable> actions, EpicStore<AppState> store) {
   //   return actions.flatMap((SetPieceToTable action) async* {
   //   final List<Tuple2<int, int>> table = store.state.table;
@@ -96,6 +128,22 @@ class AppEpic {
   //   yield SetPieceToTable(Tuple2<int, int>(2, move.item2), move.item1);
   //   yield SetAvailablePlayerTwoPiece(move.item2);
   // });
+
+  Stream<AppAction> _addScoreStart(Stream<AddScoreStart> actions, EpicStore<AppState> store) {
+    return actions.flatMap((AddScoreStart action) {
+      return Stream<void>.value(null)
+          .asyncMap((_) {
+            return _gameApi.addScore(
+              uid: store.state.user!.uid,
+              difficulty: store.state.selectedDifficulty,
+              score: action.score,
+            );
+          })
+          .mapTo(const AddScore.successful())
+          .onErrorReturnWith($AddScore.error);
+    });
+  }
+
   // }
 
   Stream<AppAction> _setTurnTableStart(Stream<SetTurnTableStart> actions, EpicStore<AppState> store) {
@@ -103,16 +151,19 @@ class AppEpic {
       if ((store.state.table[action.index].item1 == 2 && store.state.table[action.index].item2 < action.piece.item2) ||
           store.state.table[action.index].item1 == -1) {
         yield SetPieceToTable(action.piece, action.index);
+        yield DecreaseScore(action.piece.item2 + 6 - store.state.availablePlayerOnePieces.length);
 
         yield const SetSelectedPiece(Tuple2<int, int>(-1, -1));
         yield SetAvailablePlayerOnePiece(piece: action.piece.item2, remove: true);
 
         if (evaluate(store.state.table) == -10) {
           yield const SetGameStatus(1);
+          yield AddScore.start(store.state.score);
+
           await showDialog<Widget>(
             context: action.context,
             builder: (BuildContext context) {
-              return getAlertDialog('You won!', context, action.difficulty);
+              return getAlertDialog('You won!', context, action.difficulty, store.state.score);
             },
           );
           return;
@@ -134,10 +185,13 @@ class AppEpic {
 
         if (checkTie(store.state.availablePlayerOnePieces, store.state.availablePlayerTwoPieces)) {
           yield const SetGameStatus(3);
+          yield const DecreaseScore(10);
+          yield AddScore.start(store.state.score);
+
           await showDialog<Widget>(
             context: action.context,
             builder: (BuildContext context) {
-              return getAlertDialog('It s a TIE!', context, action.difficulty);
+              return getAlertDialog('It s a TIE!', context, action.difficulty, store.state.score);
             },
           );
           return;
@@ -146,7 +200,8 @@ class AppEpic {
         yield const SetPlayerTurn(2);
 
         int j = 0;
-        while (j < store.state.availablePlayerTwoPieces.length) {
+        while (
+            j < store.state.availablePlayerTwoPieces.length && store.state.availablePlayerTwoPieces.reduce(max) > 0) {
           await Future<void>.delayed(Duration(milliseconds: Random().nextInt(300) + 700));
 
           Tuple2<int, int> move = const Tuple2<int, int>(-1, -1);
@@ -165,7 +220,7 @@ class AppEpic {
           if (move.item1 != -1) {
             yield SetPieceToTable(Tuple2<int, int>(2, move.item2), move.item1);
             yield SetAvailablePlayerTwoPiece(piece: move.item2, remove: true);
-            j --;
+            j--;
           }
 
           for (int i = 0; i < store.state.availablePlayerOnePieces.length; i++) {
@@ -184,10 +239,13 @@ class AppEpic {
 
           if (evaluate(store.state.table) == 10) {
             yield const SetGameStatus(2);
+            yield const DecreaseScore(20);
+            yield AddScore.start(store.state.score);
+
             await showDialog<Widget>(
               context: action.context,
               builder: (BuildContext context) {
-                return getAlertDialog('You lose!', context, action.difficulty);
+                return getAlertDialog('You lose!', context, action.difficulty, store.state.score);
               },
             );
             return;
@@ -195,10 +253,13 @@ class AppEpic {
 
           if (checkTie(store.state.availablePlayerOnePieces, store.state.availablePlayerTwoPieces)) {
             yield const SetGameStatus(3);
+            yield const DecreaseScore(10);
+            yield AddScore.start(store.state.score);
+
             await showDialog<Widget>(
               context: action.context,
               builder: (BuildContext context) {
-                return getAlertDialog('It s a TIE!', context, action.difficulty);
+                return getAlertDialog('It s a TIE!', context, action.difficulty, store.state.score);
               },
             );
             return;
@@ -216,14 +277,14 @@ class AppEpic {
   }
 }
 
-AlertDialog getAlertDialog(String title, BuildContext context, int difficulty) {
+AlertDialog getAlertDialog(String title, BuildContext context, int difficulty, int score) {
   return AlertDialog(
     actionsAlignment: MainAxisAlignment.spaceEvenly,
     title: Center(
       child: Text(title),
     ),
-    content: const Text(
-      'Your score is 15, this will be automatically added to your scores!',
+    content: Text(
+      'Your score is $score, this will be automatically added to your scores!',
     ),
     actions: <Widget>[
       TextButton(

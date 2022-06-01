@@ -30,6 +30,11 @@ Reducer<AppState> _reducer = combineReducers<AppState>(<Reducer<AppState>>[
   TypedReducer<AppState, SetInitGame>(_setInitGame),
   TypedReducer<AppState, SetGameStatus>(_setGameStatus),
   TypedReducer<AppState, SetPlayerTurn>(_setPlayerTurn),
+  TypedReducer<AppState, DecreaseScore>(_decreaseScore),
+  TypedReducer<AppState, ActionStart>(_actionStart),
+  TypedReducer<AppState, ActionDone>(_actionDone),
+  TypedReducer<AppState, OnScoresEvent>(_onScoresEvent),
+  TypedReducer<AppState, GetUserSuccessful>(_getUserSuccessful),
 ]);
 
 AppState _userAction(AppState state, UserAction action) {
@@ -113,6 +118,7 @@ AppState _setInitGame(AppState state, SetInitGame action) {
     availablePlayerTwoPieces: <int>[1, 2, 3, 4, 5, 6],
     selectedDifficulty: action.difficulty,
     gameStatus: 0,
+    score: 109,
     difficultyColors: <Color>[Colors.grey, Colors.grey, Colors.grey],
     selectedPiece: const Tuple2<int, int>(-1, -1),
     table: <Tuple2<int, int>>[
@@ -135,4 +141,29 @@ AppState _setGameStatus(AppState state, SetGameStatus action) {
 
 AppState _setPlayerTurn(AppState state, SetPlayerTurn action) {
   return state.copyWith(playerTurn: action.player);
+}
+
+AppState _decreaseScore(AppState state, DecreaseScore action) {
+  return state.copyWith(score: state.score - action.points);
+}
+
+AppState _actionStart(AppState state, ActionStart action) {
+  return state.copyWith(pending: <String>{...state.pending, action.pendingId});
+}
+
+AppState _actionDone(AppState state, ActionDone action) {
+  return state.copyWith(pending: <String>{...state.pending}..remove(action.pendingId));
+}
+
+AppState _onScoresEvent(AppState state, OnScoresEvent action) {
+  return state.copyWith(scores: <Score>{...state.scores, ...action.scores}.toList());
+}
+
+AppState _getUserSuccessful(AppState state, GetUserSuccessful action) {
+  return state.copyWith(
+    users: <String, AppUser>{
+      ...state.users,
+      action.user.uid: action.user,
+    },
+  );
 }

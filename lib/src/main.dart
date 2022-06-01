@@ -8,6 +8,7 @@ import 'package:redux/redux.dart';
 import 'package:redux_epics/redux_epics.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
 import 'package:tic_tac_toe/src/data/auth_api.dart';
+import 'package:tic_tac_toe/src/data/game_api.dart';
 import 'package:tic_tac_toe/src/epics/app_epic.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
 import 'package:tic_tac_toe/src/presentation/about_page.dart';
@@ -15,6 +16,7 @@ import 'package:tic_tac_toe/src/presentation/home.dart';
 import 'package:tic_tac_toe/src/presentation/login_page.dart';
 import 'package:tic_tac_toe/src/presentation/offline_page.dart';
 import 'package:tic_tac_toe/src/presentation/profile_page.dart';
+import 'package:tic_tac_toe/src/presentation/rankings_page.dart';
 import 'package:tic_tac_toe/src/presentation/sign_up_page.dart';
 import 'package:tic_tac_toe/src/reducer/reducer.dart';
 
@@ -26,7 +28,8 @@ Future<void> main() async {
   final FirebaseStorage storage = FirebaseStorage.instanceFor(app: app);
 
   final AuthApi authApi = AuthApi(auth, firestore, storage);
-  final AppEpic epic = AppEpic(authApi);
+  final GameApi gameApi = GameApi(firestore);
+  final AppEpic epic = AppEpic(authApi, gameApi);
 
   final Store<AppState> store = Store<AppState>(
     reducer,
@@ -56,6 +59,7 @@ class TicTacToeApp extends StatelessWidget {
           '/aboutPage': (BuildContext context) => const AboutPage(),
           '/profilePage': (BuildContext context) => const ProfilePage(),
           '/offline': (BuildContext context) => const OfflinePage(),
+          '/rankings': (BuildContext context) => const RankingsPage(),
         },
       ),
     );

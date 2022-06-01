@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ElevatedButton(
               onPressed: () {
-                // Navigator.pushNamed(context, '/rankings');
+                Navigator.pushNamed(context, '/rankings');
               },
               child: const Text('Rankings'),
             ),
