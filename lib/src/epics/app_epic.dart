@@ -27,6 +27,7 @@ class AppEpic {
       TypedEpic<AppState, SetTurnTableStart>(_setTurnTableStart),
       TypedEpic<AppState, AddScoreStart>(_addScoreStart),
       TypedEpic<AppState, GetUserStart>(_getUserStart),
+      TypedEpic<AppState, RemoveScoreStart>(_removeScoreStart),
       _listenForScores,
     ]);
   }
@@ -112,22 +113,14 @@ class AppEpic {
     });
   }
 
-  // Stream<AppAction> _setPieceToTable(Stream<SetPieceToTable> actions, EpicStore<AppState> store) {
-  //   return actions.flatMap((SetPieceToTable action) async* {
-  //   final List<Tuple2<int, int>> table = store.state.table;
-  //   yield const SetSelectedPiece(Tuple2<int, int>(-1, -1));
-  //
-  //   yield SetAvailablePlayerOnePiece(piece.item2);
-  //
-  //   final Tuple2<int, int> move = findBestMove(
-  //     List<Tuple2<int, int>>.from(table),
-  //     List<int>.from(playerTwoPieces),
-  //   );
-  //
-  //   print(table);
-  //   yield SetPieceToTable(Tuple2<int, int>(2, move.item2), move.item1);
-  //   yield SetAvailablePlayerTwoPiece(move.item2);
-  // });
+  Stream<AppAction> _removeScoreStart(Stream<RemoveScoreStart> actions, EpicStore<AppState> store) {
+    return actions.flatMap((RemoveScoreStart action) {
+      return Stream<void>.value(null)
+          .asyncMap((_) => _gameApi.removeScore(action.id))
+          .map<RemoveScore>($RemoveScore.successful)
+          .onErrorReturnWith(RemoveScore.error);
+    });
+  }
 
   Stream<AppAction> _addScoreStart(Stream<AddScoreStart> actions, EpicStore<AppState> store) {
     return actions.flatMap((AddScoreStart action) {
@@ -143,8 +136,6 @@ class AppEpic {
           .onErrorReturnWith($AddScore.error);
     });
   }
-
-  // }
 
   Stream<AppAction> _setTurnTableStart(Stream<SetTurnTableStart> actions, EpicStore<AppState> store) {
     return actions.flatMap((SetTurnTableStart action) async* {

@@ -121,8 +121,8 @@ Tuple2<int, int> findBestMoveEasy(List<Tuple2<int, int>> table, List<int> myPiec
       return Tuple2<int, int>(-1, randomSize);
     }
 
-    if ((table[randomPosition].item1 == -1)
-        || (table[randomPosition].item1 == 1 && table[randomPosition].item2 < randomSize)) {
+    if ((table[randomPosition].item1 == -1) ||
+        (table[randomPosition].item1 == 1 && table[randomPosition].item2 < randomSize)) {
       return Tuple2<int, int>(randomPosition, randomSize);
     }
   }

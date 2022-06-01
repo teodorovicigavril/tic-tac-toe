@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
 
@@ -28,44 +27,105 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                StoreProvider.of<AppState>(context, listen: false)
-                  .dispatch(const SetInitGame());
+            GestureDetector(
+              onTap: () {
+                StoreProvider.of<AppState>(context, listen: false).dispatch(const SetInitGame());
                 Navigator.pushNamed(context, '/offline');
               },
-              child: const Text('Play Offline'),
+              child: Container(
+                width: 180,
+                height: 40,
+                margin: const EdgeInsets.only(top: 16, bottom: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.lightGreen,
+                ),
+                child: const Center(child: Text('Play Offline')),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {
-              },
-              child: const Text('Play Online'),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                width: 180,
+                height: 40,
+                margin: const EdgeInsets.only(top: 16, bottom: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.lightGreen,
+                ),
+                child: const Center(child: Text('Play Online')),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 Navigator.pushNamed(context, '/rankings');
               },
-              child: const Text('Rankings'),
+              child: Container(
+                width: 180,
+                height: 40,
+                margin: const EdgeInsets.only(top: 16, bottom: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.lightGreen,
+                ),
+                child: const Center(child: Text('Rankings')),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 Navigator.pushNamed(context, '/profilePage');
               },
-              child: const Text('Profile'),
+              child: Container(
+                width: 180,
+                height: 40,
+                margin: const EdgeInsets.only(top: 16, bottom: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.lightGreen,
+                ),
+                child: const Center(child: Text('Profile')),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('About'),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                width: 180,
+                height: 40,
+                margin: const EdgeInsets.only(top: 16, bottom: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.lightGreen,
+                ),
+                child: const Center(child: Text('About')),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Settings'),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                width: 180,
+                height: 40,
+                margin: const EdgeInsets.only(top: 16, bottom: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.lightGreen,
+                ),
+                child: const Center(child: Text('Settings')),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 StoreProvider.of<AppState>(context).dispatch(const Logout());
               },
-              child: const Text('Logout'),
+              child: Container(
+                width: 180,
+                height: 40,
+                margin: const EdgeInsets.only(top: 16, bottom: 8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.yellow,
+                ),
+                child: const Center(child: Text('Logout')),
+              ),
             ),
           ],
         ),

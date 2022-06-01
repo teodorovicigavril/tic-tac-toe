@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
@@ -7,7 +5,7 @@ import 'package:tic_tac_toe/src/models/index.dart';
 import 'package:tuple/tuple.dart';
 
 AppState reducer(AppState state, dynamic action) {
-  print(action);
+  // print(action);
   if (action is! AppAction) {
     throw ArgumentError('All actions should implement AppAction');
   }
@@ -35,6 +33,8 @@ Reducer<AppState> _reducer = combineReducers<AppState>(<Reducer<AppState>>[
   TypedReducer<AppState, ActionDone>(_actionDone),
   TypedReducer<AppState, OnScoresEvent>(_onScoresEvent),
   TypedReducer<AppState, GetUserSuccessful>(_getUserSuccessful),
+  TypedReducer<AppState, SetShowMyTableScore>(_setShowMyTableScore),
+  TypedReducer<AppState, RemoveScoreSuccessful>(_removeScoreSuccessful),
 ]);
 
 AppState _userAction(AppState state, UserAction action) {
@@ -166,4 +166,19 @@ AppState _getUserSuccessful(AppState state, GetUserSuccessful action) {
       action.user.uid: action.user,
     },
   );
+}
+
+AppState _setShowMyTableScore(AppState state, SetShowMyTableScore action) {
+  return state.copyWith(
+    showMyTableScore: state.showMyTableScore.asMap().entries.map((MapEntry<int, bool> e) {
+      if (e.key == action.difficulty) {
+        return !e.value;
+      }
+      return e.value;
+    }).toList(),
+  );
+}
+
+AppState _removeScoreSuccessful(AppState state, RemoveScoreSuccessful action) {
+  return state.copyWith(scores: <Score>[...state.scores]..remove(action.score));
 }

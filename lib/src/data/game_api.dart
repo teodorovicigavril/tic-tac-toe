@@ -7,12 +7,7 @@ class GameApi {
   final FirebaseFirestore _firestore;
 
   Stream<List<Score>> listenForScores() {
-    print('apeleaza asta!!');
-    return _firestore
-        .collection('scores')
-        .orderBy('score', descending: true)
-        .snapshots()
-        .map((QuerySnapshot<Map<String, dynamic>> snapshot) {
+    return _firestore.collection('scores').snapshots().map((QuerySnapshot<Map<String, dynamic>> snapshot) {
       return snapshot.docs
           .map((QueryDocumentSnapshot<Map<String, dynamic>> doc) => Score.fromJson(doc.data()))
           .toList();
@@ -35,5 +30,17 @@ class GameApi {
     );
 
     await ref.set(_score.toJson());
+  }
+
+  Future<Score> removeScore(String id) async {
+    late Score score;
+    await _firestore.runTransaction<void>((Transaction transaction) async {
+      final DocumentSnapshot<Map<String, dynamic>> snapshot = await transaction.get(_firestore.doc('scores/$id'));
+
+      score = Score.fromJson(snapshot.data()!);
+
+      transaction.delete(_firestore.doc('scores/$id'));
+    });
+    return score;
   }
 }

@@ -1,18 +1,8 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
 import 'package:tic_tac_toe/src/containers/difficulty_colors_container.dart';
-import 'package:tic_tac_toe/src/containers/game_status_container.dart';
-import 'package:tic_tac_toe/src/containers/piece_container.dart';
-import 'package:tic_tac_toe/src/containers/player_one_pieces_container.dart';
-import 'package:tic_tac_toe/src/containers/player_two_pieces_container.dart';
-import 'package:tic_tac_toe/src/containers/selected_difficulty_container.dart';
-import 'package:tic_tac_toe/src/containers/table_container.dart';
-import 'package:tic_tac_toe/src/game_api/game_logic.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
-import 'package:tuple/tuple.dart';
 
 class NoDifficultyOfflinePage extends StatefulWidget {
   const NoDifficultyOfflinePage({Key? key}) : super(key: key);

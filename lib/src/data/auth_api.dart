@@ -10,8 +10,12 @@ class AuthApi {
   final FirebaseFirestore _firestore;
   final FirebaseStorage _storage;
 
-  Future<AppUser> create(
-      {required String email, required String password, required String username, required String photoUrl,}) async {
+  Future<AppUser> create({
+    required String email,
+    required String password,
+    required String username,
+    required String photoUrl,
+  }) async {
     final UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     await _auth.currentUser!.updateDisplayName(username);
     await _auth.currentUser!.updatePhotoURL(photoUrl);
@@ -76,7 +80,7 @@ class AuthApi {
     return photoUrls;
   }
 
-  Future<AppUser> getUser(String uid) async{
+  Future<AppUser> getUser(String uid) async {
     final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore.doc('users/$uid').get();
 
     return AppUser.fromJson(snapshot.data()!);

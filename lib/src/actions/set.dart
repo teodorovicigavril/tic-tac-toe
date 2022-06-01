@@ -54,3 +54,8 @@ class SetPlayerTurn with _$SetPlayerTurn implements AppAction {
 class DecreaseScore with _$DecreaseScore implements AppAction {
   const factory DecreaseScore(int points) = DecreaseScore$;
 }
+
+@freezed
+class SetShowMyTableScore with _$SetShowMyTableScore implements AppAction {
+  const factory SetShowMyTableScore(int difficulty) = SetShowMyTableScore$;
+}

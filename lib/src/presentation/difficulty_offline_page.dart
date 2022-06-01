@@ -1,9 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
-import 'package:tic_tac_toe/src/containers/difficulty_colors_container.dart';
 import 'package:tic_tac_toe/src/containers/game_status_container.dart';
 import 'package:tic_tac_toe/src/containers/piece_container.dart';
 import 'package:tic_tac_toe/src/containers/player_one_pieces_container.dart';
@@ -11,7 +9,6 @@ import 'package:tic_tac_toe/src/containers/player_turn_container.dart';
 import 'package:tic_tac_toe/src/containers/player_two_pieces_container.dart';
 import 'package:tic_tac_toe/src/containers/selected_difficulty_container.dart';
 import 'package:tic_tac_toe/src/containers/table_container.dart';
-import 'package:tic_tac_toe/src/game_api/game_logic.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
 import 'package:tuple/tuple.dart';
 
@@ -48,12 +45,19 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                             return Column(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                Text(
-                                  playerTurn == 1 && gameStatus == 0
-                                      ? 'Your turn...'
-                                      : playerTurn == 2 && gameStatus == 0
-                                          ? 'Opponent turn...'
-                                          : 'Game Ended!',
+                                Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Text(
+                                    playerTurn == 1 && gameStatus == 0
+                                        ? 'Your turn...'
+                                        : playerTurn == 2 && gameStatus == 0
+                                            ? 'Opponent turn...'
+                                            : 'Game Ended!',
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
                                 ),
                                 Stack(
                                   alignment: AlignmentDirectional.center,

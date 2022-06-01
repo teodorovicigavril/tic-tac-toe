@@ -13,11 +13,10 @@ class ScoresContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, List<Score>>(
       builder: builder,
-      converter: (Store<AppState> store) =>
-          store.state.scores
-              .where((Score score) => score.difficulty == difficulty)
-              .where((Score score) => store.state.users[score.uid] != null)
-              .toList(),
+      converter: (Store<AppState> store) => store.state.scores
+          .where((Score score) => score.difficulty == difficulty)
+          .where((Score score) => store.state.users[score.uid] != null)
+          .toList(),
     );
   }
 }

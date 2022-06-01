@@ -8,7 +8,7 @@ class Score with _$Score {
     required int difficulty,
     required int score,
     required DateTime createdAt,
-}) = Score$;
+  }) = Score$;
 
   factory Score.fromJson(Map<dynamic, dynamic> json) => _$ScoreFromJson(Map<String, dynamic>.from(json));
 }

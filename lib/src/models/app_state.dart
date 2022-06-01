@@ -32,10 +32,17 @@ class AppState with _$AppState {
         List<int> availablePlayerTwoPieces,
     @Default(Tuple2<int, int>(-1, -1))
         Tuple2<int, int> selectedPiece,
-    @Default(1) int playerTurn,
-    @Default(109) int score,
-    @Default(<Score>[]) List<Score> scores,
-    @Default(<String>{}) Set<String> pending,
-    @Default(<String, AppUser>{}) Map<String, AppUser> users,
+    @Default(1)
+        int playerTurn,
+    @Default(109)
+        int score,
+    @Default(<Score>[])
+        List<Score> scores,
+    @Default(<String>{})
+        Set<String> pending,
+    @Default(<String, AppUser>{})
+        Map<String, AppUser> users,
+    @Default(<bool>[false, false, false])
+        List<bool> showMyTableScore,
   }) = AppState$;
 }

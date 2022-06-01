@@ -7,7 +7,7 @@ class SetTurnTable with _$SetTurnTable implements AppAction {
     required int index,
     required BuildContext context,
     required int difficulty,
-}) = SetTurnTableStart;
+  }) = SetTurnTableStart;
 
   const factory SetTurnTable.successful() = SetTurnTableSuccessful;
 

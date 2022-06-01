@@ -25,6 +25,8 @@ part 'listen_for_scores.dart';
 
 part 'get_user.dart';
 
+part 'remove_score.dart';
+
 abstract class AppAction {}
 
 abstract class ErrorAction implements AppAction {
