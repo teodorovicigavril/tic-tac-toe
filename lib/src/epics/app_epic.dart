@@ -28,6 +28,9 @@ class AppEpic {
       TypedEpic<AppState, AddScoreStart>(_addScoreStart),
       TypedEpic<AppState, GetUserStart>(_getUserStart),
       TypedEpic<AppState, RemoveScoreStart>(_removeScoreStart),
+      TypedEpic<AppState, VerifyPasswordStart>(_verifyPasswordStart),
+      TypedEpic<AppState, DeleteProfileStart>(_deleteProfileStart),
+      TypedEpic<AppState, UpdateProfileStart>(_updateProfileStart),
       _listenForScores,
     ]);
   }
@@ -80,7 +83,7 @@ class AppEpic {
   Stream<AppAction> _getProfilePhotosStart(Stream<GetProfilePhotosStart> actions, EpicStore<AppState> store) {
     return actions.flatMap((GetProfilePhotosStart action) {
       return Stream<void>.value(null)
-          .asyncMap((_) => _authApi.getProfilePhotos())
+          .asyncMap((_) => _authApi.getProfilePhotos(alreadyLoggedIn: action.alreadyLoggedIn))
           .map<GetProfilePhotos>($GetProfilePhotos.successful)
           .onErrorReturnWith($GetProfilePhotos.error);
     });
@@ -101,6 +104,16 @@ class AppEpic {
           })
           .takeUntil<dynamic>(actions.where((dynamic event) => event is ListenForScoresDone))
           .onErrorReturnWith($ListenForScores.error);
+    });
+  }
+
+  Stream<AppAction> _deleteProfileStart(Stream<DeleteProfileStart> actions, EpicStore<AppState> store) {
+    return actions.flatMap((DeleteProfileStart action) {
+      return Stream<void>.value(null)
+          .asyncMap((_) => _authApi.deleteProfile(action.uid))
+          .mapTo(const DeleteProfile.successful())
+          .onErrorReturnWith($DeleteProfile.error)
+          .doOnData(action.onResult);
     });
   }
 
@@ -134,6 +147,33 @@ class AppEpic {
           })
           .mapTo(const AddScore.successful())
           .onErrorReturnWith($AddScore.error);
+    });
+  }
+
+  Stream<AppAction> _verifyPasswordStart(Stream<VerifyPasswordStart> actions, EpicStore<AppState> store) {
+    return actions.flatMap((VerifyPasswordStart action) {
+      return Stream<void>.value(null)
+          .asyncMap((_) => _authApi.verifyPassword(action.password))
+          .mapTo(const VerifyPassword.successful())
+          .onErrorReturnWith($VerifyPassword.error)
+          .doOnData(action.onResult);
+    });
+  }
+
+  Stream<AppAction> _updateProfileStart(Stream<UpdateProfileStart> actions, EpicStore<AppState> store) {
+    return actions.flatMap((UpdateProfileStart action) {
+      return Stream<void>.value(null)
+          .asyncMap(
+            (_) => _authApi.updateProfile(
+              email: action.email,
+              password: action.password,
+              username: action.username,
+              photoUrl: action.photoUrl,
+            ),
+          )
+          .map<UpdateProfile>($UpdateProfile.successful)
+          .onErrorReturnWith($UpdateProfile.error)
+          .doOnData(action.onResult);
     });
   }
 
@@ -205,6 +245,12 @@ class AppEpic {
             move = findBestMove(
               List<Tuple2<int, int>>.from(store.state.table),
               List<int>.from(store.state.availablePlayerTwoPieces),
+            );
+          } else {
+            move = findBestMoveHard(
+              List<Tuple2<int, int>>.from(store.state.table),
+              List<int>.from(store.state.availablePlayerTwoPieces),
+              List<int>.from(store.state.availablePlayerOnePieces),
             );
           }
 

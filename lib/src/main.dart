@@ -12,6 +12,7 @@ import 'package:tic_tac_toe/src/data/game_api.dart';
 import 'package:tic_tac_toe/src/epics/app_epic.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
 import 'package:tic_tac_toe/src/presentation/about_page.dart';
+import 'package:tic_tac_toe/src/presentation/edit_profile.dart';
 import 'package:tic_tac_toe/src/presentation/home.dart';
 import 'package:tic_tac_toe/src/presentation/login_page.dart';
 import 'package:tic_tac_toe/src/presentation/offline_page.dart';
@@ -60,6 +61,7 @@ class TicTacToeApp extends StatelessWidget {
           '/profilePage': (BuildContext context) => const ProfilePage(),
           '/offline': (BuildContext context) => const OfflinePage(),
           '/rankings': (BuildContext context) => const RankingsPage(),
+          '/edit': (BuildContext context) => const EditProfilePage(),
         },
       ),
     );

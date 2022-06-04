@@ -30,9 +30,6 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
     return Scaffold(
       body: SelectedDifficultyContainer(
         builder: (BuildContext context, int difficulty) {
-          if (difficulty == 2) {
-            return const Center(child: Text('Not implemented yet!'));
-          }
           return GameStatusContainer(
             builder: (BuildContext context, int gameStatus) {
               return TableContainer(

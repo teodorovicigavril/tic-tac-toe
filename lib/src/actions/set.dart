@@ -59,3 +59,13 @@ class DecreaseScore with _$DecreaseScore implements AppAction {
 class SetShowMyTableScore with _$SetShowMyTableScore implements AppAction {
   const factory SetShowMyTableScore(int difficulty) = SetShowMyTableScore$;
 }
+
+@freezed
+class SetProfileErrorMessage with _$SetProfileErrorMessage implements AppAction {
+  const factory SetProfileErrorMessage(String message) = SetProfileErrorMessage$;
+}
+
+@freezed
+class SetUserToNull with _$SetUserToNull implements AppAction {
+  const factory SetUserToNull() = SetUserToNull$;
+}

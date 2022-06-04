@@ -2,7 +2,7 @@ part of 'index.dart';
 
 @freezed
 class GetProfilePhotos with _$GetProfilePhotos implements AppAction {
-  const factory GetProfilePhotos() = GetProfilePhotosStart;
+  const factory GetProfilePhotos({required bool alreadyLoggedIn}) = GetProfilePhotosStart;
 
   const factory GetProfilePhotos.successful(List<String> photoUrls) = GetProfilePhotosSuccessful;
 

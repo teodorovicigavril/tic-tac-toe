@@ -2063,8 +2063,10 @@ abstract class LogoutError implements Logout, ErrorAction {
 class _$GetProfilePhotosTearOff {
   const _$GetProfilePhotosTearOff();
 
-  GetProfilePhotosStart call() {
-    return const GetProfilePhotosStart();
+  GetProfilePhotosStart call({required bool alreadyLoggedIn}) {
+    return GetProfilePhotosStart(
+      alreadyLoggedIn: alreadyLoggedIn,
+    );
   }
 
   GetProfilePhotosSuccessful successful(List<String> photoUrls) {
@@ -2088,21 +2090,21 @@ const $GetProfilePhotos = _$GetProfilePhotosTearOff();
 mixin _$GetProfilePhotos {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function() $default, {
+    TResult Function(bool alreadyLoggedIn) $default, {
     required TResult Function(List<String> photoUrls) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool alreadyLoggedIn)? $default, {
     TResult Function(List<String> photoUrls)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool alreadyLoggedIn)? $default, {
     TResult Function(List<String> photoUrls)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -2151,6 +2153,7 @@ class _$GetProfilePhotosCopyWithImpl<$Res> implements $GetProfilePhotosCopyWith<
 abstract class $GetProfilePhotosStartCopyWith<$Res> {
   factory $GetProfilePhotosStartCopyWith(GetProfilePhotosStart value, $Res Function(GetProfilePhotosStart) then) =
       _$GetProfilePhotosStartCopyWithImpl<$Res>;
+  $Res call({bool alreadyLoggedIn});
 }
 
 /// @nodoc
@@ -2161,56 +2164,79 @@ class _$GetProfilePhotosStartCopyWithImpl<$Res> extends _$GetProfilePhotosCopyWi
 
   @override
   GetProfilePhotosStart get _value => super._value as GetProfilePhotosStart;
+
+  @override
+  $Res call({
+    Object? alreadyLoggedIn = freezed,
+  }) {
+    return _then(GetProfilePhotosStart(
+      alreadyLoggedIn: alreadyLoggedIn == freezed
+          ? _value.alreadyLoggedIn
+          : alreadyLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetProfilePhotosStart implements GetProfilePhotosStart {
-  const _$GetProfilePhotosStart();
+  const _$GetProfilePhotosStart({required this.alreadyLoggedIn});
+
+  @override
+  final bool alreadyLoggedIn;
 
   @override
   String toString() {
-    return 'GetProfilePhotos()';
+    return 'GetProfilePhotos(alreadyLoggedIn: $alreadyLoggedIn)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is GetProfilePhotosStart);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GetProfilePhotosStart &&
+            const DeepCollectionEquality().equals(other.alreadyLoggedIn, alreadyLoggedIn));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(alreadyLoggedIn));
+
+  @JsonKey(ignore: true)
+  @override
+  $GetProfilePhotosStartCopyWith<GetProfilePhotosStart> get copyWith =>
+      _$GetProfilePhotosStartCopyWithImpl<GetProfilePhotosStart>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function() $default, {
+    TResult Function(bool alreadyLoggedIn) $default, {
     required TResult Function(List<String> photoUrls) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
-    return $default();
+    return $default(alreadyLoggedIn);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool alreadyLoggedIn)? $default, {
     TResult Function(List<String> photoUrls)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
   }) {
-    return $default?.call();
+    return $default?.call(alreadyLoggedIn);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool alreadyLoggedIn)? $default, {
     TResult Function(List<String> photoUrls)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default();
+      return $default(alreadyLoggedIn);
     }
     return orElse();
   }
@@ -2251,7 +2277,11 @@ class _$GetProfilePhotosStart implements GetProfilePhotosStart {
 }
 
 abstract class GetProfilePhotosStart implements GetProfilePhotos {
-  const factory GetProfilePhotosStart() = _$GetProfilePhotosStart;
+  const factory GetProfilePhotosStart({required bool alreadyLoggedIn}) = _$GetProfilePhotosStart;
+
+  bool get alreadyLoggedIn;
+  @JsonKey(ignore: true)
+  $GetProfilePhotosStartCopyWith<GetProfilePhotosStart> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2317,7 +2347,7 @@ class _$GetProfilePhotosSuccessful implements GetProfilePhotosSuccessful {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function() $default, {
+    TResult Function(bool alreadyLoggedIn) $default, {
     required TResult Function(List<String> photoUrls) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
@@ -2327,7 +2357,7 @@ class _$GetProfilePhotosSuccessful implements GetProfilePhotosSuccessful {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool alreadyLoggedIn)? $default, {
     TResult Function(List<String> photoUrls)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
   }) {
@@ -2337,7 +2367,7 @@ class _$GetProfilePhotosSuccessful implements GetProfilePhotosSuccessful {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool alreadyLoggedIn)? $default, {
     TResult Function(List<String> photoUrls)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -2462,7 +2492,7 @@ class _$GetProfilePhotosError implements GetProfilePhotosError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function() $default, {
+    TResult Function(bool alreadyLoggedIn) $default, {
     required TResult Function(List<String> photoUrls) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
@@ -2472,7 +2502,7 @@ class _$GetProfilePhotosError implements GetProfilePhotosError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool alreadyLoggedIn)? $default, {
     TResult Function(List<String> photoUrls)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
   }) {
@@ -2482,7 +2512,7 @@ class _$GetProfilePhotosError implements GetProfilePhotosError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool alreadyLoggedIn)? $default, {
     TResult Function(List<String> photoUrls)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -4033,6 +4063,195 @@ abstract class SetShowMyTableScore$ implements SetShowMyTableScore {
   @override
   @JsonKey(ignore: true)
   $SetShowMyTableScore$CopyWith<SetShowMyTableScore$> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$SetProfileErrorMessageTearOff {
+  const _$SetProfileErrorMessageTearOff();
+
+  SetProfileErrorMessage$ call(String message) {
+    return SetProfileErrorMessage$(
+      message,
+    );
+  }
+}
+
+/// @nodoc
+const $SetProfileErrorMessage = _$SetProfileErrorMessageTearOff();
+
+/// @nodoc
+mixin _$SetProfileErrorMessage {
+  String get message => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SetProfileErrorMessageCopyWith<SetProfileErrorMessage> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SetProfileErrorMessageCopyWith<$Res> {
+  factory $SetProfileErrorMessageCopyWith(SetProfileErrorMessage value, $Res Function(SetProfileErrorMessage) then) =
+      _$SetProfileErrorMessageCopyWithImpl<$Res>;
+  $Res call({String message});
+}
+
+/// @nodoc
+class _$SetProfileErrorMessageCopyWithImpl<$Res> implements $SetProfileErrorMessageCopyWith<$Res> {
+  _$SetProfileErrorMessageCopyWithImpl(this._value, this._then);
+
+  final SetProfileErrorMessage _value;
+  // ignore: unused_field
+  final $Res Function(SetProfileErrorMessage) _then;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_value.copyWith(
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class $SetProfileErrorMessage$CopyWith<$Res> implements $SetProfileErrorMessageCopyWith<$Res> {
+  factory $SetProfileErrorMessage$CopyWith(SetProfileErrorMessage$ value, $Res Function(SetProfileErrorMessage$) then) =
+      _$SetProfileErrorMessage$CopyWithImpl<$Res>;
+  @override
+  $Res call({String message});
+}
+
+/// @nodoc
+class _$SetProfileErrorMessage$CopyWithImpl<$Res> extends _$SetProfileErrorMessageCopyWithImpl<$Res>
+    implements $SetProfileErrorMessage$CopyWith<$Res> {
+  _$SetProfileErrorMessage$CopyWithImpl(SetProfileErrorMessage$ _value, $Res Function(SetProfileErrorMessage$) _then)
+      : super(_value, (v) => _then(v as SetProfileErrorMessage$));
+
+  @override
+  SetProfileErrorMessage$ get _value => super._value as SetProfileErrorMessage$;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(SetProfileErrorMessage$(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetProfileErrorMessage$ implements SetProfileErrorMessage$ {
+  const _$SetProfileErrorMessage$(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'SetProfileErrorMessage(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SetProfileErrorMessage$ &&
+            const DeepCollectionEquality().equals(other.message, message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+
+  @JsonKey(ignore: true)
+  @override
+  $SetProfileErrorMessage$CopyWith<SetProfileErrorMessage$> get copyWith =>
+      _$SetProfileErrorMessage$CopyWithImpl<SetProfileErrorMessage$>(this, _$identity);
+}
+
+abstract class SetProfileErrorMessage$ implements SetProfileErrorMessage {
+  const factory SetProfileErrorMessage$(String message) = _$SetProfileErrorMessage$;
+
+  @override
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  $SetProfileErrorMessage$CopyWith<SetProfileErrorMessage$> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$SetUserToNullTearOff {
+  const _$SetUserToNullTearOff();
+
+  SetUserToNull$ call() {
+    return const SetUserToNull$();
+  }
+}
+
+/// @nodoc
+const $SetUserToNull = _$SetUserToNullTearOff();
+
+/// @nodoc
+mixin _$SetUserToNull {}
+
+/// @nodoc
+abstract class $SetUserToNullCopyWith<$Res> {
+  factory $SetUserToNullCopyWith(SetUserToNull value, $Res Function(SetUserToNull) then) =
+      _$SetUserToNullCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SetUserToNullCopyWithImpl<$Res> implements $SetUserToNullCopyWith<$Res> {
+  _$SetUserToNullCopyWithImpl(this._value, this._then);
+
+  final SetUserToNull _value;
+  // ignore: unused_field
+  final $Res Function(SetUserToNull) _then;
+}
+
+/// @nodoc
+abstract class $SetUserToNull$CopyWith<$Res> {
+  factory $SetUserToNull$CopyWith(SetUserToNull$ value, $Res Function(SetUserToNull$) then) =
+      _$SetUserToNull$CopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SetUserToNull$CopyWithImpl<$Res> extends _$SetUserToNullCopyWithImpl<$Res>
+    implements $SetUserToNull$CopyWith<$Res> {
+  _$SetUserToNull$CopyWithImpl(SetUserToNull$ _value, $Res Function(SetUserToNull$) _then)
+      : super(_value, (v) => _then(v as SetUserToNull$));
+
+  @override
+  SetUserToNull$ get _value => super._value as SetUserToNull$;
+}
+
+/// @nodoc
+
+class _$SetUserToNull$ implements SetUserToNull$ {
+  const _$SetUserToNull$();
+
+  @override
+  String toString() {
+    return 'SetUserToNull()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other.runtimeType == runtimeType && other is SetUserToNull$);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+}
+
+abstract class SetUserToNull$ implements SetUserToNull {
+  const factory SetUserToNull$() = _$SetUserToNull$;
 }
 
 /// @nodoc
@@ -6745,4 +6964,1565 @@ abstract class RemoveScoreError implements RemoveScore, ErrorAction {
   StackTrace get stackTrace;
   @JsonKey(ignore: true)
   $RemoveScoreErrorCopyWith<RemoveScoreError> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$DeleteProfileTearOff {
+  const _$DeleteProfileTearOff();
+
+  DeleteProfileStart call({required String uid, required ActionResult onResult}) {
+    return DeleteProfileStart(
+      uid: uid,
+      onResult: onResult,
+    );
+  }
+
+  DeleteProfileSuccessful successful() {
+    return const DeleteProfileSuccessful();
+  }
+
+  DeleteProfileError error(Object error, StackTrace stackTrace) {
+    return DeleteProfileError(
+      error,
+      stackTrace,
+    );
+  }
+}
+
+/// @nodoc
+const $DeleteProfile = _$DeleteProfileTearOff();
+
+/// @nodoc
+mixin _$DeleteProfile {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult) $default, {
+    required TResult Function() successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value) $default, {
+    required TResult Function(DeleteProfileSuccessful value) successful,
+    required TResult Function(DeleteProfileError value) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value)? $default, {
+    TResult Function(DeleteProfileSuccessful value)? successful,
+    TResult Function(DeleteProfileError value)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value)? $default, {
+    TResult Function(DeleteProfileSuccessful value)? successful,
+    TResult Function(DeleteProfileError value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DeleteProfileCopyWith<$Res> {
+  factory $DeleteProfileCopyWith(DeleteProfile value, $Res Function(DeleteProfile) then) =
+      _$DeleteProfileCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$DeleteProfileCopyWithImpl<$Res> implements $DeleteProfileCopyWith<$Res> {
+  _$DeleteProfileCopyWithImpl(this._value, this._then);
+
+  final DeleteProfile _value;
+  // ignore: unused_field
+  final $Res Function(DeleteProfile) _then;
+}
+
+/// @nodoc
+abstract class $DeleteProfileStartCopyWith<$Res> {
+  factory $DeleteProfileStartCopyWith(DeleteProfileStart value, $Res Function(DeleteProfileStart) then) =
+      _$DeleteProfileStartCopyWithImpl<$Res>;
+  $Res call({String uid, ActionResult onResult});
+}
+
+/// @nodoc
+class _$DeleteProfileStartCopyWithImpl<$Res> extends _$DeleteProfileCopyWithImpl<$Res>
+    implements $DeleteProfileStartCopyWith<$Res> {
+  _$DeleteProfileStartCopyWithImpl(DeleteProfileStart _value, $Res Function(DeleteProfileStart) _then)
+      : super(_value, (v) => _then(v as DeleteProfileStart));
+
+  @override
+  DeleteProfileStart get _value => super._value as DeleteProfileStart;
+
+  @override
+  $Res call({
+    Object? uid = freezed,
+    Object? onResult = freezed,
+  }) {
+    return _then(DeleteProfileStart(
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      onResult: onResult == freezed
+          ? _value.onResult
+          : onResult // ignore: cast_nullable_to_non_nullable
+              as ActionResult,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteProfileStart implements DeleteProfileStart {
+  const _$DeleteProfileStart({required this.uid, required this.onResult});
+
+  @override
+  final String uid;
+  @override
+  final ActionResult onResult;
+
+  @override
+  String toString() {
+    return 'DeleteProfile(uid: $uid, onResult: $onResult)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DeleteProfileStart &&
+            const DeepCollectionEquality().equals(other.uid, uid) &&
+            (identical(other.onResult, onResult) || other.onResult == onResult));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(uid), onResult);
+
+  @JsonKey(ignore: true)
+  @override
+  $DeleteProfileStartCopyWith<DeleteProfileStart> get copyWith =>
+      _$DeleteProfileStartCopyWithImpl<DeleteProfileStart>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult) $default, {
+    required TResult Function() successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) {
+    return $default(uid, onResult);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) {
+    return $default?.call(uid, onResult);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(uid, onResult);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value) $default, {
+    required TResult Function(DeleteProfileSuccessful value) successful,
+    required TResult Function(DeleteProfileError value) error,
+  }) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value)? $default, {
+    TResult Function(DeleteProfileSuccessful value)? successful,
+    TResult Function(DeleteProfileError value)? error,
+  }) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value)? $default, {
+    TResult Function(DeleteProfileSuccessful value)? successful,
+    TResult Function(DeleteProfileError value)? error,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteProfileStart implements DeleteProfile {
+  const factory DeleteProfileStart({required String uid, required ActionResult onResult}) = _$DeleteProfileStart;
+
+  String get uid;
+  ActionResult get onResult;
+  @JsonKey(ignore: true)
+  $DeleteProfileStartCopyWith<DeleteProfileStart> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DeleteProfileSuccessfulCopyWith<$Res> {
+  factory $DeleteProfileSuccessfulCopyWith(DeleteProfileSuccessful value, $Res Function(DeleteProfileSuccessful) then) =
+      _$DeleteProfileSuccessfulCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$DeleteProfileSuccessfulCopyWithImpl<$Res> extends _$DeleteProfileCopyWithImpl<$Res>
+    implements $DeleteProfileSuccessfulCopyWith<$Res> {
+  _$DeleteProfileSuccessfulCopyWithImpl(DeleteProfileSuccessful _value, $Res Function(DeleteProfileSuccessful) _then)
+      : super(_value, (v) => _then(v as DeleteProfileSuccessful));
+
+  @override
+  DeleteProfileSuccessful get _value => super._value as DeleteProfileSuccessful;
+}
+
+/// @nodoc
+
+class _$DeleteProfileSuccessful implements DeleteProfileSuccessful {
+  const _$DeleteProfileSuccessful();
+
+  @override
+  String toString() {
+    return 'DeleteProfile.successful()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other.runtimeType == runtimeType && other is DeleteProfileSuccessful);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult) $default, {
+    required TResult Function() successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) {
+    return successful();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) {
+    return successful?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) {
+    if (successful != null) {
+      return successful();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value) $default, {
+    required TResult Function(DeleteProfileSuccessful value) successful,
+    required TResult Function(DeleteProfileError value) error,
+  }) {
+    return successful(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value)? $default, {
+    TResult Function(DeleteProfileSuccessful value)? successful,
+    TResult Function(DeleteProfileError value)? error,
+  }) {
+    return successful?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value)? $default, {
+    TResult Function(DeleteProfileSuccessful value)? successful,
+    TResult Function(DeleteProfileError value)? error,
+    required TResult orElse(),
+  }) {
+    if (successful != null) {
+      return successful(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteProfileSuccessful implements DeleteProfile {
+  const factory DeleteProfileSuccessful() = _$DeleteProfileSuccessful;
+}
+
+/// @nodoc
+abstract class $DeleteProfileErrorCopyWith<$Res> {
+  factory $DeleteProfileErrorCopyWith(DeleteProfileError value, $Res Function(DeleteProfileError) then) =
+      _$DeleteProfileErrorCopyWithImpl<$Res>;
+  $Res call({Object error, StackTrace stackTrace});
+}
+
+/// @nodoc
+class _$DeleteProfileErrorCopyWithImpl<$Res> extends _$DeleteProfileCopyWithImpl<$Res>
+    implements $DeleteProfileErrorCopyWith<$Res> {
+  _$DeleteProfileErrorCopyWithImpl(DeleteProfileError _value, $Res Function(DeleteProfileError) _then)
+      : super(_value, (v) => _then(v as DeleteProfileError));
+
+  @override
+  DeleteProfileError get _value => super._value as DeleteProfileError;
+
+  @override
+  $Res call({
+    Object? error = freezed,
+    Object? stackTrace = freezed,
+  }) {
+    return _then(DeleteProfileError(
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Object,
+      stackTrace == freezed
+          ? _value.stackTrace
+          : stackTrace // ignore: cast_nullable_to_non_nullable
+              as StackTrace,
+    ));
+  }
+}
+
+/// @nodoc
+
+@Implements<ErrorAction>()
+class _$DeleteProfileError implements DeleteProfileError {
+  const _$DeleteProfileError(this.error, this.stackTrace);
+
+  @override
+  final Object error;
+  @override
+  final StackTrace stackTrace;
+
+  @override
+  String toString() {
+    return 'DeleteProfile.error(error: $error, stackTrace: $stackTrace)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DeleteProfileError &&
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality().equals(other.stackTrace, stackTrace));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(error), const DeepCollectionEquality().hash(stackTrace));
+
+  @JsonKey(ignore: true)
+  @override
+  $DeleteProfileErrorCopyWith<DeleteProfileError> get copyWith =>
+      _$DeleteProfileErrorCopyWithImpl<DeleteProfileError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult) $default, {
+    required TResult Function() successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) {
+    return error(this.error, stackTrace);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) {
+    return error?.call(this.error, stackTrace);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String uid, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this.error, stackTrace);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value) $default, {
+    required TResult Function(DeleteProfileSuccessful value) successful,
+    required TResult Function(DeleteProfileError value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value)? $default, {
+    TResult Function(DeleteProfileSuccessful value)? successful,
+    TResult Function(DeleteProfileError value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(DeleteProfileStart value)? $default, {
+    TResult Function(DeleteProfileSuccessful value)? successful,
+    TResult Function(DeleteProfileError value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteProfileError implements DeleteProfile, ErrorAction {
+  const factory DeleteProfileError(Object error, StackTrace stackTrace) = _$DeleteProfileError;
+
+  Object get error;
+  StackTrace get stackTrace;
+  @JsonKey(ignore: true)
+  $DeleteProfileErrorCopyWith<DeleteProfileError> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$VerifyPasswordTearOff {
+  const _$VerifyPasswordTearOff();
+
+  VerifyPasswordStart call({required String password, required ActionResult onResult}) {
+    return VerifyPasswordStart(
+      password: password,
+      onResult: onResult,
+    );
+  }
+
+  VerifyPasswordSuccessful successful() {
+    return const VerifyPasswordSuccessful();
+  }
+
+  VerifyPasswordError error(Object error, StackTrace stackTrace) {
+    return VerifyPasswordError(
+      error,
+      stackTrace,
+    );
+  }
+}
+
+/// @nodoc
+const $VerifyPassword = _$VerifyPasswordTearOff();
+
+/// @nodoc
+mixin _$VerifyPassword {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult) $default, {
+    required TResult Function() successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value) $default, {
+    required TResult Function(VerifyPasswordSuccessful value) successful,
+    required TResult Function(VerifyPasswordError value) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value)? $default, {
+    TResult Function(VerifyPasswordSuccessful value)? successful,
+    TResult Function(VerifyPasswordError value)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value)? $default, {
+    TResult Function(VerifyPasswordSuccessful value)? successful,
+    TResult Function(VerifyPasswordError value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $VerifyPasswordCopyWith<$Res> {
+  factory $VerifyPasswordCopyWith(VerifyPassword value, $Res Function(VerifyPassword) then) =
+      _$VerifyPasswordCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$VerifyPasswordCopyWithImpl<$Res> implements $VerifyPasswordCopyWith<$Res> {
+  _$VerifyPasswordCopyWithImpl(this._value, this._then);
+
+  final VerifyPassword _value;
+  // ignore: unused_field
+  final $Res Function(VerifyPassword) _then;
+}
+
+/// @nodoc
+abstract class $VerifyPasswordStartCopyWith<$Res> {
+  factory $VerifyPasswordStartCopyWith(VerifyPasswordStart value, $Res Function(VerifyPasswordStart) then) =
+      _$VerifyPasswordStartCopyWithImpl<$Res>;
+  $Res call({String password, ActionResult onResult});
+}
+
+/// @nodoc
+class _$VerifyPasswordStartCopyWithImpl<$Res> extends _$VerifyPasswordCopyWithImpl<$Res>
+    implements $VerifyPasswordStartCopyWith<$Res> {
+  _$VerifyPasswordStartCopyWithImpl(VerifyPasswordStart _value, $Res Function(VerifyPasswordStart) _then)
+      : super(_value, (v) => _then(v as VerifyPasswordStart));
+
+  @override
+  VerifyPasswordStart get _value => super._value as VerifyPasswordStart;
+
+  @override
+  $Res call({
+    Object? password = freezed,
+    Object? onResult = freezed,
+  }) {
+    return _then(VerifyPasswordStart(
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      onResult: onResult == freezed
+          ? _value.onResult
+          : onResult // ignore: cast_nullable_to_non_nullable
+              as ActionResult,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$VerifyPasswordStart implements VerifyPasswordStart {
+  const _$VerifyPasswordStart({required this.password, required this.onResult});
+
+  @override
+  final String password;
+  @override
+  final ActionResult onResult;
+
+  @override
+  String toString() {
+    return 'VerifyPassword(password: $password, onResult: $onResult)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is VerifyPasswordStart &&
+            const DeepCollectionEquality().equals(other.password, password) &&
+            (identical(other.onResult, onResult) || other.onResult == onResult));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(password), onResult);
+
+  @JsonKey(ignore: true)
+  @override
+  $VerifyPasswordStartCopyWith<VerifyPasswordStart> get copyWith =>
+      _$VerifyPasswordStartCopyWithImpl<VerifyPasswordStart>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult) $default, {
+    required TResult Function() successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) {
+    return $default(password, onResult);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) {
+    return $default?.call(password, onResult);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(password, onResult);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value) $default, {
+    required TResult Function(VerifyPasswordSuccessful value) successful,
+    required TResult Function(VerifyPasswordError value) error,
+  }) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value)? $default, {
+    TResult Function(VerifyPasswordSuccessful value)? successful,
+    TResult Function(VerifyPasswordError value)? error,
+  }) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value)? $default, {
+    TResult Function(VerifyPasswordSuccessful value)? successful,
+    TResult Function(VerifyPasswordError value)? error,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class VerifyPasswordStart implements VerifyPassword {
+  const factory VerifyPasswordStart({required String password, required ActionResult onResult}) = _$VerifyPasswordStart;
+
+  String get password;
+  ActionResult get onResult;
+  @JsonKey(ignore: true)
+  $VerifyPasswordStartCopyWith<VerifyPasswordStart> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $VerifyPasswordSuccessfulCopyWith<$Res> {
+  factory $VerifyPasswordSuccessfulCopyWith(
+          VerifyPasswordSuccessful value, $Res Function(VerifyPasswordSuccessful) then) =
+      _$VerifyPasswordSuccessfulCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$VerifyPasswordSuccessfulCopyWithImpl<$Res> extends _$VerifyPasswordCopyWithImpl<$Res>
+    implements $VerifyPasswordSuccessfulCopyWith<$Res> {
+  _$VerifyPasswordSuccessfulCopyWithImpl(VerifyPasswordSuccessful _value, $Res Function(VerifyPasswordSuccessful) _then)
+      : super(_value, (v) => _then(v as VerifyPasswordSuccessful));
+
+  @override
+  VerifyPasswordSuccessful get _value => super._value as VerifyPasswordSuccessful;
+}
+
+/// @nodoc
+
+class _$VerifyPasswordSuccessful implements VerifyPasswordSuccessful {
+  const _$VerifyPasswordSuccessful();
+
+  @override
+  String toString() {
+    return 'VerifyPassword.successful()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other.runtimeType == runtimeType && other is VerifyPasswordSuccessful);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult) $default, {
+    required TResult Function() successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) {
+    return successful();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) {
+    return successful?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) {
+    if (successful != null) {
+      return successful();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value) $default, {
+    required TResult Function(VerifyPasswordSuccessful value) successful,
+    required TResult Function(VerifyPasswordError value) error,
+  }) {
+    return successful(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value)? $default, {
+    TResult Function(VerifyPasswordSuccessful value)? successful,
+    TResult Function(VerifyPasswordError value)? error,
+  }) {
+    return successful?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value)? $default, {
+    TResult Function(VerifyPasswordSuccessful value)? successful,
+    TResult Function(VerifyPasswordError value)? error,
+    required TResult orElse(),
+  }) {
+    if (successful != null) {
+      return successful(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class VerifyPasswordSuccessful implements VerifyPassword {
+  const factory VerifyPasswordSuccessful() = _$VerifyPasswordSuccessful;
+}
+
+/// @nodoc
+abstract class $VerifyPasswordErrorCopyWith<$Res> {
+  factory $VerifyPasswordErrorCopyWith(VerifyPasswordError value, $Res Function(VerifyPasswordError) then) =
+      _$VerifyPasswordErrorCopyWithImpl<$Res>;
+  $Res call({Object error, StackTrace stackTrace});
+}
+
+/// @nodoc
+class _$VerifyPasswordErrorCopyWithImpl<$Res> extends _$VerifyPasswordCopyWithImpl<$Res>
+    implements $VerifyPasswordErrorCopyWith<$Res> {
+  _$VerifyPasswordErrorCopyWithImpl(VerifyPasswordError _value, $Res Function(VerifyPasswordError) _then)
+      : super(_value, (v) => _then(v as VerifyPasswordError));
+
+  @override
+  VerifyPasswordError get _value => super._value as VerifyPasswordError;
+
+  @override
+  $Res call({
+    Object? error = freezed,
+    Object? stackTrace = freezed,
+  }) {
+    return _then(VerifyPasswordError(
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Object,
+      stackTrace == freezed
+          ? _value.stackTrace
+          : stackTrace // ignore: cast_nullable_to_non_nullable
+              as StackTrace,
+    ));
+  }
+}
+
+/// @nodoc
+
+@Implements<ErrorAction>()
+class _$VerifyPasswordError implements VerifyPasswordError {
+  const _$VerifyPasswordError(this.error, this.stackTrace);
+
+  @override
+  final Object error;
+  @override
+  final StackTrace stackTrace;
+
+  @override
+  String toString() {
+    return 'VerifyPassword.error(error: $error, stackTrace: $stackTrace)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is VerifyPasswordError &&
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality().equals(other.stackTrace, stackTrace));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(error), const DeepCollectionEquality().hash(stackTrace));
+
+  @JsonKey(ignore: true)
+  @override
+  $VerifyPasswordErrorCopyWith<VerifyPasswordError> get copyWith =>
+      _$VerifyPasswordErrorCopyWithImpl<VerifyPasswordError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult) $default, {
+    required TResult Function() successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) {
+    return error(this.error, stackTrace);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) {
+    return error?.call(this.error, stackTrace);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String password, ActionResult onResult)? $default, {
+    TResult Function()? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this.error, stackTrace);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value) $default, {
+    required TResult Function(VerifyPasswordSuccessful value) successful,
+    required TResult Function(VerifyPasswordError value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value)? $default, {
+    TResult Function(VerifyPasswordSuccessful value)? successful,
+    TResult Function(VerifyPasswordError value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(VerifyPasswordStart value)? $default, {
+    TResult Function(VerifyPasswordSuccessful value)? successful,
+    TResult Function(VerifyPasswordError value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class VerifyPasswordError implements VerifyPassword, ErrorAction {
+  const factory VerifyPasswordError(Object error, StackTrace stackTrace) = _$VerifyPasswordError;
+
+  Object get error;
+  StackTrace get stackTrace;
+  @JsonKey(ignore: true)
+  $VerifyPasswordErrorCopyWith<VerifyPasswordError> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$UpdateProfileTearOff {
+  const _$UpdateProfileTearOff();
+
+  UpdateProfileStart call(
+      {required String? email,
+      required String? password,
+      required String? username,
+      required String? photoUrl,
+      required ActionResult onResult}) {
+    return UpdateProfileStart(
+      email: email,
+      password: password,
+      username: username,
+      photoUrl: photoUrl,
+      onResult: onResult,
+    );
+  }
+
+  UpdateProfileSuccessful successful(AppUser user) {
+    return UpdateProfileSuccessful(
+      user,
+    );
+  }
+
+  UpdateProfileError error(Object error, StackTrace stackTrace) {
+    return UpdateProfileError(
+      error,
+      stackTrace,
+    );
+  }
+}
+
+/// @nodoc
+const $UpdateProfile = _$UpdateProfileTearOff();
+
+/// @nodoc
+mixin _$UpdateProfile {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)
+        $default, {
+    required TResult Function(AppUser user) successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)?
+        $default, {
+    TResult Function(AppUser user)? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)?
+        $default, {
+    TResult Function(AppUser user)? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value) $default, {
+    required TResult Function(UpdateProfileSuccessful value) successful,
+    required TResult Function(UpdateProfileError value) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value)? $default, {
+    TResult Function(UpdateProfileSuccessful value)? successful,
+    TResult Function(UpdateProfileError value)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value)? $default, {
+    TResult Function(UpdateProfileSuccessful value)? successful,
+    TResult Function(UpdateProfileError value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UpdateProfileCopyWith<$Res> {
+  factory $UpdateProfileCopyWith(UpdateProfile value, $Res Function(UpdateProfile) then) =
+      _$UpdateProfileCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$UpdateProfileCopyWithImpl<$Res> implements $UpdateProfileCopyWith<$Res> {
+  _$UpdateProfileCopyWithImpl(this._value, this._then);
+
+  final UpdateProfile _value;
+  // ignore: unused_field
+  final $Res Function(UpdateProfile) _then;
+}
+
+/// @nodoc
+abstract class $UpdateProfileStartCopyWith<$Res> {
+  factory $UpdateProfileStartCopyWith(UpdateProfileStart value, $Res Function(UpdateProfileStart) then) =
+      _$UpdateProfileStartCopyWithImpl<$Res>;
+  $Res call({String? email, String? password, String? username, String? photoUrl, ActionResult onResult});
+}
+
+/// @nodoc
+class _$UpdateProfileStartCopyWithImpl<$Res> extends _$UpdateProfileCopyWithImpl<$Res>
+    implements $UpdateProfileStartCopyWith<$Res> {
+  _$UpdateProfileStartCopyWithImpl(UpdateProfileStart _value, $Res Function(UpdateProfileStart) _then)
+      : super(_value, (v) => _then(v as UpdateProfileStart));
+
+  @override
+  UpdateProfileStart get _value => super._value as UpdateProfileStart;
+
+  @override
+  $Res call({
+    Object? email = freezed,
+    Object? password = freezed,
+    Object? username = freezed,
+    Object? photoUrl = freezed,
+    Object? onResult = freezed,
+  }) {
+    return _then(UpdateProfileStart(
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photoUrl: photoUrl == freezed
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      onResult: onResult == freezed
+          ? _value.onResult
+          : onResult // ignore: cast_nullable_to_non_nullable
+              as ActionResult,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateProfileStart implements UpdateProfileStart {
+  const _$UpdateProfileStart(
+      {required this.email,
+      required this.password,
+      required this.username,
+      required this.photoUrl,
+      required this.onResult});
+
+  @override
+  final String? email;
+  @override
+  final String? password;
+  @override
+  final String? username;
+  @override
+  final String? photoUrl;
+  @override
+  final ActionResult onResult;
+
+  @override
+  String toString() {
+    return 'UpdateProfile(email: $email, password: $password, username: $username, photoUrl: $photoUrl, onResult: $onResult)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UpdateProfileStart &&
+            const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality().equals(other.username, username) &&
+            const DeepCollectionEquality().equals(other.photoUrl, photoUrl) &&
+            (identical(other.onResult, onResult) || other.onResult == onResult));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(username),
+      const DeepCollectionEquality().hash(photoUrl),
+      onResult);
+
+  @JsonKey(ignore: true)
+  @override
+  $UpdateProfileStartCopyWith<UpdateProfileStart> get copyWith =>
+      _$UpdateProfileStartCopyWithImpl<UpdateProfileStart>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)
+        $default, {
+    required TResult Function(AppUser user) successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) {
+    return $default(email, password, username, photoUrl, onResult);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)?
+        $default, {
+    TResult Function(AppUser user)? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) {
+    return $default?.call(email, password, username, photoUrl, onResult);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)?
+        $default, {
+    TResult Function(AppUser user)? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(email, password, username, photoUrl, onResult);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value) $default, {
+    required TResult Function(UpdateProfileSuccessful value) successful,
+    required TResult Function(UpdateProfileError value) error,
+  }) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value)? $default, {
+    TResult Function(UpdateProfileSuccessful value)? successful,
+    TResult Function(UpdateProfileError value)? error,
+  }) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value)? $default, {
+    TResult Function(UpdateProfileSuccessful value)? successful,
+    TResult Function(UpdateProfileError value)? error,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateProfileStart implements UpdateProfile {
+  const factory UpdateProfileStart(
+      {required String? email,
+      required String? password,
+      required String? username,
+      required String? photoUrl,
+      required ActionResult onResult}) = _$UpdateProfileStart;
+
+  String? get email;
+  String? get password;
+  String? get username;
+  String? get photoUrl;
+  ActionResult get onResult;
+  @JsonKey(ignore: true)
+  $UpdateProfileStartCopyWith<UpdateProfileStart> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UpdateProfileSuccessfulCopyWith<$Res> {
+  factory $UpdateProfileSuccessfulCopyWith(UpdateProfileSuccessful value, $Res Function(UpdateProfileSuccessful) then) =
+      _$UpdateProfileSuccessfulCopyWithImpl<$Res>;
+  $Res call({AppUser user});
+
+  $AppUserCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class _$UpdateProfileSuccessfulCopyWithImpl<$Res> extends _$UpdateProfileCopyWithImpl<$Res>
+    implements $UpdateProfileSuccessfulCopyWith<$Res> {
+  _$UpdateProfileSuccessfulCopyWithImpl(UpdateProfileSuccessful _value, $Res Function(UpdateProfileSuccessful) _then)
+      : super(_value, (v) => _then(v as UpdateProfileSuccessful));
+
+  @override
+  UpdateProfileSuccessful get _value => super._value as UpdateProfileSuccessful;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+  }) {
+    return _then(UpdateProfileSuccessful(
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as AppUser,
+    ));
+  }
+
+  @override
+  $AppUserCopyWith<$Res> get user {
+    return $AppUserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$UpdateProfileSuccessful implements UpdateProfileSuccessful {
+  const _$UpdateProfileSuccessful(this.user);
+
+  @override
+  final AppUser user;
+
+  @override
+  String toString() {
+    return 'UpdateProfile.successful(user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UpdateProfileSuccessful &&
+            const DeepCollectionEquality().equals(other.user, user));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+
+  @JsonKey(ignore: true)
+  @override
+  $UpdateProfileSuccessfulCopyWith<UpdateProfileSuccessful> get copyWith =>
+      _$UpdateProfileSuccessfulCopyWithImpl<UpdateProfileSuccessful>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)
+        $default, {
+    required TResult Function(AppUser user) successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) {
+    return successful(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)?
+        $default, {
+    TResult Function(AppUser user)? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) {
+    return successful?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)?
+        $default, {
+    TResult Function(AppUser user)? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) {
+    if (successful != null) {
+      return successful(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value) $default, {
+    required TResult Function(UpdateProfileSuccessful value) successful,
+    required TResult Function(UpdateProfileError value) error,
+  }) {
+    return successful(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value)? $default, {
+    TResult Function(UpdateProfileSuccessful value)? successful,
+    TResult Function(UpdateProfileError value)? error,
+  }) {
+    return successful?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value)? $default, {
+    TResult Function(UpdateProfileSuccessful value)? successful,
+    TResult Function(UpdateProfileError value)? error,
+    required TResult orElse(),
+  }) {
+    if (successful != null) {
+      return successful(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateProfileSuccessful implements UpdateProfile {
+  const factory UpdateProfileSuccessful(AppUser user) = _$UpdateProfileSuccessful;
+
+  AppUser get user;
+  @JsonKey(ignore: true)
+  $UpdateProfileSuccessfulCopyWith<UpdateProfileSuccessful> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UpdateProfileErrorCopyWith<$Res> {
+  factory $UpdateProfileErrorCopyWith(UpdateProfileError value, $Res Function(UpdateProfileError) then) =
+      _$UpdateProfileErrorCopyWithImpl<$Res>;
+  $Res call({Object error, StackTrace stackTrace});
+}
+
+/// @nodoc
+class _$UpdateProfileErrorCopyWithImpl<$Res> extends _$UpdateProfileCopyWithImpl<$Res>
+    implements $UpdateProfileErrorCopyWith<$Res> {
+  _$UpdateProfileErrorCopyWithImpl(UpdateProfileError _value, $Res Function(UpdateProfileError) _then)
+      : super(_value, (v) => _then(v as UpdateProfileError));
+
+  @override
+  UpdateProfileError get _value => super._value as UpdateProfileError;
+
+  @override
+  $Res call({
+    Object? error = freezed,
+    Object? stackTrace = freezed,
+  }) {
+    return _then(UpdateProfileError(
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Object,
+      stackTrace == freezed
+          ? _value.stackTrace
+          : stackTrace // ignore: cast_nullable_to_non_nullable
+              as StackTrace,
+    ));
+  }
+}
+
+/// @nodoc
+
+@Implements<ErrorAction>()
+class _$UpdateProfileError implements UpdateProfileError {
+  const _$UpdateProfileError(this.error, this.stackTrace);
+
+  @override
+  final Object error;
+  @override
+  final StackTrace stackTrace;
+
+  @override
+  String toString() {
+    return 'UpdateProfile.error(error: $error, stackTrace: $stackTrace)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UpdateProfileError &&
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality().equals(other.stackTrace, stackTrace));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(error), const DeepCollectionEquality().hash(stackTrace));
+
+  @JsonKey(ignore: true)
+  @override
+  $UpdateProfileErrorCopyWith<UpdateProfileError> get copyWith =>
+      _$UpdateProfileErrorCopyWithImpl<UpdateProfileError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)
+        $default, {
+    required TResult Function(AppUser user) successful,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) {
+    return error(this.error, stackTrace);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)?
+        $default, {
+    TResult Function(AppUser user)? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+  }) {
+    return error?.call(this.error, stackTrace);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String? email, String? password, String? username, String? photoUrl, ActionResult onResult)?
+        $default, {
+    TResult Function(AppUser user)? successful,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this.error, stackTrace);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value) $default, {
+    required TResult Function(UpdateProfileSuccessful value) successful,
+    required TResult Function(UpdateProfileError value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value)? $default, {
+    TResult Function(UpdateProfileSuccessful value)? successful,
+    TResult Function(UpdateProfileError value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(UpdateProfileStart value)? $default, {
+    TResult Function(UpdateProfileSuccessful value)? successful,
+    TResult Function(UpdateProfileError value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateProfileError implements UpdateProfile, ErrorAction {
+  const factory UpdateProfileError(Object error, StackTrace stackTrace) = _$UpdateProfileError;
+
+  Object get error;
+  StackTrace get stackTrace;
+  @JsonKey(ignore: true)
+  $UpdateProfileErrorCopyWith<UpdateProfileError> get copyWith => throw _privateConstructorUsedError;
 }

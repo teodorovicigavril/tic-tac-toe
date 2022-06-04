@@ -9,14 +9,14 @@ import 'package:tic_tac_toe/src/containers/selected_profile_photo_container.dart
 import 'package:tic_tac_toe/src/containers/user_container.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _EditProfilePageState extends State<EditProfilePage> {
   late Store<AppState> _store;
 
   final TextEditingController _email = TextEditingController();
@@ -34,15 +34,22 @@ class _SignUpPageState extends State<SignUpPage> {
       return;
     }
 
-    _store.dispatch(
-      CreateUser(
-        email: _email.text,
-        password: _password.text,
-        username: _username.text,
-        photoUrl: _store.state.photoUrls[_store.state.selectedProfilePhoto],
-        onResult: _onResult,
-      ),
-    );
+    if (_email.text.isEmpty &&
+        _password.text.isEmpty &&
+        _username.text.isEmpty &&
+        _store.state.photoUrls[_store.state.selectedProfilePhoto] == _store.state.user!.photoUrl) {
+      _errorText = 'Nothing to update!';
+    } else {
+      _store.dispatch(
+        UpdateProfile(
+          email: _email.text,
+          password: _password.text,
+          username: _username.text,
+          photoUrl: _store.state.photoUrls[_store.state.selectedProfilePhoto],
+          onResult: _onResult,
+        ),
+      );
+    }
   }
 
   void _onResult(AppAction action) {
@@ -58,8 +65,16 @@ class _SignUpPageState extends State<SignUpPage> {
       }
     }
 
-    if (action is CreateUserSuccessful) {
-      Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+    if (action is UpdateProfileSuccessful) {
+      Navigator.pop(context);
+      Navigator.pop(context);
+
+      const SnackBar snackBar = SnackBar(
+        content: Text('Account Updated Successfully!'),
+        duration: Duration(seconds: 3),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 
@@ -67,9 +82,8 @@ class _SignUpPageState extends State<SignUpPage> {
   void initState() {
     super.initState();
 
-    _store = StoreProvider.of<AppState>(context, listen: false)
-      ..dispatch(const GetProfilePhotos(alreadyLoggedIn: false))
-      ..dispatch(const SetProfilePhoto(0));
+    _store = StoreProvider.of<AppState>(context, listen: false);
+    _store.dispatch(SetProfilePhoto(_store.state.photoUrls.indexOf(_store.state.user!.photoUrl)));
   }
 
   @override
@@ -77,20 +91,30 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text('Sign Up page'),
+          child: Text('Edit Profile'),
         ),
       ),
       body: SingleChildScrollView(
         child: Form(
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: ProfilePhotosContainer(
-              builder: (BuildContext context, List<String> photoUrls) {
-                return UserContainer(
-                  builder: (BuildContext context, AppUser? user) {
+            child: UserContainer(
+              builder: (BuildContext context, AppUser? user) {
+                return ProfilePhotosContainer(
+                  builder: (BuildContext context, List<String> photoUrls) {
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
+                        Container(
+                          margin: const EdgeInsets.all(8),
+                          child: const Text(
+                            'Please enter the fields you want to update!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
                         Text(
                           _errorText,
                           style: const TextStyle(
@@ -100,14 +124,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           autofocus: true,
-                          decoration: const InputDecoration(hintText: 'email@email.com'),
+                          decoration: InputDecoration(hintText: 'email: ${user!.email}'),
                           controller: _email,
                           textInputAction: TextInputAction.next,
                           validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your email!';
-                            } else if (!EmailValidator.validate(value)) {
-                              return 'Please enter a valid email address!';
+                            if (value != null && value.isNotEmpty) {
+                              if (!EmailValidator.validate(value)) {
+                                return 'Please enter a valid email address!';
+                              }
                             }
                             return null;
                           },
@@ -125,22 +149,20 @@ class _SignUpPageState extends State<SignUpPage> {
                             hintText: 'password',
                           ),
                           validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your password!';
+                            if (value != null && value.isNotEmpty) {
+                              if (!value.contains(RegExp('[A-Z]'))) {
+                                return 'Password should contains at least one UpperCase letter!';
+                              }
+                              if (!value.contains(RegExp('[0-9]'))) {
+                                return 'Password should contains at least one digit!';
+                              }
+                              if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+                                return 'Password should contains at least one special character!';
+                              }
+                              if (value.length < 6) {
+                                return 'Password should contains at least 6 characters!';
+                              }
                             }
-                            if (!value.contains(RegExp('[A-Z]'))) {
-                              return 'Password should contains at least one UpperCase letter!';
-                            }
-                            if (!value.contains(RegExp('[0-9]'))) {
-                              return 'Password should contains at least one digit!';
-                            }
-                            if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-                              return 'Password should contains at least one special character!';
-                            }
-                            if (value.length < 6) {
-                              return 'Password should contains at least 6 characters!';
-                            }
-
                             return null;
                           },
                           onFieldSubmitted: (String value) {
@@ -157,23 +179,22 @@ class _SignUpPageState extends State<SignUpPage> {
                             hintText: 'confirm password',
                           ),
                           validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your password!';
-                            }
-                            if (!value.contains(RegExp('[A-Z]'))) {
-                              return 'Password should contains at least one UpperCase letter!';
-                            }
-                            if (!value.contains(RegExp('[0-9]'))) {
-                              return 'Password should contains at least one digit!';
-                            }
-                            if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-                              return 'Password should contains at least one special character!';
-                            }
-                            if (value.length < 6) {
-                              return 'Password should contains at least 6 characters!';
-                            }
-                            if (value != _password.text) {
-                              return 'Password not matching!';
+                            if (value != null && value.isNotEmpty) {
+                              if (!value.contains(RegExp('[A-Z]'))) {
+                                return 'Password should contains at least one UpperCase letter!';
+                              }
+                              if (!value.contains(RegExp('[0-9]'))) {
+                                return 'Password should contains at least one digit!';
+                              }
+                              if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+                                return 'Password should contains at least one special character!';
+                              }
+                              if (value.length < 6) {
+                                return 'Password should contains at least 6 characters!';
+                              }
+                              if (value != _password.text) {
+                                return 'Password not matching!';
+                              }
                             }
 
                             return null;
@@ -189,15 +210,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             focusNode: _usernameNode,
                             keyboardType: TextInputType.name,
                             textInputAction: TextInputAction.done,
-                            decoration: const InputDecoration(
-                              hintText: 'username',
+                            decoration: InputDecoration(
+                              hintText: 'username: ${user.username}',
                             ),
-                            validator: (String? value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter a username!';
-                              }
-                              return null;
-                            },
                             onFieldSubmitted: (String value) {
                               FocusManager.instance.primaryFocus?.unfocus();
                             },
@@ -211,10 +226,14 @@ class _SignUpPageState extends State<SignUpPage> {
                             return Column(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                Container(
-                                  margin: const EdgeInsets.only(top: 32),
-                                  height: 180,
-                                  child: Image.network(photoUrls[selectedProfilePhoto]),
+                                UserContainer(
+                                  builder: (BuildContext context, AppUser? user) {
+                                    return Container(
+                                      margin: const EdgeInsets.only(top: 32),
+                                      height: 180,
+                                      child: Image.network(photoUrls[selectedProfilePhoto]),
+                                    );
+                                  },
                                 ),
                                 Center(
                                   child: Row(
@@ -260,16 +279,17 @@ class _SignUpPageState extends State<SignUpPage> {
                             children: <Widget>[
                               ElevatedButton(
                                 onPressed: () => _onNext(context),
-                                child: const Text('Sign Up'),
+                                child: const Text('Submit'),
                               ),
                               ElevatedButton(
                                 onPressed: () {
+                                  Navigator.pop(context);
                                   Navigator.pop(context);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.grey,
                                 ),
-                                child: const Text('Login'),
+                                child: const Text('Cancel'),
                               ),
                             ],
                           ),

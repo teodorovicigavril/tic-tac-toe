@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
@@ -5,7 +6,9 @@ import 'package:tic_tac_toe/src/models/index.dart';
 import 'package:tuple/tuple.dart';
 
 AppState reducer(AppState state, dynamic action) {
-  // print(action);
+  if (kDebugMode) {
+    print(action);
+  }
   if (action is! AppAction) {
     throw ArgumentError('All actions should implement AppAction');
   }
@@ -35,6 +38,9 @@ Reducer<AppState> _reducer = combineReducers<AppState>(<Reducer<AppState>>[
   TypedReducer<AppState, GetUserSuccessful>(_getUserSuccessful),
   TypedReducer<AppState, SetShowMyTableScore>(_setShowMyTableScore),
   TypedReducer<AppState, RemoveScoreSuccessful>(_removeScoreSuccessful),
+  TypedReducer<AppState, DeleteProfileSuccessful>(_deleteProfileSuccessful),
+  TypedReducer<AppState, SetProfileErrorMessage>(_setProfileErrorMessage),
+  TypedReducer<AppState, UpdateProfileSuccessful>(_updateProfileSuccessful),
 ]);
 
 AppState _userAction(AppState state, UserAction action) {
@@ -181,4 +187,16 @@ AppState _setShowMyTableScore(AppState state, SetShowMyTableScore action) {
 
 AppState _removeScoreSuccessful(AppState state, RemoveScoreSuccessful action) {
   return state.copyWith(scores: <Score>[...state.scores]..remove(action.score));
+}
+
+AppState _deleteProfileSuccessful(AppState state, DeleteProfileSuccessful action) {
+  return state.copyWith(user: null);
+}
+
+AppState _setProfileErrorMessage(AppState state, SetProfileErrorMessage action) {
+  return state.copyWith(profileErrorMessage: action.message);
+}
+
+AppState _updateProfileSuccessful(AppState state, UpdateProfileSuccessful action) {
+  return state.copyWith(user: action.user, users: <String, AppUser>{...state.users, action.user.uid: action.user});
 }

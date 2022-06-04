@@ -27,6 +27,12 @@ part 'get_user.dart';
 
 part 'remove_score.dart';
 
+part 'delete_profile.dart';
+
+part 'verify_password.dart';
+
+part 'update_profile.dart';
+
 abstract class AppAction {}
 
 abstract class ErrorAction implements AppAction {

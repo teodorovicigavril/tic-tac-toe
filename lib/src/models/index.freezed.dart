@@ -234,7 +234,8 @@ class _$AppStateTearOff {
       List<Score> scores = const <Score>[],
       Set<String> pending = const <String>{},
       Map<String, AppUser> users = const <String, AppUser>{},
-      List<bool> showMyTableScore = const <bool>[false, false, false]}) {
+      List<bool> showMyTableScore = const <bool>[false, false, false],
+      String profileErrorMessage = ''}) {
     return AppState$(
       selectedDifficulty: selectedDifficulty,
       user: user,
@@ -252,6 +253,7 @@ class _$AppStateTearOff {
       pending: pending,
       users: users,
       showMyTableScore: showMyTableScore,
+      profileErrorMessage: profileErrorMessage,
     );
   }
 }
@@ -277,6 +279,7 @@ mixin _$AppState {
   Set<String> get pending => throw _privateConstructorUsedError;
   Map<String, AppUser> get users => throw _privateConstructorUsedError;
   List<bool> get showMyTableScore => throw _privateConstructorUsedError;
+  String get profileErrorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateCopyWith<AppState> get copyWith => throw _privateConstructorUsedError;
@@ -301,7 +304,8 @@ abstract class $AppStateCopyWith<$Res> {
       List<Score> scores,
       Set<String> pending,
       Map<String, AppUser> users,
-      List<bool> showMyTableScore});
+      List<bool> showMyTableScore,
+      String profileErrorMessage});
 
   $AppUserCopyWith<$Res>? get user;
 }
@@ -332,6 +336,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
     Object? pending = freezed,
     Object? users = freezed,
     Object? showMyTableScore = freezed,
+    Object? profileErrorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       selectedDifficulty: selectedDifficulty == freezed
@@ -398,6 +403,10 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
           ? _value.showMyTableScore
           : showMyTableScore // ignore: cast_nullable_to_non_nullable
               as List<bool>,
+      profileErrorMessage: profileErrorMessage == freezed
+          ? _value.profileErrorMessage
+          : profileErrorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -433,7 +442,8 @@ abstract class $AppState$CopyWith<$Res> implements $AppStateCopyWith<$Res> {
       List<Score> scores,
       Set<String> pending,
       Map<String, AppUser> users,
-      List<bool> showMyTableScore});
+      List<bool> showMyTableScore,
+      String profileErrorMessage});
 
   @override
   $AppUserCopyWith<$Res>? get user;
@@ -465,6 +475,7 @@ class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res> impleme
     Object? pending = freezed,
     Object? users = freezed,
     Object? showMyTableScore = freezed,
+    Object? profileErrorMessage = freezed,
   }) {
     return _then(AppState$(
       selectedDifficulty: selectedDifficulty == freezed
@@ -531,6 +542,10 @@ class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res> impleme
           ? _value.showMyTableScore
           : showMyTableScore // ignore: cast_nullable_to_non_nullable
               as List<bool>,
+      profileErrorMessage: profileErrorMessage == freezed
+          ? _value.profileErrorMessage
+          : profileErrorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -564,7 +579,8 @@ class _$AppState$ implements AppState$ {
       this.scores = const <Score>[],
       this.pending = const <String>{},
       this.users = const <String, AppUser>{},
-      this.showMyTableScore = const <bool>[false, false, false]});
+      this.showMyTableScore = const <bool>[false, false, false],
+      this.profileErrorMessage = ''});
 
   @JsonKey()
   @override
@@ -613,10 +629,13 @@ class _$AppState$ implements AppState$ {
   @JsonKey()
   @override
   final List<bool> showMyTableScore;
+  @JsonKey()
+  @override
+  final String profileErrorMessage;
 
   @override
   String toString() {
-    return 'AppState(selectedDifficulty: $selectedDifficulty, user: $user, photoUrls: $photoUrls, selectedProfilePhoto: $selectedProfilePhoto, difficultyColors: $difficultyColors, gameStatus: $gameStatus, table: $table, availablePlayerOnePieces: $availablePlayerOnePieces, availablePlayerTwoPieces: $availablePlayerTwoPieces, selectedPiece: $selectedPiece, playerTurn: $playerTurn, score: $score, scores: $scores, pending: $pending, users: $users, showMyTableScore: $showMyTableScore)';
+    return 'AppState(selectedDifficulty: $selectedDifficulty, user: $user, photoUrls: $photoUrls, selectedProfilePhoto: $selectedProfilePhoto, difficultyColors: $difficultyColors, gameStatus: $gameStatus, table: $table, availablePlayerOnePieces: $availablePlayerOnePieces, availablePlayerTwoPieces: $availablePlayerTwoPieces, selectedPiece: $selectedPiece, playerTurn: $playerTurn, score: $score, scores: $scores, pending: $pending, users: $users, showMyTableScore: $showMyTableScore, profileErrorMessage: $profileErrorMessage)';
   }
 
   @override
@@ -639,7 +658,8 @@ class _$AppState$ implements AppState$ {
             const DeepCollectionEquality().equals(other.scores, scores) &&
             const DeepCollectionEquality().equals(other.pending, pending) &&
             const DeepCollectionEquality().equals(other.users, users) &&
-            const DeepCollectionEquality().equals(other.showMyTableScore, showMyTableScore));
+            const DeepCollectionEquality().equals(other.showMyTableScore, showMyTableScore) &&
+            const DeepCollectionEquality().equals(other.profileErrorMessage, profileErrorMessage));
   }
 
   @override
@@ -660,7 +680,8 @@ class _$AppState$ implements AppState$ {
       const DeepCollectionEquality().hash(scores),
       const DeepCollectionEquality().hash(pending),
       const DeepCollectionEquality().hash(users),
-      const DeepCollectionEquality().hash(showMyTableScore));
+      const DeepCollectionEquality().hash(showMyTableScore),
+      const DeepCollectionEquality().hash(profileErrorMessage));
 
   @JsonKey(ignore: true)
   @override
@@ -684,7 +705,8 @@ abstract class AppState$ implements AppState {
       List<Score> scores,
       Set<String> pending,
       Map<String, AppUser> users,
-      List<bool> showMyTableScore}) = _$AppState$;
+      List<bool> showMyTableScore,
+      String profileErrorMessage}) = _$AppState$;
 
   @override
   int get selectedDifficulty;
@@ -718,6 +740,8 @@ abstract class AppState$ implements AppState {
   Map<String, AppUser> get users;
   @override
   List<bool> get showMyTableScore;
+  @override
+  String get profileErrorMessage;
   @override
   @JsonKey(ignore: true)
   $AppState$CopyWith<AppState$> get copyWith => throw _privateConstructorUsedError;

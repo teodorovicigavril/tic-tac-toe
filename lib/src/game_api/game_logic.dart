@@ -112,6 +112,54 @@ Tuple2<int, int> findBestMove(List<Tuple2<int, int>> table, List<int> myPieces) 
   return Tuple2<int, int>(bestMove, randomSize);
 }
 
+Tuple2<int, int> findBestMoveHard(List<Tuple2<int, int>> table, List<int> myPieces, List<int> opponentPieces) {
+  int bestVal = -1000;
+  int bestMove = -1;
+  int size = -1;
+
+  bool doMinimax = true;
+  int positionForDefend = -1;
+
+  if (opponentPieces.isNotEmpty) {
+    for (int index = 0; index < table.length; index++) {
+      if (table[index].item1 == -1) {
+        final Tuple2<int, int> copyPosition = table[index];
+        table[index] = Tuple2<int, int>(1, opponentPieces[opponentPieces.length - 1]);
+        if (evaluate(table) == -10) {
+          doMinimax = false;
+          positionForDefend = index;
+          break;
+        }
+        table[index] = copyPosition;
+      }
+    }
+  }
+
+  if (doMinimax) {
+    for (final int pieceSize in myPieces) {
+      for (int index = 0; index < table.length; index++) {
+        if (table[index].item1 == -1 || (table[index].item1 == 1 && table[index].item2 < pieceSize)) {
+          final Tuple2<int, int> copyPosition = table[index];
+          table[index] = Tuple2<int, int>(2, pieceSize);
+          final int moveVal = minimax(table: table, depth: 0, isMax: false, size: pieceSize);
+          table[index] = copyPosition;
+
+          if (moveVal > bestVal) {
+            size = pieceSize;
+            bestMove = index;
+            bestVal = moveVal;
+          }
+        }
+      }
+    }
+  }
+  if (doMinimax) {
+    return Tuple2<int, int>(bestMove, size);
+  } else {
+    return Tuple2<int, int>(positionForDefend, myPieces[myPieces.length - 1]);
+  }
+}
+
 Tuple2<int, int> findBestMoveEasy(List<Tuple2<int, int>> table, List<int> myPieces) {
   while (true) {
     final int randomSize = myPieces[Random().nextInt(myPieces.length)];

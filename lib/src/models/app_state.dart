@@ -44,5 +44,7 @@ class AppState with _$AppState {
         Map<String, AppUser> users,
     @Default(<bool>[false, false, false])
         List<bool> showMyTableScore,
+    @Default('')
+        String profileErrorMessage,
   }) = AppState$;
 }
