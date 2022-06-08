@@ -91,7 +91,18 @@ class _ProfilePageState extends State<ProfilePage> {
     _store = StoreProvider.of<AppState>(context, listen: false);
     _store
       ..dispatch(const ListenForScoresStart())
-      ..dispatch(const GetProfilePhotos(alreadyLoggedIn: true));
+      ..dispatch(const GetProfilePhotos(alreadyLoggedIn: true))
+      ..dispatch(const SetProfileErrorMessage(''));
+
+    if (_store.state.showMyTableScore[0]) {
+      _store.dispatch(const SetShowMyTableScore(0));
+    }
+    if (_store.state.showMyTableScore[1]) {
+      _store.dispatch(const SetShowMyTableScore(1));
+    }
+    if (_store.state.showMyTableScore[2]) {
+      _store.dispatch(const SetShowMyTableScore(2));
+    }
   }
 
   @override
@@ -103,7 +114,23 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget showAlertDialog({required bool forUpdate}) {
     return Form(
       child: AlertDialog(
-        title: const Center(child: Text('Confirm Your Password')),
+        backgroundColor: const Color.fromRGBO(16, 13, 34, 1),
+        title: const Center(
+          child: Text(
+            'Confirm Your Password',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+              shadows: <Shadow>[
+                Shadow(
+                  blurRadius: 40,
+                  color: Colors.blue,
+                ),
+              ],
+            ),
+          ),
+        ),
         content: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
@@ -114,33 +141,59 @@ class _ProfilePageState extends State<ProfilePage> {
                   return Text(
                     errorMessage,
                     style: const TextStyle(
-                      color: Colors.red,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      shadows: <Shadow>[
+                        Shadow(
+                          blurRadius: 40,
+                          color: Colors.red,
+                        ),
+                      ],
                     ),
                   );
                 },
               ),
-              const SizedBox(
-                width: 16,
-              ),
               Builder(
                 builder: (BuildContext context) {
-                  return TextFormField(
-                    keyboardType: TextInputType.visiblePassword,
-                    controller: _password,
-                    textInputAction: TextInputAction.done,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      hintText: 'current password',
+                  return Container(
+                    margin: const EdgeInsets.only(top: 16),
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.blue,
+                          blurRadius: 5,
+                          spreadRadius: 2,
+                        ),
+                      ],
                     ),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password!';
-                      }
-                      return null;
-                    },
-                    onFieldSubmitted: (String value) {
-                      _onNext(forUpdate, context);
-                    },
+                    child: TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: _password,
+                      textInputAction: TextInputAction.done,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        suffixIcon: Icon(
+                          Icons.key,
+                          color: Colors.blue,
+                        ),
+                        fillColor: Color.fromRGBO(16, 13, 34, 1),
+                        filled: true,
+                        hintText: 'current password',
+                        errorStyle: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password!';
+                        }
+                        return null;
+                      },
+                      onFieldSubmitted: (String value) {
+                        _onNext(forUpdate, context);
+                      },
+                    ),
                   );
                 },
               ),
@@ -149,23 +202,63 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         actionsAlignment: MainAxisAlignment.center,
         actions: <Widget>[
-          Builder(
-            builder: (BuildContext context) {
-              return TextButton(
-                onPressed: () {
-                  _onNext(forUpdate, context);
-                },
-                child: const Text('Submit'),
-              );
-            },
+          Container(
+            decoration: const BoxDecoration(
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Colors.blue,
+                  blurRadius: 5,
+                ),
+              ],
+            ),
+            child: Builder(
+              builder: (BuildContext context) {
+                return ElevatedButton(
+                  onPressed: () => _onNext(forUpdate, context),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(
+                      MediaQuery.of(context).size.width * 0.25,
+                      50,
+                    ),
+                  ),
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
-          TextButton(
-            onPressed: () {
-              _password.clear();
-              _store.dispatch(const SetProfileErrorMessage(''));
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
+          Container(
+            decoration: const BoxDecoration(
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Colors.blue,
+                  blurRadius: 5,
+                ),
+              ],
+            ),
+            child: ElevatedButton(
+              onPressed: () {
+                _password.clear();
+                _store.dispatch(const SetProfileErrorMessage(''));
+                Navigator.of(context).pop();
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(
+                  MediaQuery.of(context).size.width * 0.25,
+                  50,
+                ),
+              ),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -184,8 +277,15 @@ class _ProfilePageState extends State<ProfilePage> {
               child: const Text(
                 'There are no records yet!',
                 style: TextStyle(
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black38,
+                  fontSize: 20,
+                  shadows: <Shadow>[
+                    Shadow(
+                      blurRadius: 40,
+                      color: Colors.blue,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -193,7 +293,9 @@ class _ProfilePageState extends State<ProfilePage> {
         }
         return DataTable(
           columnSpacing: 16,
-          headingRowColor: MaterialStateColor.resolveWith((Set<MaterialState> states) => Colors.lightGreen),
+          headingRowColor: MaterialStateColor.resolveWith(
+            (Set<MaterialState> states) => Colors.blue.withOpacity(0.75),
+          ),
           columns: <DataColumn>[
             DataColumn(
               label: SizedBox(
@@ -245,7 +347,7 @@ class _ProfilePageState extends State<ProfilePage> {
             (int index) => DataRow(
               color: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
                 if (index.isOdd) {
-                  return Colors.grey.withOpacity(0.3);
+                  return Colors.blueAccent.withOpacity(0.2);
                 }
                 return null;
               }),
@@ -290,9 +392,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('Profile Page')),
-      ),
       body: ShowMyTableContainer(
         builder: (BuildContext context, List<bool> showMyTable) {
           return UserContainer(
@@ -303,153 +402,259 @@ class _ProfilePageState extends State<ProfilePage> {
                 );
               }
               return SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.only(left: 32, top: 32, bottom: 8),
-                      child: Text(
-                        'Hi there,',
+                child: Container(
+                  margin: const EdgeInsets.only(left: 16, right: 16, top: 48),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const Text(
+                        'My Account',
                         style: TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    Card(
-                      elevation: 8,
-                      margin: const EdgeInsets.all(10),
-                      child: Container(
-                        height: 120,
-                        color: Colors.white,
-                        child: Row(
-                          children: <Widget>[
-                            Image.network(user.photoUrl),
-                            Expanded(
-                              child: Column(
-                                children: <Widget>[
-                                  ListTile(
-                                    title: Text(user.username),
-                                    subtitle: Text(user.email),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: <Widget>[
-                                        TextButton(
-                                          child: const Text(
-                                            'Update',
-                                            style: TextStyle(
-                                              color: Colors.orangeAccent,
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            showDialog<Widget>(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return showAlertDialog(forUpdate: true);
-                                              },
-                                            );
-                                          },
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        TextButton(
-                                          child: const Text(
-                                            'Delete',
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            showDialog<Widget>(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return showAlertDialog(forUpdate: false);
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
+                          fontSize: 70,
+                          shadows: <Shadow>[
+                            Shadow(
+                              blurRadius: 40,
+                              color: Colors.blue,
+                            ),
                           ],
                         ),
                       ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 32, top: 32, bottom: 8),
-                      child: Text(
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                      ),
+                      const Text(
+                        'Hi there,',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          shadows: <Shadow>[
+                            Shadow(
+                              blurRadius: 40,
+                              color: Colors.blue,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.blue,
+                              blurRadius: 5,
+                            ),
+                          ],
+                        ),
+                        child: Card(
+                          elevation: 8,
+                          child: Container(
+                            height: 120,
+                            color: Colors.white,
+                            child: Row(
+                              children: <Widget>[
+                                Image.network(user.photoUrl),
+                                Expanded(
+                                  child: Column(
+                                    children: <Widget>[
+                                      ListTile(
+                                        title: Text(
+                                          user.username,
+                                          style: const TextStyle(
+                                            color: Colors.blue,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          user.email,
+                                          style: const TextStyle(
+                                            color: Colors.blue,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(right: 16),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: <Widget>[
+                                            TextButton(
+                                              child: const Text(
+                                                'Update',
+                                                style: TextStyle(
+                                                  color: Colors.orangeAccent,
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                showDialog<Widget>(
+                                                  barrierDismissible: false,
+                                                  context: context,
+                                                  builder: (BuildContext context) {
+                                                    return showAlertDialog(forUpdate: true);
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            TextButton(
+                                              child: const Text(
+                                                'Delete',
+                                                style: TextStyle(
+                                                  color: Colors.red,
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                showDialog<Widget>(
+                                                  barrierDismissible: false,
+                                                  context: context,
+                                                  builder: (BuildContext context) {
+                                                    return showAlertDialog(forUpdate: false);
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.04,
+                      ),
+                      const Text(
                         'My scores',
                         style: TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 24,
+                          shadows: <Shadow>[
+                            Shadow(
+                              blurRadius: 40,
+                              color: Colors.blue,
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          _store.dispatch(const SetShowMyTableScore(0));
-                        },
-                        child: Container(
-                          width: 180,
-                          height: 40,
-                          margin: const EdgeInsets.only(top: 16, bottom: 8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: showMyTable[0] ? Colors.amber : Colors.lightGreen,
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.blue,
+                              blurRadius: 5,
+                            )
+                          ],
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _store.dispatch(const SetShowMyTableScore(0));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                              MediaQuery.of(context).size.width,
+                              50,
+                            ),
                           ),
-                          child: Center(child: Text('${showMyTable[0] ? 'Hide' : 'Show'} Scores - EASY')),
-                        ),
-                      ),
-                    ),
-                    if (showMyTable[0]) Center(child: getTable(0, user)),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          _store.dispatch(const SetShowMyTableScore(1));
-                        },
-                        child: Container(
-                          width: 180,
-                          height: 40,
-                          margin: const EdgeInsets.only(top: 16, bottom: 8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: showMyTable[1] ? Colors.amber : Colors.lightGreen,
+                          child: Text(
+                            '${showMyTable[0] ? 'Hide' : 'Show'} Scores - EASY',
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
                           ),
-                          child: Center(child: Text('${showMyTable[1] ? 'Hide' : 'Show'} Scores - MEDIUM')),
                         ),
                       ),
-                    ),
-                    if (showMyTable[1]) Center(child: getTable(1, user)),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          _store.dispatch(const SetShowMyTableScore(2));
-                        },
-                        child: Container(
-                          width: 180,
-                          height: 40,
-                          margin: const EdgeInsets.only(top: 16, bottom: 8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: showMyTable[2] ? Colors.amber : Colors.lightGreen,
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      if (showMyTable[0]) Center(child: getTable(0, user)),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.blue,
+                              blurRadius: 5,
+                            )
+                          ],
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _store.dispatch(const SetShowMyTableScore(1));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                              MediaQuery.of(context).size.width,
+                              50,
+                            ),
                           ),
-                          child: Center(child: Text('${showMyTable[2] ? 'Hide' : 'Show'} Scores - HARD')),
+                          child: Text(
+                            '${showMyTable[1] ? 'Hide' : 'Show'} Scores - MEDIUM',
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    if (showMyTable[2]) Center(child: getTable(2, user)),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                  ],
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      if (showMyTable[1]) Center(child: getTable(1, user)),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.blue,
+                              blurRadius: 5,
+                            )
+                          ],
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _store.dispatch(const SetShowMyTableScore(2));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                              MediaQuery.of(context).size.width,
+                              50,
+                            ),
+                          ),
+                          child: Text(
+                            '${showMyTable[2] ? 'Hide' : 'Show'} Scores - HARD',
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      if (showMyTable[2]) Center(child: getTable(2, user)),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

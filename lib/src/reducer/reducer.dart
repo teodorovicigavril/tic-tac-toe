@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
@@ -64,9 +63,9 @@ AppState _setDifficulty(AppState state, SetDifficulty action) {
 }
 
 AppState _setDifficultyColor(AppState state, SetDifficultyColor action) {
-  final List<Color> difficultyColors = List<Color>.filled(state.difficultyColors.length, Colors.grey);
-  if (action.position >= 0 && action.position <= difficultyColors.length) {
-    difficultyColors[action.position] = Colors.lightGreen;
+  final List<bool> difficultyColors = List<bool>.filled(state.difficultyColors.length, false);
+  if (action.position >= 0 && action.position <= difficultyColors.length && !state.difficultyColors[action.position]) {
+    difficultyColors[action.position] = true;
   }
   return state.copyWith(difficultyColors: difficultyColors);
 }
@@ -124,8 +123,9 @@ AppState _setInitGame(AppState state, SetInitGame action) {
     availablePlayerTwoPieces: <int>[1, 2, 3, 4, 5, 6],
     selectedDifficulty: action.difficulty,
     gameStatus: 0,
+    playerTurn: 1,
     score: 109,
-    difficultyColors: <Color>[Colors.grey, Colors.grey, Colors.grey],
+    difficultyColors: <bool>[false, false, false],
     selectedPiece: const Tuple2<int, int>(-1, -1),
     table: <Tuple2<int, int>>[
       const Tuple2<int, int>(-1, -1),

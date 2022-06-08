@@ -6,11 +6,11 @@ import 'package:tic_tac_toe/src/models/index.dart';
 class DifficultyColorsContainer extends StatelessWidget {
   const DifficultyColorsContainer({Key? key, required this.builder}) : super(key: key);
 
-  final ViewModelBuilder<List<Color>> builder;
+  final ViewModelBuilder<List<bool>> builder;
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, List<Color>>(
+    return StoreConnector<AppState, List<bool>>(
       builder: builder,
       converter: (Store<AppState> store) => store.state.difficultyColors,
     );

@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
 
 class AuthApi {
-  AuthApi(this._auth, this._firestore, this._storage);
+  AuthApi(this._auth, this._firestore, this._storage, this._googleSignIn);
 
   final FirebaseAuth _auth;
   final FirebaseFirestore _firestore;
   final FirebaseStorage _storage;
+  final GoogleSignIn _googleSignIn;
 
   Future<AppUser> create({
     required String email,
@@ -166,5 +168,21 @@ class AuthApi {
 
     await _firestore.doc('users/${user.uid}').set(user.toJson());
     return user;
+  }
+
+  Future<AppUser> loginWithGoogle() async {
+    final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
+
+    final OAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    await _auth.signInWithCredential(credential);
+
+    final DocumentSnapshot<Map<String, dynamic>> snapshot =
+        await _firestore.doc('users/${_auth.currentUser!.uid}').get();
+    return AppUser.fromJson(snapshot.data()!);
   }
 }

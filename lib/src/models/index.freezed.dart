@@ -213,7 +213,7 @@ class _$AppStateTearOff {
       AppUser? user,
       List<String> photoUrls = const <String>[],
       int selectedProfilePhoto = 0,
-      List<Color> difficultyColors = const <Color>[Colors.grey, Colors.grey, Colors.grey],
+      List<bool> difficultyColors = const <bool>[false, false, false],
       int gameStatus = 0,
       List<Tuple2<int, int>> table = const <Tuple2<int, int>>[
         Tuple2<int, int>(-1, -1),
@@ -267,7 +267,7 @@ mixin _$AppState {
   AppUser? get user => throw _privateConstructorUsedError;
   List<String> get photoUrls => throw _privateConstructorUsedError;
   int get selectedProfilePhoto => throw _privateConstructorUsedError;
-  List<Color> get difficultyColors => throw _privateConstructorUsedError;
+  List<bool> get difficultyColors => throw _privateConstructorUsedError;
   int get gameStatus => throw _privateConstructorUsedError; // 0 -started, 1 - win, 2 - lose, 3 - tie
   List<Tuple2<int, int>> get table => throw _privateConstructorUsedError;
   List<int> get availablePlayerOnePieces => throw _privateConstructorUsedError;
@@ -293,7 +293,7 @@ abstract class $AppStateCopyWith<$Res> {
       AppUser? user,
       List<String> photoUrls,
       int selectedProfilePhoto,
-      List<Color> difficultyColors,
+      List<bool> difficultyColors,
       int gameStatus,
       List<Tuple2<int, int>> table,
       List<int> availablePlayerOnePieces,
@@ -358,7 +358,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
       difficultyColors: difficultyColors == freezed
           ? _value.difficultyColors
           : difficultyColors // ignore: cast_nullable_to_non_nullable
-              as List<Color>,
+              as List<bool>,
       gameStatus: gameStatus == freezed
           ? _value.gameStatus
           : gameStatus // ignore: cast_nullable_to_non_nullable
@@ -431,7 +431,7 @@ abstract class $AppState$CopyWith<$Res> implements $AppStateCopyWith<$Res> {
       AppUser? user,
       List<String> photoUrls,
       int selectedProfilePhoto,
-      List<Color> difficultyColors,
+      List<bool> difficultyColors,
       int gameStatus,
       List<Tuple2<int, int>> table,
       List<int> availablePlayerOnePieces,
@@ -497,7 +497,7 @@ class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res> impleme
       difficultyColors: difficultyColors == freezed
           ? _value.difficultyColors
           : difficultyColors // ignore: cast_nullable_to_non_nullable
-              as List<Color>,
+              as List<bool>,
       gameStatus: gameStatus == freezed
           ? _value.gameStatus
           : gameStatus // ignore: cast_nullable_to_non_nullable
@@ -558,7 +558,7 @@ class _$AppState$ implements AppState$ {
       this.user,
       this.photoUrls = const <String>[],
       this.selectedProfilePhoto = 0,
-      this.difficultyColors = const <Color>[Colors.grey, Colors.grey, Colors.grey],
+      this.difficultyColors = const <bool>[false, false, false],
       this.gameStatus = 0,
       this.table = const <Tuple2<int, int>>[
         Tuple2<int, int>(-1, -1),
@@ -595,7 +595,7 @@ class _$AppState$ implements AppState$ {
   final int selectedProfilePhoto;
   @JsonKey()
   @override
-  final List<Color> difficultyColors;
+  final List<bool> difficultyColors;
   @JsonKey()
   @override
   final int gameStatus;
@@ -694,7 +694,7 @@ abstract class AppState$ implements AppState {
       AppUser? user,
       List<String> photoUrls,
       int selectedProfilePhoto,
-      List<Color> difficultyColors,
+      List<bool> difficultyColors,
       int gameStatus,
       List<Tuple2<int, int>> table,
       List<int> availablePlayerOnePieces,
@@ -717,7 +717,7 @@ abstract class AppState$ implements AppState {
   @override
   int get selectedProfilePhoto;
   @override
-  List<Color> get difficultyColors;
+  List<bool> get difficultyColors;
   @override
   int get gameStatus;
   @override // 0 -started, 1 - win, 2 - lose, 3 - tie

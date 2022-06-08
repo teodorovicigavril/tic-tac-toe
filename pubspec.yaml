@@ -21,6 +21,7 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   flutter_redux: ^0.9.0
   freezed_annotation: ^1.1.0
+  google_sign_in: ^5.3.3
   http: ^0.13.4
   json_annotation: ^4.4.0
   meta: ^1.7.0

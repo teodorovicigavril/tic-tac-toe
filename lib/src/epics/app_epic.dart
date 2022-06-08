@@ -179,55 +179,140 @@ class AppEpic {
 
   Stream<AppAction> _setTurnTableStart(Stream<SetTurnTableStart> actions, EpicStore<AppState> store) {
     return actions.flatMap((SetTurnTableStart action) async* {
-      if ((store.state.table[action.index].item1 == 2 && store.state.table[action.index].item2 < action.piece.item2) ||
-          store.state.table[action.index].item1 == -1) {
-        yield SetPieceToTable(action.piece, action.index);
-        yield DecreaseScore(action.piece.item2 + 6 - store.state.availablePlayerOnePieces.length);
+      if (!action.opponentStarts) {
+        if ((store.state.table[action.index].item1 == 2 &&
+                store.state.table[action.index].item2 < action.piece.item2) ||
+            store.state.table[action.index].item1 == -1) {
+          yield SetPieceToTable(action.piece, action.index);
+          yield DecreaseScore(action.piece.item2 + 6 - store.state.availablePlayerOnePieces.length);
 
-        yield const SetSelectedPiece(Tuple2<int, int>(-1, -1));
-        yield SetAvailablePlayerOnePiece(piece: action.piece.item2, remove: true);
+          yield const SetSelectedPiece(Tuple2<int, int>(-1, -1));
+          yield SetAvailablePlayerOnePiece(piece: action.piece.item2, remove: true);
 
-        if (evaluate(store.state.table) == -10) {
-          yield const SetGameStatus(1);
-          yield AddScore.start(store.state.score);
+          if (evaluate(store.state.table) == -10) {
+            yield const SetGameStatus(1);
+            yield AddScore.start(store.state.score);
 
-          await showDialog<Widget>(
-            context: action.context,
-            builder: (BuildContext context) {
-              return getAlertDialog('You won!', context, action.difficulty, store.state.score);
-            },
-          );
-          return;
-        }
-
-        for (int i = 0; i < store.state.availablePlayerOnePieces.length; i++) {
-          if (!isMovesLeft(store.state.table, store.state.availablePlayerOnePieces[i], 2) &&
-              store.state.availablePlayerOnePieces[i] > 0) {
-            yield SetAvailablePlayerOnePiece(piece: store.state.availablePlayerOnePieces[i], remove: false);
+            await showDialog<Widget>(
+              context: action.context,
+              builder: (BuildContext context) {
+                return getAlertDialog('You won!', context, action.difficulty, store.state.score);
+              },
+            );
+            return;
           }
-        }
 
-        for (int i = 0; i < store.state.availablePlayerTwoPieces.length; i++) {
-          if (!isMovesLeft(store.state.table, store.state.availablePlayerTwoPieces[i], 1) &&
-              store.state.availablePlayerTwoPieces[i] > 0) {
-            yield SetAvailablePlayerTwoPiece(piece: store.state.availablePlayerTwoPieces[i], remove: false);
+          for (int i = 0; i < store.state.availablePlayerOnePieces.length; i++) {
+            if (!isMovesLeft(store.state.table, store.state.availablePlayerOnePieces[i], 2) &&
+                store.state.availablePlayerOnePieces[i] > 0) {
+              yield SetAvailablePlayerOnePiece(piece: store.state.availablePlayerOnePieces[i], remove: false);
+            }
           }
+
+          for (int i = 0; i < store.state.availablePlayerTwoPieces.length; i++) {
+            if (!isMovesLeft(store.state.table, store.state.availablePlayerTwoPieces[i], 1) &&
+                store.state.availablePlayerTwoPieces[i] > 0) {
+              yield SetAvailablePlayerTwoPiece(piece: store.state.availablePlayerTwoPieces[i], remove: false);
+            }
+          }
+
+          if (checkTie(store.state.availablePlayerOnePieces, store.state.availablePlayerTwoPieces)) {
+            yield const SetGameStatus(3);
+            yield const DecreaseScore(10);
+            yield AddScore.start(store.state.score);
+
+            await showDialog<Widget>(
+              context: action.context,
+              builder: (BuildContext context) {
+                return getAlertDialog('It s a TIE!', context, action.difficulty, store.state.score);
+              },
+            );
+            return;
+          }
+
+          yield const SetPlayerTurn(2);
+
+          int j = 0;
+          while (
+              j < store.state.availablePlayerTwoPieces.length && store.state.availablePlayerTwoPieces.reduce(max) > 0) {
+            await Future<void>.delayed(Duration(milliseconds: Random().nextInt(300) + 700));
+
+            Tuple2<int, int> move = const Tuple2<int, int>(-1, -1);
+            if (action.difficulty == 0) {
+              move = findBestMoveEasy(
+                List<Tuple2<int, int>>.from(store.state.table),
+                List<int>.from(store.state.availablePlayerTwoPieces),
+              );
+            } else if (action.difficulty == 1) {
+              move = findBestMove(
+                List<Tuple2<int, int>>.from(store.state.table),
+                List<int>.from(store.state.availablePlayerTwoPieces),
+              );
+            } else {
+              move = findBestMoveHard(
+                List<Tuple2<int, int>>.from(store.state.table),
+                List<int>.from(store.state.availablePlayerTwoPieces),
+                List<int>.from(store.state.availablePlayerOnePieces),
+              );
+            }
+
+            if (move.item1 != -1) {
+              yield SetPieceToTable(Tuple2<int, int>(2, move.item2), move.item1);
+              yield SetAvailablePlayerTwoPiece(piece: move.item2, remove: true);
+              j--;
+            }
+
+            for (int i = 0; i < store.state.availablePlayerOnePieces.length; i++) {
+              if (!isMovesLeft(store.state.table, store.state.availablePlayerOnePieces[i], 2) &&
+                  store.state.availablePlayerOnePieces[i] > 0) {
+                yield SetAvailablePlayerOnePiece(piece: store.state.availablePlayerOnePieces[i], remove: false);
+              }
+            }
+
+            for (int i = 0; i < store.state.availablePlayerTwoPieces.length; i++) {
+              if (!isMovesLeft(store.state.table, store.state.availablePlayerTwoPieces[i], 1) &&
+                  store.state.availablePlayerTwoPieces[i] > 0) {
+                yield SetAvailablePlayerTwoPiece(piece: store.state.availablePlayerTwoPieces[i], remove: false);
+              }
+            }
+
+            if (evaluate(store.state.table) == 10) {
+              yield const SetGameStatus(2);
+              yield const DecreaseScore(20);
+              yield AddScore.start(store.state.score);
+
+              await showDialog<Widget>(
+                context: action.context,
+                builder: (BuildContext context) {
+                  return getAlertDialog('You lose!', context, action.difficulty, store.state.score);
+                },
+              );
+              return;
+            }
+
+            if (checkTie(store.state.availablePlayerOnePieces, store.state.availablePlayerTwoPieces)) {
+              yield const SetGameStatus(3);
+              yield const DecreaseScore(10);
+              yield AddScore.start(store.state.score);
+
+              await showDialog<Widget>(
+                context: action.context,
+                builder: (BuildContext context) {
+                  return getAlertDialog('It s a TIE!', context, action.difficulty, store.state.score);
+                },
+              );
+              return;
+            }
+
+            if (!(store.state.availablePlayerOnePieces.isNotEmpty &&
+                store.state.availablePlayerOnePieces.reduce(max) < 0)) {
+              break;
+            }
+            j++;
+          }
+          yield const SetPlayerTurn(1);
         }
-
-        if (checkTie(store.state.availablePlayerOnePieces, store.state.availablePlayerTwoPieces)) {
-          yield const SetGameStatus(3);
-          yield const DecreaseScore(10);
-          yield AddScore.start(store.state.score);
-
-          await showDialog<Widget>(
-            context: action.context,
-            builder: (BuildContext context) {
-              return getAlertDialog('It s a TIE!', context, action.difficulty, store.state.score);
-            },
-          );
-          return;
-        }
-
+      } else {
         yield const SetPlayerTurn(2);
 
         int j = 0;

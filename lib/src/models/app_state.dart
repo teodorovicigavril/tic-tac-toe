@@ -10,8 +10,8 @@ class AppState with _$AppState {
         List<String> photoUrls,
     @Default(0)
         int selectedProfilePhoto,
-    @Default(<Color>[Colors.grey, Colors.grey, Colors.grey])
-        List<Color> difficultyColors,
+    @Default(<bool>[false, false, false])
+        List<bool> difficultyColors,
     @Default(0)
         int gameStatus, // 0 -started, 1 - win, 2 - lose, 3 - tie
     @Default(<Tuple2<int, int>>[

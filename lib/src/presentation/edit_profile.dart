@@ -69,9 +69,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
       Navigator.pop(context);
       Navigator.pop(context);
 
-      const SnackBar snackBar = SnackBar(
-        content: Text('Account Updated Successfully!'),
-        duration: Duration(seconds: 3),
+      final SnackBar snackBar = SnackBar(
+        backgroundColor: Colors.blueAccent.withOpacity(0.4),
+        content: const Text(
+          'Account Updated Successfully!',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            shadows: <Shadow>[
+              Shadow(
+                blurRadius: 40,
+                color: Colors.white,
+              ),
+            ],
+          ),
+        ),
+        duration: const Duration(seconds: 5),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -89,134 +103,255 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text('Edit Profile'),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Form(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: UserContainer(
-              builder: (BuildContext context, AppUser? user) {
-                return ProfilePhotosContainer(
-                  builder: (BuildContext context, List<String> photoUrls) {
-                    return Column(
+          child: UserContainer(
+            builder: (BuildContext context, AppUser? user) {
+              return ProfilePhotosContainer(
+                builder: (BuildContext context, List<String> photoUrls) {
+                  return Container(
+                    margin: const EdgeInsets.only(left: 16, right: 16, top: 48),
+                    child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          child: const Text(
-                            'Please enter the fields you want to update!',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
+                        const Text(
+                          'Please enter the fields you want to update!',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 26,
+                            shadows: <Shadow>[
+                              Shadow(
+                                blurRadius: 40,
+                                color: Colors.blue,
+                              ),
+                            ],
                           ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
                         ),
                         Text(
                           _errorText,
                           style: const TextStyle(
-                            color: Colors.red,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            shadows: <Shadow>[
+                              Shadow(
+                                blurRadius: 40,
+                                color: Colors.red,
+                              ),
+                            ],
                           ),
                         ),
-                        TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          autofocus: true,
-                          decoration: InputDecoration(hintText: 'email: ${user!.email}'),
-                          controller: _email,
-                          textInputAction: TextInputAction.next,
-                          validator: (String? value) {
-                            if (value != null && value.isNotEmpty) {
-                              if (!EmailValidator.validate(value)) {
-                                return 'Please enter a valid email address!';
-                              }
-                            }
-                            return null;
-                          },
-                          onFieldSubmitted: (String value) {
-                            FocusScope.of(context).requestFocus(_passwordNode);
-                          },
-                        ),
-                        TextFormField(
-                          controller: _password,
-                          focusNode: _passwordNode,
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: true,
-                          textInputAction: TextInputAction.next,
-                          decoration: const InputDecoration(
-                            hintText: 'password',
-                          ),
-                          validator: (String? value) {
-                            if (value != null && value.isNotEmpty) {
-                              if (!value.contains(RegExp('[A-Z]'))) {
-                                return 'Password should contains at least one UpperCase letter!';
-                              }
-                              if (!value.contains(RegExp('[0-9]'))) {
-                                return 'Password should contains at least one digit!';
-                              }
-                              if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-                                return 'Password should contains at least one special character!';
-                              }
-                              if (value.length < 6) {
-                                return 'Password should contains at least 6 characters!';
-                              }
-                            }
-                            return null;
-                          },
-                          onFieldSubmitted: (String value) {
-                            FocusScope.of(context).requestFocus(_confirmPasswordNode);
-                          },
-                        ),
-                        TextFormField(
-                          controller: _confirmPassword,
-                          focusNode: _confirmPasswordNode,
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: true,
-                          textInputAction: TextInputAction.next,
-                          decoration: const InputDecoration(
-                            hintText: 'confirm password',
-                          ),
-                          validator: (String? value) {
-                            if (value != null && value.isNotEmpty) {
-                              if (!value.contains(RegExp('[A-Z]'))) {
-                                return 'Password should contains at least one UpperCase letter!';
-                              }
-                              if (!value.contains(RegExp('[0-9]'))) {
-                                return 'Password should contains at least one digit!';
-                              }
-                              if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-                                return 'Password should contains at least one special character!';
-                              }
-                              if (value.length < 6) {
-                                return 'Password should contains at least 6 characters!';
-                              }
-                              if (value != _password.text) {
-                                return 'Password not matching!';
-                              }
-                            }
-
-                            return null;
-                          },
-                          onFieldSubmitted: (String value) {
-                            FocusScope.of(context).requestFocus(_usernameNode);
-                          },
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
                         ),
                         Container(
-                          margin: const EdgeInsets.only(bottom: 16),
+                          decoration: const BoxDecoration(
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: Colors.blue,
+                                blurRadius: 5,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              suffixIcon: const Icon(
+                                Icons.email,
+                                color: Colors.blue,
+                              ),
+                              fillColor: const Color.fromRGBO(16, 13, 34, 1),
+                              filled: true,
+                              hintText: 'email: ${user!.email}',
+                              errorStyle: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                            controller: _email,
+                            textInputAction: TextInputAction.next,
+                            validator: (String? value) {
+                              if (value != null && value.isNotEmpty) {
+                                if (!EmailValidator.validate(value)) {
+                                  return 'Please enter a valid email address!';
+                                }
+                              }
+                              return null;
+                            },
+                            onFieldSubmitted: (String value) {
+                              FocusScope.of(context).requestFocus(_passwordNode);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: Colors.blue,
+                                blurRadius: 5,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: TextFormField(
+                            controller: _password,
+                            focusNode: _passwordNode,
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: true,
+                            textInputAction: TextInputAction.next,
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                Icons.key,
+                                color: Colors.blue,
+                              ),
+                              fillColor: Color.fromRGBO(16, 13, 34, 1),
+                              filled: true,
+                              hintText: 'password',
+                              errorStyle: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                            validator: (String? value) {
+                              if (value != null && value.isNotEmpty) {
+                                if (!value.contains(RegExp('[A-Z]'))) {
+                                  return 'Password should contains at least one UpperCase letter!';
+                                }
+                                if (!value.contains(RegExp('[0-9]'))) {
+                                  return 'Password should contains at least one digit!';
+                                }
+                                if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+                                  return 'Password should contains at least one special character!';
+                                }
+                                if (value.length < 6) {
+                                  return 'Password should contains at least 6 characters!';
+                                }
+                              }
+                              return null;
+                            },
+                            onFieldSubmitted: (String value) {
+                              FocusScope.of(context).requestFocus(_confirmPasswordNode);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: Colors.blue,
+                                blurRadius: 5,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: TextFormField(
+                            controller: _confirmPassword,
+                            focusNode: _confirmPasswordNode,
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: true,
+                            textInputAction: TextInputAction.next,
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                Icons.key,
+                                color: Colors.blue,
+                              ),
+                              fillColor: Color.fromRGBO(16, 13, 34, 1),
+                              filled: true,
+                              hintText: 'confirm password',
+                              errorStyle: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                            validator: (String? value) {
+                              if (value != null && value.isNotEmpty) {
+                                if (!value.contains(RegExp('[A-Z]'))) {
+                                  return 'Password should contains at least one UpperCase letter!';
+                                }
+                                if (!value.contains(RegExp('[0-9]'))) {
+                                  return 'Password should contains at least one digit!';
+                                }
+                                if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+                                  return 'Password should contains at least one special character!';
+                                }
+                                if (value.length < 6) {
+                                  return 'Password should contains at least 6 characters!';
+                                }
+                                if (value != _password.text) {
+                                  return 'Password not matching!';
+                                }
+                              }
+
+                              return null;
+                            },
+                            onFieldSubmitted: (String value) {
+                              FocusScope.of(context).requestFocus(_usernameNode);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: Colors.blue,
+                                blurRadius: 5,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
                           child: TextFormField(
                             controller: _username,
                             focusNode: _usernameNode,
                             keyboardType: TextInputType.name,
                             textInputAction: TextInputAction.done,
                             decoration: InputDecoration(
+                              suffixIcon: const Icon(
+                                Icons.person,
+                                color: Colors.blue,
+                              ),
+                              fillColor: const Color.fromRGBO(16, 13, 34, 1),
+                              filled: true,
                               hintText: 'username: ${user.username}',
+                              errorStyle: const TextStyle(
+                                fontSize: 14,
+                              ),
                             ),
                             onFieldSubmitted: (String value) {
                               FocusManager.instance.primaryFocus?.unfocus();
                             },
                           ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                        ),
+                        const Text(
+                          'Choose your avatar',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            shadows: <Shadow>[
+                              Shadow(
+                                blurRadius: 40,
+                                color: Colors.blue,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.02,
                         ),
                         SelectedProfilePhotosContainer(
                           builder: (BuildContext context, int selectedProfilePhoto) {
@@ -229,8 +364,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 UserContainer(
                                   builder: (BuildContext context, AppUser? user) {
                                     return Container(
-                                      margin: const EdgeInsets.only(top: 32),
                                       height: 180,
+                                      decoration: const BoxDecoration(
+                                        boxShadow: <BoxShadow>[
+                                          BoxShadow(
+                                            color: Colors.blue,
+                                            blurRadius: 10,
+                                            spreadRadius: 2,
+                                          ),
+                                        ],
+                                      ),
                                       child: Image.network(photoUrls[selectedProfilePhoto]),
                                     );
                                   },
@@ -249,7 +392,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         },
                                         icon: const Icon(
                                           Icons.arrow_left,
-                                          color: Colors.black,
+                                          color: Colors.blue,
+                                          size: 32,
                                         ),
                                       ),
                                       IconButton(
@@ -262,7 +406,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         },
                                         icon: const Icon(
                                           Icons.arrow_right,
-                                          color: Colors.black,
+                                          color: Colors.blue,
+                                          size: 32,
                                         ),
                                       ),
                                     ],
@@ -272,34 +417,76 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             );
                           },
                         ),
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              ElevatedButton(
-                                onPressed: () => _onNext(context),
-                                child: const Text('Submit'),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Container(
+                              decoration: const BoxDecoration(
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Colors.blue,
+                                    blurRadius: 5,
+                                  ),
+                                ],
                               ),
-                              ElevatedButton(
+                              child: ElevatedButton(
+                                onPressed: () => _onNext(context),
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.35,
+                                    50,
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Submit',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Colors.blue,
+                                    blurRadius: 5,
+                                  ),
+                                ],
+                              ),
+                              child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.pop(context);
                                   Navigator.pop(context);
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  primary: Colors.grey,
+                                  minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.35,
+                                    50,
+                                  ),
                                 ),
-                                child: const Text('Cancel'),
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
                         ),
                       ],
-                    );
-                  },
-                );
-              },
-            ),
+                    ),
+                  );
+                },
+              );
+            },
           ),
         ),
       ),

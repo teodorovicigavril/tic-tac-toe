@@ -4259,12 +4259,17 @@ class _$SetTurnTableTearOff {
   const _$SetTurnTableTearOff();
 
   SetTurnTableStart call(
-      {required Tuple2<int, int> piece, required int index, required BuildContext context, required int difficulty}) {
+      {required Tuple2<int, int> piece,
+      required int index,
+      required BuildContext context,
+      required int difficulty,
+      required bool opponentStarts}) {
     return SetTurnTableStart(
       piece: piece,
       index: index,
       context: context,
       difficulty: difficulty,
+      opponentStarts: opponentStarts,
     );
   }
 
@@ -4287,21 +4292,24 @@ const $SetTurnTable = _$SetTurnTableTearOff();
 mixin _$SetTurnTable {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty) $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)
+        $default, {
     required TResult Function() successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty)? $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)?
+        $default, {
     TResult Function()? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty)? $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)?
+        $default, {
     TResult Function()? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -4350,7 +4358,7 @@ class _$SetTurnTableCopyWithImpl<$Res> implements $SetTurnTableCopyWith<$Res> {
 abstract class $SetTurnTableStartCopyWith<$Res> {
   factory $SetTurnTableStartCopyWith(SetTurnTableStart value, $Res Function(SetTurnTableStart) then) =
       _$SetTurnTableStartCopyWithImpl<$Res>;
-  $Res call({Tuple2<int, int> piece, int index, BuildContext context, int difficulty});
+  $Res call({Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts});
 }
 
 /// @nodoc
@@ -4368,6 +4376,7 @@ class _$SetTurnTableStartCopyWithImpl<$Res> extends _$SetTurnTableCopyWithImpl<$
     Object? index = freezed,
     Object? context = freezed,
     Object? difficulty = freezed,
+    Object? opponentStarts = freezed,
   }) {
     return _then(SetTurnTableStart(
       piece: piece == freezed
@@ -4386,6 +4395,10 @@ class _$SetTurnTableStartCopyWithImpl<$Res> extends _$SetTurnTableCopyWithImpl<$
           ? _value.difficulty
           : difficulty // ignore: cast_nullable_to_non_nullable
               as int,
+      opponentStarts: opponentStarts == freezed
+          ? _value.opponentStarts
+          : opponentStarts // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -4394,7 +4407,11 @@ class _$SetTurnTableStartCopyWithImpl<$Res> extends _$SetTurnTableCopyWithImpl<$
 
 class _$SetTurnTableStart implements SetTurnTableStart {
   const _$SetTurnTableStart(
-      {required this.piece, required this.index, required this.context, required this.difficulty});
+      {required this.piece,
+      required this.index,
+      required this.context,
+      required this.difficulty,
+      required this.opponentStarts});
 
   @override
   final Tuple2<int, int> piece;
@@ -4404,10 +4421,12 @@ class _$SetTurnTableStart implements SetTurnTableStart {
   final BuildContext context;
   @override
   final int difficulty;
+  @override
+  final bool opponentStarts;
 
   @override
   String toString() {
-    return 'SetTurnTable(piece: $piece, index: $index, context: $context, difficulty: $difficulty)';
+    return 'SetTurnTable(piece: $piece, index: $index, context: $context, difficulty: $difficulty, opponentStarts: $opponentStarts)';
   }
 
   @override
@@ -4418,7 +4437,8 @@ class _$SetTurnTableStart implements SetTurnTableStart {
             const DeepCollectionEquality().equals(other.piece, piece) &&
             const DeepCollectionEquality().equals(other.index, index) &&
             const DeepCollectionEquality().equals(other.context, context) &&
-            const DeepCollectionEquality().equals(other.difficulty, difficulty));
+            const DeepCollectionEquality().equals(other.difficulty, difficulty) &&
+            const DeepCollectionEquality().equals(other.opponentStarts, opponentStarts));
   }
 
   @override
@@ -4427,7 +4447,8 @@ class _$SetTurnTableStart implements SetTurnTableStart {
       const DeepCollectionEquality().hash(piece),
       const DeepCollectionEquality().hash(index),
       const DeepCollectionEquality().hash(context),
-      const DeepCollectionEquality().hash(difficulty));
+      const DeepCollectionEquality().hash(difficulty),
+      const DeepCollectionEquality().hash(opponentStarts));
 
   @JsonKey(ignore: true)
   @override
@@ -4437,33 +4458,36 @@ class _$SetTurnTableStart implements SetTurnTableStart {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty) $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)
+        $default, {
     required TResult Function() successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
-    return $default(piece, index, context, difficulty);
+    return $default(piece, index, context, difficulty, opponentStarts);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty)? $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)?
+        $default, {
     TResult Function()? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
   }) {
-    return $default?.call(piece, index, context, difficulty);
+    return $default?.call(piece, index, context, difficulty, opponentStarts);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty)? $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)?
+        $default, {
     TResult Function()? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(piece, index, context, difficulty);
+      return $default(piece, index, context, difficulty, opponentStarts);
     }
     return orElse();
   }
@@ -4508,12 +4532,14 @@ abstract class SetTurnTableStart implements SetTurnTable {
       {required Tuple2<int, int> piece,
       required int index,
       required BuildContext context,
-      required int difficulty}) = _$SetTurnTableStart;
+      required int difficulty,
+      required bool opponentStarts}) = _$SetTurnTableStart;
 
   Tuple2<int, int> get piece;
   int get index;
   BuildContext get context;
   int get difficulty;
+  bool get opponentStarts;
   @JsonKey(ignore: true)
   $SetTurnTableStartCopyWith<SetTurnTableStart> get copyWith => throw _privateConstructorUsedError;
 }
@@ -4555,7 +4581,8 @@ class _$SetTurnTableSuccessful implements SetTurnTableSuccessful {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty) $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)
+        $default, {
     required TResult Function() successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
@@ -4565,7 +4592,8 @@ class _$SetTurnTableSuccessful implements SetTurnTableSuccessful {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty)? $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)?
+        $default, {
     TResult Function()? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
   }) {
@@ -4575,7 +4603,8 @@ class _$SetTurnTableSuccessful implements SetTurnTableSuccessful {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty)? $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)?
+        $default, {
     TResult Function()? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
@@ -4696,7 +4725,8 @@ class _$SetTurnTableError implements SetTurnTableError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty) $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)
+        $default, {
     required TResult Function() successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
@@ -4706,7 +4736,8 @@ class _$SetTurnTableError implements SetTurnTableError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty)? $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)?
+        $default, {
     TResult Function()? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
   }) {
@@ -4716,7 +4747,8 @@ class _$SetTurnTableError implements SetTurnTableError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty)? $default, {
+    TResult Function(Tuple2<int, int> piece, int index, BuildContext context, int difficulty, bool opponentStarts)?
+        $default, {
     TResult Function()? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),

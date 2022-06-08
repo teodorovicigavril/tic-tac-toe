@@ -19,9 +19,6 @@ class _OfflinePageState extends State<OfflinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Playing Against Computer'),
-      ),
       body: SelectedDifficultyContainer(
         builder: (BuildContext context, int difficulty) {
           if (difficulty == -1) {

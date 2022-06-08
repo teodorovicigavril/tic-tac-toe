@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
 import 'package:tic_tac_toe/src/containers/difficulty_colors_container.dart';
+import 'package:tic_tac_toe/src/containers/player_turn_container.dart';
+import 'package:tic_tac_toe/src/containers/user_container.dart';
 import 'package:tic_tac_toe/src/models/index.dart';
 
 class NoDifficultyOfflinePage extends StatefulWidget {
@@ -23,105 +25,220 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DifficultyColorsContainer(
-        builder: (BuildContext context, List<Color> colors) {
-          return Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.only(top: 32),
-            child: Column(
-              children: <Widget>[
-                const Text('Please select difficulty!'),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        _localDifficulty = 0;
-                        StoreProvider.of<AppState>(context).dispatch(SetDifficultyColor(_localDifficulty));
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.only(right: 8),
-                        decoration: BoxDecoration(
-                          color: colors[0],
-                          borderRadius: const BorderRadius.all(Radius.circular(15)),
+        builder: (BuildContext context, List<bool> colors) {
+          return SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.only(left: 16, right: 16, top: 48),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  UserContainer(
+                    builder: (BuildContext context, AppUser? user) {
+                      return Text(
+                        'computer\nVS\n${user!.username}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 70,
+                          shadows: <Shadow>[
+                            Shadow(
+                              blurRadius: 40,
+                              color: Colors.blue,
+                            ),
+                          ],
                         ),
-                        height: 40,
-                        width: 100,
-                        child: const Center(
-                          child: Text(
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.06,
+                  ),
+                  const Text(
+                    'Please select difficulty!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      shadows: <Shadow>[
+                        Shadow(
+                          blurRadius: 40,
+                          color: Colors.blue,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.03,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: colors[0] ? const Color.fromRGBO(0, 131, 34, 1) : Colors.blue,
+                              blurRadius: colors[0] ? 10 : 5,
+                              spreadRadius: colors[0] ? 7 : 0,
+                            ),
+                          ],
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (!colors[0]) {
+                              _localDifficulty = 0;
+                            } else {
+                              _localDifficulty = -1;
+                            }
+                            StoreProvider.of<AppState>(context).dispatch(SetDifficultyColor(_localDifficulty));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                              MediaQuery.of(context).size.width * 0.25,
+                              50,
+                            ),
+                          ),
+                          child: const Text(
                             'Easy',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        _localDifficulty = 1;
-                        StoreProvider.of<AppState>(context).dispatch(SetDifficultyColor(_localDifficulty));
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.all(8),
+                      Container(
                         decoration: BoxDecoration(
-                          color: colors[1],
-                          borderRadius: const BorderRadius.all(Radius.circular(15)),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: colors[1] ? const Color.fromRGBO(138, 134, 65, 1) : Colors.blue,
+                              blurRadius: colors[1] ? 10 : 5,
+                              spreadRadius: colors[1] ? 7 : 0,
+                            ),
+                          ],
                         ),
-                        height: 40,
-                        width: 100,
-                        child: const Center(
-                          child: Text(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (!colors[1]) {
+                              _localDifficulty = 1;
+                            } else {
+                              _localDifficulty = -1;
+                            }
+                            StoreProvider.of<AppState>(context).dispatch(SetDifficultyColor(_localDifficulty));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                              MediaQuery.of(context).size.width * 0.25,
+                              50,
+                            ),
+                          ),
+                          child: const Text(
                             'Medium',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        _localDifficulty = 2;
-                        StoreProvider.of<AppState>(context).dispatch(SetDifficultyColor(_localDifficulty));
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.only(left: 8),
+                      Container(
                         decoration: BoxDecoration(
-                          color: colors[2],
-                          borderRadius: const BorderRadius.all(Radius.circular(15)),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: colors[2] ? const Color.fromRGBO(164, 59, 59, 1) : Colors.blue,
+                              blurRadius: colors[2] ? 10 : 5,
+                              spreadRadius: colors[2] ? 7 : 0,
+                            ),
+                          ],
                         ),
-                        height: 40,
-                        width: 100,
-                        child: const Center(
-                          child: Text(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (!colors[2]) {
+                              _localDifficulty = 2;
+                            } else {
+                              _localDifficulty = -1;
+                            }
+                            StoreProvider.of<AppState>(context).dispatch(SetDifficultyColor(_localDifficulty));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                              MediaQuery.of(context).size.width * 0.25,
+                              50,
+                            ),
+                          ),
+                          child: const Text(
                             'Hard',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text(
+                        'Opponent first',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          shadows: <Shadow>[
+                            Shadow(
+                              blurRadius: 40,
+                              color: Colors.blue,
+                            ),
+                          ],
+                        ),
+                      ),
+                      PlayerTurnContainer(
+                        builder: (BuildContext context, int playerTurn) {
+                          return Switch(
+                            activeColor: Colors.blue,
+                            value: playerTurn == 2,
+                            onChanged: (final bool? value) {
+                              StoreProvider.of<AppState>(context).dispatch(SetPlayerTurn(value! ? 2 : 1));
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.04,
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.blue,
+                          blurRadius: 5,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                TextButton(
-                  onPressed: () {
-                    StoreProvider.of<AppState>(context).dispatch(SetDifficulty(_localDifficulty));
-                  },
-                  child: const Text(
-                    'Start',
-                    style: TextStyle(
-                      color: Colors.green,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        StoreProvider.of<AppState>(context).dispatch(SetDifficulty(_localDifficulty));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width,
+                          50,
+                        ),
+                      ),
+                      child: const Text(
+                        'Start',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
