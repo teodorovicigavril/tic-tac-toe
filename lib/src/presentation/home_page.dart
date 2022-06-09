@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void offline(BuildContext context) {
-    StoreProvider.of<AppState>(context, listen: false).dispatch(const SetInitGame());
+    StoreProvider.of<AppState>(context, listen: false).dispatch(const SetInitGame(1, -1));
     Navigator.pushNamed(context, '/offline');
   }
 

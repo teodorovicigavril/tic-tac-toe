@@ -42,7 +42,7 @@ class SetAvailablePlayerTwoPiece with _$SetAvailablePlayerTwoPiece implements Ap
 
 @freezed
 class SetInitGame with _$SetInitGame implements AppAction {
-  const factory SetInitGame([@Default(-1) int difficulty]) = SetInitGame$;
+  const factory SetInitGame(int playerTurn, [@Default(-1) int difficulty]) = SetInitGame$;
 }
 
 @freezed

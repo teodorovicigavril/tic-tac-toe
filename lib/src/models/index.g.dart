@@ -13,7 +13,8 @@ _$AppUser$ _$$AppUser$FromJson(Map<String, dynamic> json) => _$AppUser$(
       photoUrl: json['photoUrl'] as String,
     );
 
-Map<String, dynamic> _$$AppUser$ToJson(_$AppUser$ instance) => <String, dynamic>{
+Map<String, dynamic> _$$AppUser$ToJson(_$AppUser$ instance) =>
+    <String, dynamic>{
       'uid': instance.uid,
       'email': instance.email,
       'username': instance.username,

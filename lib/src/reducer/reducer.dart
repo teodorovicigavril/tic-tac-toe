@@ -123,7 +123,7 @@ AppState _setInitGame(AppState state, SetInitGame action) {
     availablePlayerTwoPieces: <int>[1, 2, 3, 4, 5, 6],
     selectedDifficulty: action.difficulty,
     gameStatus: 0,
-    playerTurn: 1,
+    playerTurn: action.playerTurn,
     score: 109,
     difficultyColors: <bool>[false, false, false],
     selectedPiece: const Tuple2<int, int>(-1, -1),

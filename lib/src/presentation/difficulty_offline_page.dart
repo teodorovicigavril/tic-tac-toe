@@ -37,6 +37,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
           piece: const Tuple2<int, int>(-1, -1),
           opponentStarts: true,
           context: context,
+          initialPlayer: 2,
         ),
       );
     }
@@ -45,6 +46,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
+    final int initPlayerTurn = _store.state.playerTurn;
 
     return Scaffold(
       body: SelectedDifficultyContainer(
@@ -193,6 +195,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                                                 context: context,
                                                                 difficulty: difficulty,
                                                                 opponentStarts: false,
+                                                                initialPlayer: initPlayerTurn,
                                                               ),
                                                             );
                                                           }
@@ -231,7 +234,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                                 playerOnePieces.length,
                                                 (int index) => GestureDetector(
                                                   onTap: () {
-                                                    if (gameStatus == 0 && playerOnePieces[index] > 0) {
+                                                    if (gameStatus == 0 && playerOnePieces[index] > 0 && playerTurn == 1) {
                                                       if (piece.item1 == 1 && piece.item2 == playerOnePieces[index]) {
                                                         StoreProvider.of<AppState>(context)
                                                             .dispatch(const SetSelectedPiece(Tuple2<int, int>(-1, -1)));
@@ -356,7 +359,19 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                                           child: ElevatedButton(
                                                             onPressed: () {
                                                               StoreProvider.of<AppState>(context)
-                                                                  .dispatch(SetInitGame(difficulty));
+                                                                  .dispatch(SetInitGame(initPlayerTurn, difficulty));
+                                                              if (_store.state.playerTurn == 2) {
+                                                                _store.dispatch(
+                                                                  SetTurnTableStart(
+                                                                    index: -1,
+                                                                    difficulty: _store.state.selectedDifficulty,
+                                                                    piece: const Tuple2<int, int>(-1, -1),
+                                                                    opponentStarts: true,
+                                                                    context: context,
+                                                                    initialPlayer: initPlayerTurn,
+                                                                  ),
+                                                                );
+                                                              }
                                                               Navigator.of(context).pop();
                                                             },
                                                             style: ElevatedButton.styleFrom(
@@ -515,11 +530,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                                           ),
                                                           child: ElevatedButton(
                                                             onPressed: () {
-                                                              Navigator.pushNamedAndRemoveUntil(
-                                                                context,
-                                                                '/',
-                                                                (_) => false,
-                                                              );
+                                                              Navigator.pop(context);
                                                             },
                                                             style: ElevatedButton.styleFrom(
                                                               minimumSize: Size(

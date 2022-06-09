@@ -8,6 +8,7 @@ class SetTurnTable with _$SetTurnTable implements AppAction {
     required BuildContext context,
     required int difficulty,
     required bool opponentStarts,
+    required int initialPlayer,
   }) = SetTurnTableStart;
 
   const factory SetTurnTable.successful() = SetTurnTableSuccessful;

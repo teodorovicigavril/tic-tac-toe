@@ -184,15 +184,19 @@ bool checkTie(List<int> playerOnePieces, List<int> playerTwoPieces) {
   late int maxPlayerOnePiece;
   if (playerOnePieces.isNotEmpty) {
     maxPlayerOnePiece = playerOnePieces.reduce(max);
-  } else {
-    return false;
   }
 
   late int maxPlayerTwoPiece;
   if (playerTwoPieces.isNotEmpty) {
     maxPlayerTwoPiece = playerTwoPieces.reduce(max);
-  } else {
-    return false;
+  }
+
+  if (playerOnePieces.isEmpty && maxPlayerTwoPiece < 0){
+    return true;
+  }
+
+  if (playerTwoPieces.isEmpty && maxPlayerOnePiece < 0){
+    return true;
   }
 
   if (maxPlayerOnePiece < 0 && maxPlayerTwoPiece < 0) {

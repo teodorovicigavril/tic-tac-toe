@@ -22,7 +22,11 @@ AppUser _$AppUserFromJson(Map<String, dynamic> json) {
 class _$AppUserTearOff {
   const _$AppUserTearOff();
 
-  AppUser$ call({required String uid, required String email, required String username, required String photoUrl}) {
+  AppUser$ call(
+      {required String uid,
+      required String email,
+      required String username,
+      required String photoUrl}) {
     return AppUser$(
       uid: uid,
       email: email,
@@ -53,7 +57,8 @@ mixin _$AppUser {
 
 /// @nodoc
 abstract class $AppUserCopyWith<$Res> {
-  factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) then) = _$AppUserCopyWithImpl<$Res>;
+  factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) then) =
+      _$AppUserCopyWithImpl<$Res>;
   $Res call({String uid, String email, String username, String photoUrl});
 }
 
@@ -95,14 +100,17 @@ class _$AppUserCopyWithImpl<$Res> implements $AppUserCopyWith<$Res> {
 
 /// @nodoc
 abstract class $AppUser$CopyWith<$Res> implements $AppUserCopyWith<$Res> {
-  factory $AppUser$CopyWith(AppUser$ value, $Res Function(AppUser$) then) = _$AppUser$CopyWithImpl<$Res>;
+  factory $AppUser$CopyWith(AppUser$ value, $Res Function(AppUser$) then) =
+      _$AppUser$CopyWithImpl<$Res>;
   @override
   $Res call({String uid, String email, String username, String photoUrl});
 }
 
 /// @nodoc
-class _$AppUser$CopyWithImpl<$Res> extends _$AppUserCopyWithImpl<$Res> implements $AppUser$CopyWith<$Res> {
-  _$AppUser$CopyWithImpl(AppUser$ _value, $Res Function(AppUser$) _then) : super(_value, (v) => _then(v as AppUser$));
+class _$AppUser$CopyWithImpl<$Res> extends _$AppUserCopyWithImpl<$Res>
+    implements $AppUser$CopyWith<$Res> {
+  _$AppUser$CopyWithImpl(AppUser$ _value, $Res Function(AppUser$) _then)
+      : super(_value, (v) => _then(v as AppUser$));
 
   @override
   AppUser$ get _value => super._value as AppUser$;
@@ -138,9 +146,14 @@ class _$AppUser$CopyWithImpl<$Res> extends _$AppUserCopyWithImpl<$Res> implement
 /// @nodoc
 @JsonSerializable()
 class _$AppUser$ implements AppUser$ {
-  const _$AppUser$({required this.uid, required this.email, required this.username, required this.photoUrl});
+  const _$AppUser$(
+      {required this.uid,
+      required this.email,
+      required this.username,
+      required this.photoUrl});
 
-  factory _$AppUser$.fromJson(Map<String, dynamic> json) => _$$AppUser$FromJson(json);
+  factory _$AppUser$.fromJson(Map<String, dynamic> json) =>
+      _$$AppUser$FromJson(json);
 
   @override
   final String uid;
@@ -177,7 +190,8 @@ class _$AppUser$ implements AppUser$ {
 
   @JsonKey(ignore: true)
   @override
-  $AppUser$CopyWith<AppUser$> get copyWith => _$AppUser$CopyWithImpl<AppUser$>(this, _$identity);
+  $AppUser$CopyWith<AppUser$> get copyWith =>
+      _$AppUser$CopyWithImpl<AppUser$>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -187,7 +201,10 @@ class _$AppUser$ implements AppUser$ {
 
 abstract class AppUser$ implements AppUser {
   const factory AppUser$(
-      {required String uid, required String email, required String username, required String photoUrl}) = _$AppUser$;
+      {required String uid,
+      required String email,
+      required String username,
+      required String photoUrl}) = _$AppUser$;
 
   factory AppUser$.fromJson(Map<String, dynamic> json) = _$AppUser$.fromJson;
 
@@ -201,7 +218,8 @@ abstract class AppUser$ implements AppUser {
   String get photoUrl;
   @override
   @JsonKey(ignore: true)
-  $AppUser$CopyWith<AppUser$> get copyWith => throw _privateConstructorUsedError;
+  $AppUser$CopyWith<AppUser$> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -268,7 +286,8 @@ mixin _$AppState {
   List<String> get photoUrls => throw _privateConstructorUsedError;
   int get selectedProfilePhoto => throw _privateConstructorUsedError;
   List<bool> get difficultyColors => throw _privateConstructorUsedError;
-  int get gameStatus => throw _privateConstructorUsedError; // 0 -started, 1 - win, 2 - lose, 3 - tie
+  int get gameStatus =>
+      throw _privateConstructorUsedError; // 0 -started, 1 - win, 2 - lose, 3 - tie
   List<Tuple2<int, int>> get table => throw _privateConstructorUsedError;
   List<int> get availablePlayerOnePieces => throw _privateConstructorUsedError;
   List<int> get availablePlayerTwoPieces => throw _privateConstructorUsedError;
@@ -282,12 +301,14 @@ mixin _$AppState {
   String get profileErrorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AppStateCopyWith<AppState> get copyWith => throw _privateConstructorUsedError;
+  $AppStateCopyWith<AppState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppStateCopyWith<$Res> {
-  factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) = _$AppStateCopyWithImpl<$Res>;
+  factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
+      _$AppStateCopyWithImpl<$Res>;
   $Res call(
       {int selectedDifficulty,
       AppUser? user,
@@ -424,7 +445,8 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
 /// @nodoc
 abstract class $AppState$CopyWith<$Res> implements $AppStateCopyWith<$Res> {
-  factory $AppState$CopyWith(AppState$ value, $Res Function(AppState$) then) = _$AppState$CopyWithImpl<$Res>;
+  factory $AppState$CopyWith(AppState$ value, $Res Function(AppState$) then) =
+      _$AppState$CopyWithImpl<$Res>;
   @override
   $Res call(
       {int selectedDifficulty,
@@ -450,7 +472,8 @@ abstract class $AppState$CopyWith<$Res> implements $AppStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res> implements $AppState$CopyWith<$Res> {
+class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
+    implements $AppState$CopyWith<$Res> {
   _$AppState$CopyWithImpl(AppState$ _value, $Res Function(AppState$) _then)
       : super(_value, (v) => _then(v as AppState$));
 
@@ -643,23 +666,33 @@ class _$AppState$ implements AppState$ {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AppState$ &&
-            const DeepCollectionEquality().equals(other.selectedDifficulty, selectedDifficulty) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedDifficulty, selectedDifficulty) &&
             const DeepCollectionEquality().equals(other.user, user) &&
             const DeepCollectionEquality().equals(other.photoUrls, photoUrls) &&
-            const DeepCollectionEquality().equals(other.selectedProfilePhoto, selectedProfilePhoto) &&
-            const DeepCollectionEquality().equals(other.difficultyColors, difficultyColors) &&
-            const DeepCollectionEquality().equals(other.gameStatus, gameStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedProfilePhoto, selectedProfilePhoto) &&
+            const DeepCollectionEquality()
+                .equals(other.difficultyColors, difficultyColors) &&
+            const DeepCollectionEquality()
+                .equals(other.gameStatus, gameStatus) &&
             const DeepCollectionEquality().equals(other.table, table) &&
-            const DeepCollectionEquality().equals(other.availablePlayerOnePieces, availablePlayerOnePieces) &&
-            const DeepCollectionEquality().equals(other.availablePlayerTwoPieces, availablePlayerTwoPieces) &&
-            const DeepCollectionEquality().equals(other.selectedPiece, selectedPiece) &&
-            const DeepCollectionEquality().equals(other.playerTurn, playerTurn) &&
+            const DeepCollectionEquality().equals(
+                other.availablePlayerOnePieces, availablePlayerOnePieces) &&
+            const DeepCollectionEquality().equals(
+                other.availablePlayerTwoPieces, availablePlayerTwoPieces) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedPiece, selectedPiece) &&
+            const DeepCollectionEquality()
+                .equals(other.playerTurn, playerTurn) &&
             const DeepCollectionEquality().equals(other.score, score) &&
             const DeepCollectionEquality().equals(other.scores, scores) &&
             const DeepCollectionEquality().equals(other.pending, pending) &&
             const DeepCollectionEquality().equals(other.users, users) &&
-            const DeepCollectionEquality().equals(other.showMyTableScore, showMyTableScore) &&
-            const DeepCollectionEquality().equals(other.profileErrorMessage, profileErrorMessage));
+            const DeepCollectionEquality()
+                .equals(other.showMyTableScore, showMyTableScore) &&
+            const DeepCollectionEquality()
+                .equals(other.profileErrorMessage, profileErrorMessage));
   }
 
   @override
@@ -685,7 +718,8 @@ class _$AppState$ implements AppState$ {
 
   @JsonKey(ignore: true)
   @override
-  $AppState$CopyWith<AppState$> get copyWith => _$AppState$CopyWithImpl<AppState$>(this, _$identity);
+  $AppState$CopyWith<AppState$> get copyWith =>
+      _$AppState$CopyWithImpl<AppState$>(this, _$identity);
 }
 
 abstract class AppState$ implements AppState {
@@ -744,7 +778,8 @@ abstract class AppState$ implements AppState {
   String get profileErrorMessage;
   @override
   @JsonKey(ignore: true)
-  $AppState$CopyWith<AppState$> get copyWith => throw _privateConstructorUsedError;
+  $AppState$CopyWith<AppState$> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 Score _$ScoreFromJson(Map<String, dynamic> json) {
@@ -793,8 +828,10 @@ mixin _$Score {
 
 /// @nodoc
 abstract class $ScoreCopyWith<$Res> {
-  factory $ScoreCopyWith(Score value, $Res Function(Score) then) = _$ScoreCopyWithImpl<$Res>;
-  $Res call({String id, String uid, int difficulty, int score, DateTime createdAt});
+  factory $ScoreCopyWith(Score value, $Res Function(Score) then) =
+      _$ScoreCopyWithImpl<$Res>;
+  $Res call(
+      {String id, String uid, int difficulty, int score, DateTime createdAt});
 }
 
 /// @nodoc
@@ -840,14 +877,18 @@ class _$ScoreCopyWithImpl<$Res> implements $ScoreCopyWith<$Res> {
 
 /// @nodoc
 abstract class $Score$CopyWith<$Res> implements $ScoreCopyWith<$Res> {
-  factory $Score$CopyWith(Score$ value, $Res Function(Score$) then) = _$Score$CopyWithImpl<$Res>;
+  factory $Score$CopyWith(Score$ value, $Res Function(Score$) then) =
+      _$Score$CopyWithImpl<$Res>;
   @override
-  $Res call({String id, String uid, int difficulty, int score, DateTime createdAt});
+  $Res call(
+      {String id, String uid, int difficulty, int score, DateTime createdAt});
 }
 
 /// @nodoc
-class _$Score$CopyWithImpl<$Res> extends _$ScoreCopyWithImpl<$Res> implements $Score$CopyWith<$Res> {
-  _$Score$CopyWithImpl(Score$ _value, $Res Function(Score$) _then) : super(_value, (v) => _then(v as Score$));
+class _$Score$CopyWithImpl<$Res> extends _$ScoreCopyWithImpl<$Res>
+    implements $Score$CopyWith<$Res> {
+  _$Score$CopyWithImpl(Score$ _value, $Res Function(Score$) _then)
+      : super(_value, (v) => _then(v as Score$));
 
   @override
   Score$ get _value => super._value as Score$;
@@ -889,9 +930,14 @@ class _$Score$CopyWithImpl<$Res> extends _$ScoreCopyWithImpl<$Res> implements $S
 @JsonSerializable()
 class _$Score$ implements Score$ {
   const _$Score$(
-      {required this.id, required this.uid, required this.difficulty, required this.score, required this.createdAt});
+      {required this.id,
+      required this.uid,
+      required this.difficulty,
+      required this.score,
+      required this.createdAt});
 
-  factory _$Score$.fromJson(Map<String, dynamic> json) => _$$Score$FromJson(json);
+  factory _$Score$.fromJson(Map<String, dynamic> json) =>
+      _$$Score$FromJson(json);
 
   @override
   final String id;
@@ -916,7 +962,8 @@ class _$Score$ implements Score$ {
             other is Score$ &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.uid, uid) &&
-            const DeepCollectionEquality().equals(other.difficulty, difficulty) &&
+            const DeepCollectionEquality()
+                .equals(other.difficulty, difficulty) &&
             const DeepCollectionEquality().equals(other.score, score) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt));
   }
@@ -932,7 +979,8 @@ class _$Score$ implements Score$ {
 
   @JsonKey(ignore: true)
   @override
-  $Score$CopyWith<Score$> get copyWith => _$Score$CopyWithImpl<Score$>(this, _$identity);
+  $Score$CopyWith<Score$> get copyWith =>
+      _$Score$CopyWithImpl<Score$>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
