@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () => createRoom(context),
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(
-                        MediaQuery.of(context).size.width * 0.8,
+                        MediaQuery.of(context).size.width,
                         50,
                       ),
                     ),
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () => joinRoom(context),
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(
-                        MediaQuery.of(context).size.width * 0.8,
+                        MediaQuery.of(context).size.width,
                         50,
                       ),
                     ),
@@ -222,40 +222,12 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(
-                        MediaQuery.of(context).size.width * 0.8,
+                        MediaQuery.of(context).size.width,
                         50,
                       ),
                     ),
                     child: const Text(
                       'About',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.blue,
-                        blurRadius: 5,
-                      )
-                    ],
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width * 0.8,
-                        50,
-                      ),
-                    ),
-                    child: const Text(
-                      'Settings',
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -289,6 +261,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 16,
                 ),
               ],
             ),

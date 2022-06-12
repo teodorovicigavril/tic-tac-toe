@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/src/containers/selected_difficulty_container.dart';
 import 'package:tic_tac_toe/src/presentation/difficulty_offline_page.dart';
 import 'package:tic_tac_toe/src/presentation/no_difficulty_offline_page.dart';
+import 'package:tic_tac_toe/src/responsive/responsive.dart';
 
 class OfflinePage extends StatefulWidget {
   const OfflinePage({Key? key}) : super(key: key);
@@ -19,14 +20,16 @@ class _OfflinePageState extends State<OfflinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SelectedDifficultyContainer(
-        builder: (BuildContext context, int difficulty) {
-          if (difficulty == -1) {
-            return const NoDifficultyOfflinePage();
-          } else {
-            return const DifficultyOfflinePage();
-          }
-        },
+      body: Responsive(
+        child: SelectedDifficultyContainer(
+          builder: (BuildContext context, int difficulty) {
+            if (difficulty == -1) {
+              return const NoDifficultyOfflinePage();
+            } else {
+              return const DifficultyOfflinePage();
+            }
+          },
+        ),
       ),
     );
   }

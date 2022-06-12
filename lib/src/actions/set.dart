@@ -69,3 +69,38 @@ class SetProfileErrorMessage with _$SetProfileErrorMessage implements AppAction 
 class SetUserToNull with _$SetUserToNull implements AppAction {
   const factory SetUserToNull() = SetUserToNull$;
 }
+
+@freezed
+class SetNumberOfRounds with _$SetNumberOfRounds implements AppAction {
+  const factory SetNumberOfRounds(int rounds) = SetNumberOfRounds$;
+}
+
+@freezed
+class SetPlayerOrderForOnline with _$SetPlayerOrderForOnline implements AppAction {
+  const factory SetPlayerOrderForOnline(String order) = SetPlayerOrderForOnline$;
+}
+
+@freezed
+class SetRoom with _$SetRoom implements AppAction {
+  const factory SetRoom(Map<String, dynamic> room) = SetRoom$;
+}
+
+@freezed
+class SetPlayerOneOnline with _$SetPlayerOneOnline implements AppAction {
+  const factory SetPlayerOneOnline(AppUser player) = SetPlayerOneOnline$;
+}
+
+@freezed
+class SetPlayerTwoOnline with _$SetPlayerTwoOnline implements AppAction {
+  const factory SetPlayerTwoOnline(AppUser player) = SetPlayerTwoOnline$;
+}
+
+@freezed
+class SetPlayerOneReady with _$SetPlayerOneReady implements AppAction {
+  const factory SetPlayerOneReady({required bool value}) = SetPlayerOneReady$;
+}
+
+@freezed
+class SetPlayerTwoReady with _$SetPlayerTwoReady implements AppAction {
+  const factory SetPlayerTwoReady({required bool value}) = SetPlayerTwoReady$;
+}

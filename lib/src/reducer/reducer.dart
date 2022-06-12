@@ -40,6 +40,13 @@ Reducer<AppState> _reducer = combineReducers<AppState>(<Reducer<AppState>>[
   TypedReducer<AppState, DeleteProfileSuccessful>(_deleteProfileSuccessful),
   TypedReducer<AppState, SetProfileErrorMessage>(_setProfileErrorMessage),
   TypedReducer<AppState, UpdateProfileSuccessful>(_updateProfileSuccessful),
+  TypedReducer<AppState, SetNumberOfRounds>(_setNumberOfRounds),
+  TypedReducer<AppState, SetPlayerOrderForOnline>(_setPlayerOrderForOnline),
+  TypedReducer<AppState, SetRoom>(_setRoom),
+  TypedReducer<AppState, SetPlayerOneOnline>(_setPlayerOneOnline),
+  TypedReducer<AppState, SetPlayerTwoOnline>(_setPlayerTwoOnline),
+  TypedReducer<AppState, SetPlayerOneReady>(_setPlayerOneReady),
+  TypedReducer<AppState, SetPlayerTwoReady>(_setPlayerTwoReady),
 ]);
 
 AppState _userAction(AppState state, UserAction action) {
@@ -199,4 +206,32 @@ AppState _setProfileErrorMessage(AppState state, SetProfileErrorMessage action) 
 
 AppState _updateProfileSuccessful(AppState state, UpdateProfileSuccessful action) {
   return state.copyWith(user: action.user, users: <String, AppUser>{...state.users, action.user.uid: action.user});
+}
+
+AppState _setNumberOfRounds(AppState state, SetNumberOfRounds action) {
+  return state.copyWith(numberOfRounds: action.rounds);
+}
+
+AppState _setPlayerOrderForOnline(AppState state, SetPlayerOrderForOnline action) {
+  return state.copyWith(playerOrderForOnline: action.order);
+}
+
+AppState _setRoom(AppState state, SetRoom action) {
+  return state.copyWith(room: action.room);
+}
+
+AppState _setPlayerOneOnline(AppState state, SetPlayerOneOnline action) {
+  return state.copyWith(playerOneOnline: action.player);
+}
+
+AppState _setPlayerTwoOnline(AppState state, SetPlayerTwoOnline action) {
+  return state.copyWith(playerTwoOnline: action.player);
+}
+
+AppState _setPlayerOneReady(AppState state, SetPlayerOneReady action) {
+  return state.copyWith(playerOneReady: action.value);
+}
+
+AppState _setPlayerTwoReady(AppState state, SetPlayerTwoReady action) {
+  return state.copyWith(playerTwoReady: action.value);
 }

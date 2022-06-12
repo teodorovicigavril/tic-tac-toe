@@ -46,5 +46,12 @@ class AppState with _$AppState {
         List<bool> showMyTableScore,
     @Default('')
         String profileErrorMessage,
+    @Default(1) int numberOfRounds,
+    @Default('you first') String playerOrderForOnline,
+    @Default(<String, dynamic>{}) Map<String, dynamic> room,
+    AppUser? playerOneOnline,
+    AppUser? playerTwoOnline,
+    @Default(true) bool playerOneReady,
+    @Default(true) bool playerTwoReady,
   }) = AppState$;
 }

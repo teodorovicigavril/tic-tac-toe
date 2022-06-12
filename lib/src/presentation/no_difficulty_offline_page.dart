@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tic_tac_toe/src/actions/index.dart';
@@ -23,6 +25,8 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = min(600, MediaQuery.of(context).size.width);
     return Scaffold(
       body: DifficultyColorsContainer(
         builder: (BuildContext context, List<bool> colors) {
@@ -32,26 +36,60 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  const Center(
+                    child: Text(
+                      'computer',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 70,
+                        shadows: <Shadow>[
+                          Shadow(
+                            blurRadius: 40,
+                            color: Colors.blue,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Center(
+                    child: Text(
+                      'VS',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 70,
+                        shadows: <Shadow>[
+                          Shadow(
+                            blurRadius: 40,
+                            color: Colors.blue,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   UserContainer(
                     builder: (BuildContext context, AppUser? user) {
-                      return Text(
-                        'computer\nVS\n${user!.username}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 70,
-                          shadows: <Shadow>[
-                            Shadow(
-                              blurRadius: 40,
-                              color: Colors.blue,
-                            ),
-                          ],
+                      return Center(
+                        child: Text(
+                          user!.username,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 70,
+                            shadows: <Shadow>[
+                              Shadow(
+                                blurRadius: 40,
+                                color: Colors.blue,
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.06,
+                    height: height * .06,
                   ),
                   const Text(
                     'Please select difficulty!',
@@ -68,7 +106,7 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.03,
+                    height: height * .03,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -93,10 +131,7 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
                             StoreProvider.of<AppState>(context).dispatch(SetDifficultyColor(_localDifficulty));
                           },
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(
-                              MediaQuery.of(context).size.width * 0.25,
-                              50,
-                            ),
+                            minimumSize: Size(width * .25, 50),
                           ),
                           child: const Text(
                             'Easy',
@@ -126,10 +161,7 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
                             StoreProvider.of<AppState>(context).dispatch(SetDifficultyColor(_localDifficulty));
                           },
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(
-                              MediaQuery.of(context).size.width * 0.25,
-                              50,
-                            ),
+                            minimumSize: Size(width * .25, 50),
                           ),
                           child: const Text(
                             'Medium',
@@ -159,10 +191,7 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
                             StoreProvider.of<AppState>(context).dispatch(SetDifficultyColor(_localDifficulty));
                           },
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(
-                              MediaQuery.of(context).size.width * 0.25,
-                              50,
-                            ),
+                            minimumSize: Size(width * .25, 50),
                           ),
                           child: const Text(
                             'Hard',
@@ -174,9 +203,7 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
+                  SizedBox(height: height * .02),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -208,7 +235,7 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.04,
+                    height: height * .04,
                   ),
                   Container(
                     decoration: const BoxDecoration(
@@ -224,10 +251,7 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
                         StoreProvider.of<AppState>(context).dispatch(SetDifficulty(_localDifficulty));
                       },
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(
-                          MediaQuery.of(context).size.width,
-                          50,
-                        ),
+                        minimumSize: Size(width, 50),
                       ),
                       child: const Text(
                         'Start',

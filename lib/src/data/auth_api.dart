@@ -170,19 +170,19 @@ class AuthApi {
     return user;
   }
 
-  Future<AppUser> loginWithGoogle() async {
-    final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
-
-    final OAuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
-
-    await _auth.signInWithCredential(credential);
-
-    final DocumentSnapshot<Map<String, dynamic>> snapshot =
-        await _firestore.doc('users/${_auth.currentUser!.uid}').get();
-    return AppUser.fromJson(snapshot.data()!);
-  }
+  // Future<AppUser> loginWithGoogle() async {
+  //   final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+  //   final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
+  //
+  //   final OAuthCredential credential = GoogleAuthProvider.credential(
+  //     accessToken: googleSignInAuthentication.accessToken,
+  //     idToken: googleSignInAuthentication.idToken,
+  //   );
+  //
+  //   await _auth.signInWithCredential(credential);
+  //
+  //   final DocumentSnapshot<Map<String, dynamic>> snapshot =
+  //       await _firestore.doc('users/${_auth.currentUser!.uid}').get();
+  //   return AppUser.fromJson(snapshot.data()!);
+  // }
 }

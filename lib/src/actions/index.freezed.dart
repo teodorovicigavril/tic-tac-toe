@@ -4565,6 +4565,931 @@ abstract class SetUserToNull$ implements SetUserToNull {
 }
 
 /// @nodoc
+class _$SetNumberOfRoundsTearOff {
+  const _$SetNumberOfRoundsTearOff();
+
+  SetNumberOfRounds$ call(int rounds) {
+    return SetNumberOfRounds$(
+      rounds,
+    );
+  }
+}
+
+/// @nodoc
+const $SetNumberOfRounds = _$SetNumberOfRoundsTearOff();
+
+/// @nodoc
+mixin _$SetNumberOfRounds {
+  int get rounds => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SetNumberOfRoundsCopyWith<SetNumberOfRounds> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SetNumberOfRoundsCopyWith<$Res> {
+  factory $SetNumberOfRoundsCopyWith(
+          SetNumberOfRounds value, $Res Function(SetNumberOfRounds) then) =
+      _$SetNumberOfRoundsCopyWithImpl<$Res>;
+  $Res call({int rounds});
+}
+
+/// @nodoc
+class _$SetNumberOfRoundsCopyWithImpl<$Res>
+    implements $SetNumberOfRoundsCopyWith<$Res> {
+  _$SetNumberOfRoundsCopyWithImpl(this._value, this._then);
+
+  final SetNumberOfRounds _value;
+  // ignore: unused_field
+  final $Res Function(SetNumberOfRounds) _then;
+
+  @override
+  $Res call({
+    Object? rounds = freezed,
+  }) {
+    return _then(_value.copyWith(
+      rounds: rounds == freezed
+          ? _value.rounds
+          : rounds // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class $SetNumberOfRounds$CopyWith<$Res>
+    implements $SetNumberOfRoundsCopyWith<$Res> {
+  factory $SetNumberOfRounds$CopyWith(
+          SetNumberOfRounds$ value, $Res Function(SetNumberOfRounds$) then) =
+      _$SetNumberOfRounds$CopyWithImpl<$Res>;
+  @override
+  $Res call({int rounds});
+}
+
+/// @nodoc
+class _$SetNumberOfRounds$CopyWithImpl<$Res>
+    extends _$SetNumberOfRoundsCopyWithImpl<$Res>
+    implements $SetNumberOfRounds$CopyWith<$Res> {
+  _$SetNumberOfRounds$CopyWithImpl(
+      SetNumberOfRounds$ _value, $Res Function(SetNumberOfRounds$) _then)
+      : super(_value, (v) => _then(v as SetNumberOfRounds$));
+
+  @override
+  SetNumberOfRounds$ get _value => super._value as SetNumberOfRounds$;
+
+  @override
+  $Res call({
+    Object? rounds = freezed,
+  }) {
+    return _then(SetNumberOfRounds$(
+      rounds == freezed
+          ? _value.rounds
+          : rounds // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetNumberOfRounds$ implements SetNumberOfRounds$ {
+  const _$SetNumberOfRounds$(this.rounds);
+
+  @override
+  final int rounds;
+
+  @override
+  String toString() {
+    return 'SetNumberOfRounds(rounds: $rounds)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SetNumberOfRounds$ &&
+            const DeepCollectionEquality().equals(other.rounds, rounds));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(rounds));
+
+  @JsonKey(ignore: true)
+  @override
+  $SetNumberOfRounds$CopyWith<SetNumberOfRounds$> get copyWith =>
+      _$SetNumberOfRounds$CopyWithImpl<SetNumberOfRounds$>(this, _$identity);
+}
+
+abstract class SetNumberOfRounds$ implements SetNumberOfRounds {
+  const factory SetNumberOfRounds$(int rounds) = _$SetNumberOfRounds$;
+
+  @override
+  int get rounds;
+  @override
+  @JsonKey(ignore: true)
+  $SetNumberOfRounds$CopyWith<SetNumberOfRounds$> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$SetPlayerOrderForOnlineTearOff {
+  const _$SetPlayerOrderForOnlineTearOff();
+
+  SetPlayerOrderForOnline$ call(String order) {
+    return SetPlayerOrderForOnline$(
+      order,
+    );
+  }
+}
+
+/// @nodoc
+const $SetPlayerOrderForOnline = _$SetPlayerOrderForOnlineTearOff();
+
+/// @nodoc
+mixin _$SetPlayerOrderForOnline {
+  String get order => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SetPlayerOrderForOnlineCopyWith<SetPlayerOrderForOnline> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SetPlayerOrderForOnlineCopyWith<$Res> {
+  factory $SetPlayerOrderForOnlineCopyWith(SetPlayerOrderForOnline value,
+          $Res Function(SetPlayerOrderForOnline) then) =
+      _$SetPlayerOrderForOnlineCopyWithImpl<$Res>;
+  $Res call({String order});
+}
+
+/// @nodoc
+class _$SetPlayerOrderForOnlineCopyWithImpl<$Res>
+    implements $SetPlayerOrderForOnlineCopyWith<$Res> {
+  _$SetPlayerOrderForOnlineCopyWithImpl(this._value, this._then);
+
+  final SetPlayerOrderForOnline _value;
+  // ignore: unused_field
+  final $Res Function(SetPlayerOrderForOnline) _then;
+
+  @override
+  $Res call({
+    Object? order = freezed,
+  }) {
+    return _then(_value.copyWith(
+      order: order == freezed
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class $SetPlayerOrderForOnline$CopyWith<$Res>
+    implements $SetPlayerOrderForOnlineCopyWith<$Res> {
+  factory $SetPlayerOrderForOnline$CopyWith(SetPlayerOrderForOnline$ value,
+          $Res Function(SetPlayerOrderForOnline$) then) =
+      _$SetPlayerOrderForOnline$CopyWithImpl<$Res>;
+  @override
+  $Res call({String order});
+}
+
+/// @nodoc
+class _$SetPlayerOrderForOnline$CopyWithImpl<$Res>
+    extends _$SetPlayerOrderForOnlineCopyWithImpl<$Res>
+    implements $SetPlayerOrderForOnline$CopyWith<$Res> {
+  _$SetPlayerOrderForOnline$CopyWithImpl(SetPlayerOrderForOnline$ _value,
+      $Res Function(SetPlayerOrderForOnline$) _then)
+      : super(_value, (v) => _then(v as SetPlayerOrderForOnline$));
+
+  @override
+  SetPlayerOrderForOnline$ get _value =>
+      super._value as SetPlayerOrderForOnline$;
+
+  @override
+  $Res call({
+    Object? order = freezed,
+  }) {
+    return _then(SetPlayerOrderForOnline$(
+      order == freezed
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetPlayerOrderForOnline$ implements SetPlayerOrderForOnline$ {
+  const _$SetPlayerOrderForOnline$(this.order);
+
+  @override
+  final String order;
+
+  @override
+  String toString() {
+    return 'SetPlayerOrderForOnline(order: $order)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SetPlayerOrderForOnline$ &&
+            const DeepCollectionEquality().equals(other.order, order));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(order));
+
+  @JsonKey(ignore: true)
+  @override
+  $SetPlayerOrderForOnline$CopyWith<SetPlayerOrderForOnline$> get copyWith =>
+      _$SetPlayerOrderForOnline$CopyWithImpl<SetPlayerOrderForOnline$>(
+          this, _$identity);
+}
+
+abstract class SetPlayerOrderForOnline$ implements SetPlayerOrderForOnline {
+  const factory SetPlayerOrderForOnline$(String order) =
+      _$SetPlayerOrderForOnline$;
+
+  @override
+  String get order;
+  @override
+  @JsonKey(ignore: true)
+  $SetPlayerOrderForOnline$CopyWith<SetPlayerOrderForOnline$> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$SetRoomTearOff {
+  const _$SetRoomTearOff();
+
+  SetRoom$ call(Map<String, dynamic> room) {
+    return SetRoom$(
+      room,
+    );
+  }
+}
+
+/// @nodoc
+const $SetRoom = _$SetRoomTearOff();
+
+/// @nodoc
+mixin _$SetRoom {
+  Map<String, dynamic> get room => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SetRoomCopyWith<SetRoom> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SetRoomCopyWith<$Res> {
+  factory $SetRoomCopyWith(SetRoom value, $Res Function(SetRoom) then) =
+      _$SetRoomCopyWithImpl<$Res>;
+  $Res call({Map<String, dynamic> room});
+}
+
+/// @nodoc
+class _$SetRoomCopyWithImpl<$Res> implements $SetRoomCopyWith<$Res> {
+  _$SetRoomCopyWithImpl(this._value, this._then);
+
+  final SetRoom _value;
+  // ignore: unused_field
+  final $Res Function(SetRoom) _then;
+
+  @override
+  $Res call({
+    Object? room = freezed,
+  }) {
+    return _then(_value.copyWith(
+      room: room == freezed
+          ? _value.room
+          : room // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class $SetRoom$CopyWith<$Res> implements $SetRoomCopyWith<$Res> {
+  factory $SetRoom$CopyWith(SetRoom$ value, $Res Function(SetRoom$) then) =
+      _$SetRoom$CopyWithImpl<$Res>;
+  @override
+  $Res call({Map<String, dynamic> room});
+}
+
+/// @nodoc
+class _$SetRoom$CopyWithImpl<$Res> extends _$SetRoomCopyWithImpl<$Res>
+    implements $SetRoom$CopyWith<$Res> {
+  _$SetRoom$CopyWithImpl(SetRoom$ _value, $Res Function(SetRoom$) _then)
+      : super(_value, (v) => _then(v as SetRoom$));
+
+  @override
+  SetRoom$ get _value => super._value as SetRoom$;
+
+  @override
+  $Res call({
+    Object? room = freezed,
+  }) {
+    return _then(SetRoom$(
+      room == freezed
+          ? _value.room
+          : room // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetRoom$ implements SetRoom$ {
+  const _$SetRoom$(this.room);
+
+  @override
+  final Map<String, dynamic> room;
+
+  @override
+  String toString() {
+    return 'SetRoom(room: $room)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SetRoom$ &&
+            const DeepCollectionEquality().equals(other.room, room));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(room));
+
+  @JsonKey(ignore: true)
+  @override
+  $SetRoom$CopyWith<SetRoom$> get copyWith =>
+      _$SetRoom$CopyWithImpl<SetRoom$>(this, _$identity);
+}
+
+abstract class SetRoom$ implements SetRoom {
+  const factory SetRoom$(Map<String, dynamic> room) = _$SetRoom$;
+
+  @override
+  Map<String, dynamic> get room;
+  @override
+  @JsonKey(ignore: true)
+  $SetRoom$CopyWith<SetRoom$> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$SetPlayerOneOnlineTearOff {
+  const _$SetPlayerOneOnlineTearOff();
+
+  SetPlayerOneOnline$ call(AppUser player) {
+    return SetPlayerOneOnline$(
+      player,
+    );
+  }
+}
+
+/// @nodoc
+const $SetPlayerOneOnline = _$SetPlayerOneOnlineTearOff();
+
+/// @nodoc
+mixin _$SetPlayerOneOnline {
+  AppUser get player => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SetPlayerOneOnlineCopyWith<SetPlayerOneOnline> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SetPlayerOneOnlineCopyWith<$Res> {
+  factory $SetPlayerOneOnlineCopyWith(
+          SetPlayerOneOnline value, $Res Function(SetPlayerOneOnline) then) =
+      _$SetPlayerOneOnlineCopyWithImpl<$Res>;
+  $Res call({AppUser player});
+
+  $AppUserCopyWith<$Res> get player;
+}
+
+/// @nodoc
+class _$SetPlayerOneOnlineCopyWithImpl<$Res>
+    implements $SetPlayerOneOnlineCopyWith<$Res> {
+  _$SetPlayerOneOnlineCopyWithImpl(this._value, this._then);
+
+  final SetPlayerOneOnline _value;
+  // ignore: unused_field
+  final $Res Function(SetPlayerOneOnline) _then;
+
+  @override
+  $Res call({
+    Object? player = freezed,
+  }) {
+    return _then(_value.copyWith(
+      player: player == freezed
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as AppUser,
+    ));
+  }
+
+  @override
+  $AppUserCopyWith<$Res> get player {
+    return $AppUserCopyWith<$Res>(_value.player, (value) {
+      return _then(_value.copyWith(player: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class $SetPlayerOneOnline$CopyWith<$Res>
+    implements $SetPlayerOneOnlineCopyWith<$Res> {
+  factory $SetPlayerOneOnline$CopyWith(
+          SetPlayerOneOnline$ value, $Res Function(SetPlayerOneOnline$) then) =
+      _$SetPlayerOneOnline$CopyWithImpl<$Res>;
+  @override
+  $Res call({AppUser player});
+
+  @override
+  $AppUserCopyWith<$Res> get player;
+}
+
+/// @nodoc
+class _$SetPlayerOneOnline$CopyWithImpl<$Res>
+    extends _$SetPlayerOneOnlineCopyWithImpl<$Res>
+    implements $SetPlayerOneOnline$CopyWith<$Res> {
+  _$SetPlayerOneOnline$CopyWithImpl(
+      SetPlayerOneOnline$ _value, $Res Function(SetPlayerOneOnline$) _then)
+      : super(_value, (v) => _then(v as SetPlayerOneOnline$));
+
+  @override
+  SetPlayerOneOnline$ get _value => super._value as SetPlayerOneOnline$;
+
+  @override
+  $Res call({
+    Object? player = freezed,
+  }) {
+    return _then(SetPlayerOneOnline$(
+      player == freezed
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as AppUser,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetPlayerOneOnline$ implements SetPlayerOneOnline$ {
+  const _$SetPlayerOneOnline$(this.player);
+
+  @override
+  final AppUser player;
+
+  @override
+  String toString() {
+    return 'SetPlayerOneOnline(player: $player)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SetPlayerOneOnline$ &&
+            const DeepCollectionEquality().equals(other.player, player));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(player));
+
+  @JsonKey(ignore: true)
+  @override
+  $SetPlayerOneOnline$CopyWith<SetPlayerOneOnline$> get copyWith =>
+      _$SetPlayerOneOnline$CopyWithImpl<SetPlayerOneOnline$>(this, _$identity);
+}
+
+abstract class SetPlayerOneOnline$ implements SetPlayerOneOnline {
+  const factory SetPlayerOneOnline$(AppUser player) = _$SetPlayerOneOnline$;
+
+  @override
+  AppUser get player;
+  @override
+  @JsonKey(ignore: true)
+  $SetPlayerOneOnline$CopyWith<SetPlayerOneOnline$> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$SetPlayerTwoOnlineTearOff {
+  const _$SetPlayerTwoOnlineTearOff();
+
+  SetPlayerTwoOnline$ call(AppUser player) {
+    return SetPlayerTwoOnline$(
+      player,
+    );
+  }
+}
+
+/// @nodoc
+const $SetPlayerTwoOnline = _$SetPlayerTwoOnlineTearOff();
+
+/// @nodoc
+mixin _$SetPlayerTwoOnline {
+  AppUser get player => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SetPlayerTwoOnlineCopyWith<SetPlayerTwoOnline> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SetPlayerTwoOnlineCopyWith<$Res> {
+  factory $SetPlayerTwoOnlineCopyWith(
+          SetPlayerTwoOnline value, $Res Function(SetPlayerTwoOnline) then) =
+      _$SetPlayerTwoOnlineCopyWithImpl<$Res>;
+  $Res call({AppUser player});
+
+  $AppUserCopyWith<$Res> get player;
+}
+
+/// @nodoc
+class _$SetPlayerTwoOnlineCopyWithImpl<$Res>
+    implements $SetPlayerTwoOnlineCopyWith<$Res> {
+  _$SetPlayerTwoOnlineCopyWithImpl(this._value, this._then);
+
+  final SetPlayerTwoOnline _value;
+  // ignore: unused_field
+  final $Res Function(SetPlayerTwoOnline) _then;
+
+  @override
+  $Res call({
+    Object? player = freezed,
+  }) {
+    return _then(_value.copyWith(
+      player: player == freezed
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as AppUser,
+    ));
+  }
+
+  @override
+  $AppUserCopyWith<$Res> get player {
+    return $AppUserCopyWith<$Res>(_value.player, (value) {
+      return _then(_value.copyWith(player: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class $SetPlayerTwoOnline$CopyWith<$Res>
+    implements $SetPlayerTwoOnlineCopyWith<$Res> {
+  factory $SetPlayerTwoOnline$CopyWith(
+          SetPlayerTwoOnline$ value, $Res Function(SetPlayerTwoOnline$) then) =
+      _$SetPlayerTwoOnline$CopyWithImpl<$Res>;
+  @override
+  $Res call({AppUser player});
+
+  @override
+  $AppUserCopyWith<$Res> get player;
+}
+
+/// @nodoc
+class _$SetPlayerTwoOnline$CopyWithImpl<$Res>
+    extends _$SetPlayerTwoOnlineCopyWithImpl<$Res>
+    implements $SetPlayerTwoOnline$CopyWith<$Res> {
+  _$SetPlayerTwoOnline$CopyWithImpl(
+      SetPlayerTwoOnline$ _value, $Res Function(SetPlayerTwoOnline$) _then)
+      : super(_value, (v) => _then(v as SetPlayerTwoOnline$));
+
+  @override
+  SetPlayerTwoOnline$ get _value => super._value as SetPlayerTwoOnline$;
+
+  @override
+  $Res call({
+    Object? player = freezed,
+  }) {
+    return _then(SetPlayerTwoOnline$(
+      player == freezed
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as AppUser,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetPlayerTwoOnline$ implements SetPlayerTwoOnline$ {
+  const _$SetPlayerTwoOnline$(this.player);
+
+  @override
+  final AppUser player;
+
+  @override
+  String toString() {
+    return 'SetPlayerTwoOnline(player: $player)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SetPlayerTwoOnline$ &&
+            const DeepCollectionEquality().equals(other.player, player));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(player));
+
+  @JsonKey(ignore: true)
+  @override
+  $SetPlayerTwoOnline$CopyWith<SetPlayerTwoOnline$> get copyWith =>
+      _$SetPlayerTwoOnline$CopyWithImpl<SetPlayerTwoOnline$>(this, _$identity);
+}
+
+abstract class SetPlayerTwoOnline$ implements SetPlayerTwoOnline {
+  const factory SetPlayerTwoOnline$(AppUser player) = _$SetPlayerTwoOnline$;
+
+  @override
+  AppUser get player;
+  @override
+  @JsonKey(ignore: true)
+  $SetPlayerTwoOnline$CopyWith<SetPlayerTwoOnline$> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$SetPlayerOneReadyTearOff {
+  const _$SetPlayerOneReadyTearOff();
+
+  SetPlayerOneReady$ call({required bool value}) {
+    return SetPlayerOneReady$(
+      value: value,
+    );
+  }
+}
+
+/// @nodoc
+const $SetPlayerOneReady = _$SetPlayerOneReadyTearOff();
+
+/// @nodoc
+mixin _$SetPlayerOneReady {
+  bool get value => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SetPlayerOneReadyCopyWith<SetPlayerOneReady> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SetPlayerOneReadyCopyWith<$Res> {
+  factory $SetPlayerOneReadyCopyWith(
+          SetPlayerOneReady value, $Res Function(SetPlayerOneReady) then) =
+      _$SetPlayerOneReadyCopyWithImpl<$Res>;
+  $Res call({bool value});
+}
+
+/// @nodoc
+class _$SetPlayerOneReadyCopyWithImpl<$Res>
+    implements $SetPlayerOneReadyCopyWith<$Res> {
+  _$SetPlayerOneReadyCopyWithImpl(this._value, this._then);
+
+  final SetPlayerOneReady _value;
+  // ignore: unused_field
+  final $Res Function(SetPlayerOneReady) _then;
+
+  @override
+  $Res call({
+    Object? value = freezed,
+  }) {
+    return _then(_value.copyWith(
+      value: value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class $SetPlayerOneReady$CopyWith<$Res>
+    implements $SetPlayerOneReadyCopyWith<$Res> {
+  factory $SetPlayerOneReady$CopyWith(
+          SetPlayerOneReady$ value, $Res Function(SetPlayerOneReady$) then) =
+      _$SetPlayerOneReady$CopyWithImpl<$Res>;
+  @override
+  $Res call({bool value});
+}
+
+/// @nodoc
+class _$SetPlayerOneReady$CopyWithImpl<$Res>
+    extends _$SetPlayerOneReadyCopyWithImpl<$Res>
+    implements $SetPlayerOneReady$CopyWith<$Res> {
+  _$SetPlayerOneReady$CopyWithImpl(
+      SetPlayerOneReady$ _value, $Res Function(SetPlayerOneReady$) _then)
+      : super(_value, (v) => _then(v as SetPlayerOneReady$));
+
+  @override
+  SetPlayerOneReady$ get _value => super._value as SetPlayerOneReady$;
+
+  @override
+  $Res call({
+    Object? value = freezed,
+  }) {
+    return _then(SetPlayerOneReady$(
+      value: value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetPlayerOneReady$ implements SetPlayerOneReady$ {
+  const _$SetPlayerOneReady$({required this.value});
+
+  @override
+  final bool value;
+
+  @override
+  String toString() {
+    return 'SetPlayerOneReady(value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SetPlayerOneReady$ &&
+            const DeepCollectionEquality().equals(other.value, value));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(value));
+
+  @JsonKey(ignore: true)
+  @override
+  $SetPlayerOneReady$CopyWith<SetPlayerOneReady$> get copyWith =>
+      _$SetPlayerOneReady$CopyWithImpl<SetPlayerOneReady$>(this, _$identity);
+}
+
+abstract class SetPlayerOneReady$ implements SetPlayerOneReady {
+  const factory SetPlayerOneReady$({required bool value}) =
+      _$SetPlayerOneReady$;
+
+  @override
+  bool get value;
+  @override
+  @JsonKey(ignore: true)
+  $SetPlayerOneReady$CopyWith<SetPlayerOneReady$> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$SetPlayerTwoReadyTearOff {
+  const _$SetPlayerTwoReadyTearOff();
+
+  SetPlayerTwoReady$ call({required bool value}) {
+    return SetPlayerTwoReady$(
+      value: value,
+    );
+  }
+}
+
+/// @nodoc
+const $SetPlayerTwoReady = _$SetPlayerTwoReadyTearOff();
+
+/// @nodoc
+mixin _$SetPlayerTwoReady {
+  bool get value => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SetPlayerTwoReadyCopyWith<SetPlayerTwoReady> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SetPlayerTwoReadyCopyWith<$Res> {
+  factory $SetPlayerTwoReadyCopyWith(
+          SetPlayerTwoReady value, $Res Function(SetPlayerTwoReady) then) =
+      _$SetPlayerTwoReadyCopyWithImpl<$Res>;
+  $Res call({bool value});
+}
+
+/// @nodoc
+class _$SetPlayerTwoReadyCopyWithImpl<$Res>
+    implements $SetPlayerTwoReadyCopyWith<$Res> {
+  _$SetPlayerTwoReadyCopyWithImpl(this._value, this._then);
+
+  final SetPlayerTwoReady _value;
+  // ignore: unused_field
+  final $Res Function(SetPlayerTwoReady) _then;
+
+  @override
+  $Res call({
+    Object? value = freezed,
+  }) {
+    return _then(_value.copyWith(
+      value: value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class $SetPlayerTwoReady$CopyWith<$Res>
+    implements $SetPlayerTwoReadyCopyWith<$Res> {
+  factory $SetPlayerTwoReady$CopyWith(
+          SetPlayerTwoReady$ value, $Res Function(SetPlayerTwoReady$) then) =
+      _$SetPlayerTwoReady$CopyWithImpl<$Res>;
+  @override
+  $Res call({bool value});
+}
+
+/// @nodoc
+class _$SetPlayerTwoReady$CopyWithImpl<$Res>
+    extends _$SetPlayerTwoReadyCopyWithImpl<$Res>
+    implements $SetPlayerTwoReady$CopyWith<$Res> {
+  _$SetPlayerTwoReady$CopyWithImpl(
+      SetPlayerTwoReady$ _value, $Res Function(SetPlayerTwoReady$) _then)
+      : super(_value, (v) => _then(v as SetPlayerTwoReady$));
+
+  @override
+  SetPlayerTwoReady$ get _value => super._value as SetPlayerTwoReady$;
+
+  @override
+  $Res call({
+    Object? value = freezed,
+  }) {
+    return _then(SetPlayerTwoReady$(
+      value: value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetPlayerTwoReady$ implements SetPlayerTwoReady$ {
+  const _$SetPlayerTwoReady$({required this.value});
+
+  @override
+  final bool value;
+
+  @override
+  String toString() {
+    return 'SetPlayerTwoReady(value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SetPlayerTwoReady$ &&
+            const DeepCollectionEquality().equals(other.value, value));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(value));
+
+  @JsonKey(ignore: true)
+  @override
+  $SetPlayerTwoReady$CopyWith<SetPlayerTwoReady$> get copyWith =>
+      _$SetPlayerTwoReady$CopyWithImpl<SetPlayerTwoReady$>(this, _$identity);
+}
+
+abstract class SetPlayerTwoReady$ implements SetPlayerTwoReady {
+  const factory SetPlayerTwoReady$({required bool value}) =
+      _$SetPlayerTwoReady$;
+
+  @override
+  bool get value;
+  @override
+  @JsonKey(ignore: true)
+  $SetPlayerTwoReady$CopyWith<SetPlayerTwoReady$> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$SetTurnTableTearOff {
   const _$SetTurnTableTearOff();
 

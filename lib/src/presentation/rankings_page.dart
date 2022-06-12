@@ -111,7 +111,7 @@ class _RankingsPageState extends State<RankingsPage> {
             ),
           ],
           rows: List<DataRow>.generate(
-            min(scores.length, 7),
+            min(scores.length, 10),
             (int index) => DataRow(
               color: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
                 if (index.isOdd) {
@@ -129,7 +129,9 @@ class _RankingsPageState extends State<RankingsPage> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(3),
-                        child: Image.network(users[scores[index].uid]!.photoUrl),
+                        child: Image.network(
+                            users[scores[index].uid]!.photoUrl,
+                        ),
                       ),
                       Text(
                         users[scores[index].uid]!.username.length > 9
@@ -163,99 +165,102 @@ class _RankingsPageState extends State<RankingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: UsersContainer(
-        builder: (BuildContext context, Map<String, AppUser> users) {
-          return SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.only(left: 16, right: 16, top: 48),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text(
-                    'Rankings',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 70,
-                      shadows: <Shadow>[
-                        Shadow(
-                          blurRadius: 40,
-                          color: Colors.blue,
-                        ),
-                      ],
+      body: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        child: UsersContainer(
+          builder: (BuildContext context, Map<String, AppUser> users) {
+            return SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.only(left: 16, right: 16, top: 48),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'Rankings',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 70,
+                        shadows: <Shadow>[
+                          Shadow(
+                            blurRadius: 40,
+                            color: Colors.blue,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  const Text(
-                    'Best Scores - Difficulty EASY',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      shadows: <Shadow>[
-                        Shadow(
-                          blurRadius: 40,
-                          color: Colors.blue,
-                        ),
-                      ],
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-                  getTable(0, users),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.04,
-                  ),
-                  const Text(
-                    'Best Scores - Difficulty MEDIUM',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      shadows: <Shadow>[
-                        Shadow(
-                          blurRadius: 40,
-                          color: Colors.blue,
-                        ),
-                      ],
+                    const Text(
+                      'Best Scores - Difficulty EASY',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        shadows: <Shadow>[
+                          Shadow(
+                            blurRadius: 40,
+                            color: Colors.blue,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-                  getTable(1, users),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.04,
-                  ),
-                  const Text(
-                    'Best Scores - Difficulty HARD',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      shadows: <Shadow>[
-                        Shadow(
-                          blurRadius: 40,
-                          color: Colors.blue,
-                        ),
-                      ],
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-                  getTable(2, users),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-                ],
+                    Center(child: getTable(0, users)),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.04,
+                    ),
+                    const Text(
+                      'Best Scores - Difficulty MEDIUM',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        shadows: <Shadow>[
+                          Shadow(
+                            blurRadius: 40,
+                            color: Colors.blue,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    Center(child: getTable(1, users)),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.04,
+                    ),
+                    const Text(
+                      'Best Scores - Difficulty HARD',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        shadows: <Shadow>[
+                          Shadow(
+                            blurRadius: 40,
+                            color: Colors.blue,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    Center(child: getTable(2, users)),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

@@ -253,7 +253,14 @@ class _$AppStateTearOff {
       Set<String> pending = const <String>{},
       Map<String, AppUser> users = const <String, AppUser>{},
       List<bool> showMyTableScore = const <bool>[false, false, false],
-      String profileErrorMessage = ''}) {
+      String profileErrorMessage = '',
+      int numberOfRounds = 1,
+      String playerOrderForOnline = 'you first',
+      Map<String, dynamic> room = const <String, dynamic>{},
+      AppUser? playerOneOnline,
+      AppUser? playerTwoOnline,
+      bool playerOneReady = true,
+      bool playerTwoReady = true}) {
     return AppState$(
       selectedDifficulty: selectedDifficulty,
       user: user,
@@ -272,6 +279,13 @@ class _$AppStateTearOff {
       users: users,
       showMyTableScore: showMyTableScore,
       profileErrorMessage: profileErrorMessage,
+      numberOfRounds: numberOfRounds,
+      playerOrderForOnline: playerOrderForOnline,
+      room: room,
+      playerOneOnline: playerOneOnline,
+      playerTwoOnline: playerTwoOnline,
+      playerOneReady: playerOneReady,
+      playerTwoReady: playerTwoReady,
     );
   }
 }
@@ -299,6 +313,13 @@ mixin _$AppState {
   Map<String, AppUser> get users => throw _privateConstructorUsedError;
   List<bool> get showMyTableScore => throw _privateConstructorUsedError;
   String get profileErrorMessage => throw _privateConstructorUsedError;
+  int get numberOfRounds => throw _privateConstructorUsedError;
+  String get playerOrderForOnline => throw _privateConstructorUsedError;
+  Map<String, dynamic> get room => throw _privateConstructorUsedError;
+  AppUser? get playerOneOnline => throw _privateConstructorUsedError;
+  AppUser? get playerTwoOnline => throw _privateConstructorUsedError;
+  bool get playerOneReady => throw _privateConstructorUsedError;
+  bool get playerTwoReady => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateCopyWith<AppState> get copyWith =>
@@ -326,9 +347,18 @@ abstract class $AppStateCopyWith<$Res> {
       Set<String> pending,
       Map<String, AppUser> users,
       List<bool> showMyTableScore,
-      String profileErrorMessage});
+      String profileErrorMessage,
+      int numberOfRounds,
+      String playerOrderForOnline,
+      Map<String, dynamic> room,
+      AppUser? playerOneOnline,
+      AppUser? playerTwoOnline,
+      bool playerOneReady,
+      bool playerTwoReady});
 
   $AppUserCopyWith<$Res>? get user;
+  $AppUserCopyWith<$Res>? get playerOneOnline;
+  $AppUserCopyWith<$Res>? get playerTwoOnline;
 }
 
 /// @nodoc
@@ -358,6 +388,13 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
     Object? users = freezed,
     Object? showMyTableScore = freezed,
     Object? profileErrorMessage = freezed,
+    Object? numberOfRounds = freezed,
+    Object? playerOrderForOnline = freezed,
+    Object? room = freezed,
+    Object? playerOneOnline = freezed,
+    Object? playerTwoOnline = freezed,
+    Object? playerOneReady = freezed,
+    Object? playerTwoReady = freezed,
   }) {
     return _then(_value.copyWith(
       selectedDifficulty: selectedDifficulty == freezed
@@ -428,6 +465,34 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
           ? _value.profileErrorMessage
           : profileErrorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      numberOfRounds: numberOfRounds == freezed
+          ? _value.numberOfRounds
+          : numberOfRounds // ignore: cast_nullable_to_non_nullable
+              as int,
+      playerOrderForOnline: playerOrderForOnline == freezed
+          ? _value.playerOrderForOnline
+          : playerOrderForOnline // ignore: cast_nullable_to_non_nullable
+              as String,
+      room: room == freezed
+          ? _value.room
+          : room // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      playerOneOnline: playerOneOnline == freezed
+          ? _value.playerOneOnline
+          : playerOneOnline // ignore: cast_nullable_to_non_nullable
+              as AppUser?,
+      playerTwoOnline: playerTwoOnline == freezed
+          ? _value.playerTwoOnline
+          : playerTwoOnline // ignore: cast_nullable_to_non_nullable
+              as AppUser?,
+      playerOneReady: playerOneReady == freezed
+          ? _value.playerOneReady
+          : playerOneReady // ignore: cast_nullable_to_non_nullable
+              as bool,
+      playerTwoReady: playerTwoReady == freezed
+          ? _value.playerTwoReady
+          : playerTwoReady // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -439,6 +504,28 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
     return $AppUserCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  $AppUserCopyWith<$Res>? get playerOneOnline {
+    if (_value.playerOneOnline == null) {
+      return null;
+    }
+
+    return $AppUserCopyWith<$Res>(_value.playerOneOnline!, (value) {
+      return _then(_value.copyWith(playerOneOnline: value));
+    });
+  }
+
+  @override
+  $AppUserCopyWith<$Res>? get playerTwoOnline {
+    if (_value.playerTwoOnline == null) {
+      return null;
+    }
+
+    return $AppUserCopyWith<$Res>(_value.playerTwoOnline!, (value) {
+      return _then(_value.copyWith(playerTwoOnline: value));
     });
   }
 }
@@ -465,10 +552,21 @@ abstract class $AppState$CopyWith<$Res> implements $AppStateCopyWith<$Res> {
       Set<String> pending,
       Map<String, AppUser> users,
       List<bool> showMyTableScore,
-      String profileErrorMessage});
+      String profileErrorMessage,
+      int numberOfRounds,
+      String playerOrderForOnline,
+      Map<String, dynamic> room,
+      AppUser? playerOneOnline,
+      AppUser? playerTwoOnline,
+      bool playerOneReady,
+      bool playerTwoReady});
 
   @override
   $AppUserCopyWith<$Res>? get user;
+  @override
+  $AppUserCopyWith<$Res>? get playerOneOnline;
+  @override
+  $AppUserCopyWith<$Res>? get playerTwoOnline;
 }
 
 /// @nodoc
@@ -499,6 +597,13 @@ class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
     Object? users = freezed,
     Object? showMyTableScore = freezed,
     Object? profileErrorMessage = freezed,
+    Object? numberOfRounds = freezed,
+    Object? playerOrderForOnline = freezed,
+    Object? room = freezed,
+    Object? playerOneOnline = freezed,
+    Object? playerTwoOnline = freezed,
+    Object? playerOneReady = freezed,
+    Object? playerTwoReady = freezed,
   }) {
     return _then(AppState$(
       selectedDifficulty: selectedDifficulty == freezed
@@ -569,6 +674,34 @@ class _$AppState$CopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
           ? _value.profileErrorMessage
           : profileErrorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      numberOfRounds: numberOfRounds == freezed
+          ? _value.numberOfRounds
+          : numberOfRounds // ignore: cast_nullable_to_non_nullable
+              as int,
+      playerOrderForOnline: playerOrderForOnline == freezed
+          ? _value.playerOrderForOnline
+          : playerOrderForOnline // ignore: cast_nullable_to_non_nullable
+              as String,
+      room: room == freezed
+          ? _value.room
+          : room // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      playerOneOnline: playerOneOnline == freezed
+          ? _value.playerOneOnline
+          : playerOneOnline // ignore: cast_nullable_to_non_nullable
+              as AppUser?,
+      playerTwoOnline: playerTwoOnline == freezed
+          ? _value.playerTwoOnline
+          : playerTwoOnline // ignore: cast_nullable_to_non_nullable
+              as AppUser?,
+      playerOneReady: playerOneReady == freezed
+          ? _value.playerOneReady
+          : playerOneReady // ignore: cast_nullable_to_non_nullable
+              as bool,
+      playerTwoReady: playerTwoReady == freezed
+          ? _value.playerTwoReady
+          : playerTwoReady // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -603,7 +736,14 @@ class _$AppState$ implements AppState$ {
       this.pending = const <String>{},
       this.users = const <String, AppUser>{},
       this.showMyTableScore = const <bool>[false, false, false],
-      this.profileErrorMessage = ''});
+      this.profileErrorMessage = '',
+      this.numberOfRounds = 1,
+      this.playerOrderForOnline = 'you first',
+      this.room = const <String, dynamic>{},
+      this.playerOneOnline,
+      this.playerTwoOnline,
+      this.playerOneReady = true,
+      this.playerTwoReady = true});
 
   @JsonKey()
   @override
@@ -655,10 +795,29 @@ class _$AppState$ implements AppState$ {
   @JsonKey()
   @override
   final String profileErrorMessage;
+  @JsonKey()
+  @override
+  final int numberOfRounds;
+  @JsonKey()
+  @override
+  final String playerOrderForOnline;
+  @JsonKey()
+  @override
+  final Map<String, dynamic> room;
+  @override
+  final AppUser? playerOneOnline;
+  @override
+  final AppUser? playerTwoOnline;
+  @JsonKey()
+  @override
+  final bool playerOneReady;
+  @JsonKey()
+  @override
+  final bool playerTwoReady;
 
   @override
   String toString() {
-    return 'AppState(selectedDifficulty: $selectedDifficulty, user: $user, photoUrls: $photoUrls, selectedProfilePhoto: $selectedProfilePhoto, difficultyColors: $difficultyColors, gameStatus: $gameStatus, table: $table, availablePlayerOnePieces: $availablePlayerOnePieces, availablePlayerTwoPieces: $availablePlayerTwoPieces, selectedPiece: $selectedPiece, playerTurn: $playerTurn, score: $score, scores: $scores, pending: $pending, users: $users, showMyTableScore: $showMyTableScore, profileErrorMessage: $profileErrorMessage)';
+    return 'AppState(selectedDifficulty: $selectedDifficulty, user: $user, photoUrls: $photoUrls, selectedProfilePhoto: $selectedProfilePhoto, difficultyColors: $difficultyColors, gameStatus: $gameStatus, table: $table, availablePlayerOnePieces: $availablePlayerOnePieces, availablePlayerTwoPieces: $availablePlayerTwoPieces, selectedPiece: $selectedPiece, playerTurn: $playerTurn, score: $score, scores: $scores, pending: $pending, users: $users, showMyTableScore: $showMyTableScore, profileErrorMessage: $profileErrorMessage, numberOfRounds: $numberOfRounds, playerOrderForOnline: $playerOrderForOnline, room: $room, playerOneOnline: $playerOneOnline, playerTwoOnline: $playerTwoOnline, playerOneReady: $playerOneReady, playerTwoReady: $playerTwoReady)';
   }
 
   @override
@@ -692,29 +851,50 @@ class _$AppState$ implements AppState$ {
             const DeepCollectionEquality()
                 .equals(other.showMyTableScore, showMyTableScore) &&
             const DeepCollectionEquality()
-                .equals(other.profileErrorMessage, profileErrorMessage));
+                .equals(other.profileErrorMessage, profileErrorMessage) &&
+            const DeepCollectionEquality()
+                .equals(other.numberOfRounds, numberOfRounds) &&
+            const DeepCollectionEquality()
+                .equals(other.playerOrderForOnline, playerOrderForOnline) &&
+            const DeepCollectionEquality().equals(other.room, room) &&
+            const DeepCollectionEquality()
+                .equals(other.playerOneOnline, playerOneOnline) &&
+            const DeepCollectionEquality()
+                .equals(other.playerTwoOnline, playerTwoOnline) &&
+            const DeepCollectionEquality()
+                .equals(other.playerOneReady, playerOneReady) &&
+            const DeepCollectionEquality()
+                .equals(other.playerTwoReady, playerTwoReady));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(selectedDifficulty),
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(photoUrls),
-      const DeepCollectionEquality().hash(selectedProfilePhoto),
-      const DeepCollectionEquality().hash(difficultyColors),
-      const DeepCollectionEquality().hash(gameStatus),
-      const DeepCollectionEquality().hash(table),
-      const DeepCollectionEquality().hash(availablePlayerOnePieces),
-      const DeepCollectionEquality().hash(availablePlayerTwoPieces),
-      const DeepCollectionEquality().hash(selectedPiece),
-      const DeepCollectionEquality().hash(playerTurn),
-      const DeepCollectionEquality().hash(score),
-      const DeepCollectionEquality().hash(scores),
-      const DeepCollectionEquality().hash(pending),
-      const DeepCollectionEquality().hash(users),
-      const DeepCollectionEquality().hash(showMyTableScore),
-      const DeepCollectionEquality().hash(profileErrorMessage));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(selectedDifficulty),
+        const DeepCollectionEquality().hash(user),
+        const DeepCollectionEquality().hash(photoUrls),
+        const DeepCollectionEquality().hash(selectedProfilePhoto),
+        const DeepCollectionEquality().hash(difficultyColors),
+        const DeepCollectionEquality().hash(gameStatus),
+        const DeepCollectionEquality().hash(table),
+        const DeepCollectionEquality().hash(availablePlayerOnePieces),
+        const DeepCollectionEquality().hash(availablePlayerTwoPieces),
+        const DeepCollectionEquality().hash(selectedPiece),
+        const DeepCollectionEquality().hash(playerTurn),
+        const DeepCollectionEquality().hash(score),
+        const DeepCollectionEquality().hash(scores),
+        const DeepCollectionEquality().hash(pending),
+        const DeepCollectionEquality().hash(users),
+        const DeepCollectionEquality().hash(showMyTableScore),
+        const DeepCollectionEquality().hash(profileErrorMessage),
+        const DeepCollectionEquality().hash(numberOfRounds),
+        const DeepCollectionEquality().hash(playerOrderForOnline),
+        const DeepCollectionEquality().hash(room),
+        const DeepCollectionEquality().hash(playerOneOnline),
+        const DeepCollectionEquality().hash(playerTwoOnline),
+        const DeepCollectionEquality().hash(playerOneReady),
+        const DeepCollectionEquality().hash(playerTwoReady)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -740,7 +920,14 @@ abstract class AppState$ implements AppState {
       Set<String> pending,
       Map<String, AppUser> users,
       List<bool> showMyTableScore,
-      String profileErrorMessage}) = _$AppState$;
+      String profileErrorMessage,
+      int numberOfRounds,
+      String playerOrderForOnline,
+      Map<String, dynamic> room,
+      AppUser? playerOneOnline,
+      AppUser? playerTwoOnline,
+      bool playerOneReady,
+      bool playerTwoReady}) = _$AppState$;
 
   @override
   int get selectedDifficulty;
@@ -776,6 +963,20 @@ abstract class AppState$ implements AppState {
   List<bool> get showMyTableScore;
   @override
   String get profileErrorMessage;
+  @override
+  int get numberOfRounds;
+  @override
+  String get playerOrderForOnline;
+  @override
+  Map<String, dynamic> get room;
+  @override
+  AppUser? get playerOneOnline;
+  @override
+  AppUser? get playerTwoOnline;
+  @override
+  bool get playerOneReady;
+  @override
+  bool get playerTwoReady;
   @override
   @JsonKey(ignore: true)
   $AppState$CopyWith<AppState$> get copyWith =>
