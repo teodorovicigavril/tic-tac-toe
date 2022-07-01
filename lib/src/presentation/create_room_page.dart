@@ -29,7 +29,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
   @override
   void dispose() {
     super.dispose();
-    _socketMethods.stopCreateRoomSuccesListener();
+    _socketMethods.stopCreateRoomSuccessListener();
   }
 
   @override
@@ -188,7 +188,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
                               RadioListTile<String?>(
                                 activeColor: Colors.blue,
                                 title: const Text(
-                                  'you first',
+                                  'You First',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,

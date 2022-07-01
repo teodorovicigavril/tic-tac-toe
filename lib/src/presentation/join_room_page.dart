@@ -32,6 +32,15 @@ class _JoinRoomPageState extends State<JoinRoomPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _socketMethods
+      ..stopJoinRoomSuccessListener()
+      ..stopErrorOccurredListener()
+      ..stopUpdatePlayersStateListener();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
     return Scaffold(

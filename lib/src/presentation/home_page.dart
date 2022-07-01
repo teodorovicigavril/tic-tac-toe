@@ -45,227 +45,230 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Responsive(
-        child: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'Tic Tac Toe',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 70,
-                    shadows: <Shadow>[
-                      Shadow(
-                        blurRadius: 40,
-                        color: Colors.blue,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.blue,
-                        blurRadius: 5,
-                      )
-                    ],
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () => createRoom(context),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width,
-                        50,
-                      ),
-                    ),
-                    child: const Text(
-                      'Create Room',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
+      body: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        child: Responsive(
+          child: SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    'Tic Tac Toe',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 70,
+                      shadows: <Shadow>[
+                        Shadow(
+                          blurRadius: 40,
+                          color: Colors.blue,
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.blue,
-                        blurRadius: 5,
-                      )
-                    ],
+                  const SizedBox(
+                    height: 16,
                   ),
-                  child: ElevatedButton(
-                    onPressed: () => joinRoom(context),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width,
-                        50,
-                      ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.blue,
+                          blurRadius: 5,
+                        )
+                      ],
                     ),
-                    child: const Text(
-                      'Join Room',
-                      style: TextStyle(
-                        fontSize: 16,
+                    child: ElevatedButton(
+                      onPressed: () => createRoom(context),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width,
+                          50,
+                        ),
+                      ),
+                      child: const Text(
+                        'Create Room',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.blue,
-                        blurRadius: 5,
-                      )
-                    ],
+                  const SizedBox(
+                    height: 16,
                   ),
-                  child: ElevatedButton(
-                    onPressed: () => offline(context),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width,
-                        50,
-                      ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.blue,
+                          blurRadius: 5,
+                        )
+                      ],
                     ),
-                    child: const Text(
-                      'Play Offline',
-                      style: TextStyle(
-                        fontSize: 16,
+                    child: ElevatedButton(
+                      onPressed: () => joinRoom(context),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width,
+                          50,
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.blue,
-                        blurRadius: 5,
-                      )
-                    ],
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () => rankings(context),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width,
-                        50,
-                      ),
-                    ),
-                    child: const Text(
-                      'Rankings',
-                      style: TextStyle(
-                        fontSize: 16,
+                      child: const Text(
+                        'Join Room',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.blue,
-                        blurRadius: 5,
-                      )
-                    ],
+                  const SizedBox(
+                    height: 16,
                   ),
-                  child: ElevatedButton(
-                    onPressed: () => profile(context),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width,
-                        50,
-                      ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.blue,
+                          blurRadius: 5,
+                        )
+                      ],
                     ),
-                    child: const Text(
-                      'Profile',
-                      style: TextStyle(
-                        fontSize: 16,
+                    child: ElevatedButton(
+                      onPressed: () => offline(context),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width,
+                          50,
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.blue,
-                        blurRadius: 5,
-                      )
-                    ],
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width,
-                        50,
-                      ),
-                    ),
-                    child: const Text(
-                      'About',
-                      style: TextStyle(
-                        fontSize: 16,
+                      child: const Text(
+                        'Play Offline',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.blue,
-                        blurRadius: 5,
-                      )
-                    ],
+                  const SizedBox(
+                    height: 16,
                   ),
-                  child: ElevatedButton(
-                    onPressed: () => logout(context),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width,
-                        50,
+                  Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.blue,
+                          blurRadius: 5,
+                        )
+                      ],
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () => rankings(context),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width,
+                          50,
+                        ),
+                      ),
+                      child: const Text(
+                        'Rankings',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
-                    child: const Text(
-                      'Logout',
-                      style: TextStyle(
-                        fontSize: 16,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.blue,
+                          blurRadius: 5,
+                        )
+                      ],
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () => profile(context),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width,
+                          50,
+                        ),
+                      ),
+                      child: const Text(
+                        'Profile',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-              ],
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.blue,
+                          blurRadius: 5,
+                        )
+                      ],
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width,
+                          50,
+                        ),
+                      ),
+                      child: const Text(
+                        'About',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.blue,
+                          blurRadius: 5,
+                        )
+                      ],
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () => logout(context),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width,
+                          50,
+                        ),
+                      ),
+                      child: const Text(
+                        'Logout',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

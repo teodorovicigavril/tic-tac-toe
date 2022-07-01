@@ -70,9 +70,14 @@ class _NoDifficultyOfflinePageState extends State<NoDifficultyOfflinePage> {
                   ),
                   UserContainer(
                     builder: (BuildContext context, AppUser? user) {
+                      if (user == null) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      }
                       return Center(
                         child: Text(
-                          user!.username,
+                          user.username,
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

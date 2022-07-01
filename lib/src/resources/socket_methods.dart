@@ -23,7 +23,7 @@ class SocketMethods {
   void joinRoom(AppUser user, String roomId) {
     _socketClient.emit('joinRoom', <String, dynamic>{
       'user': user,
-      'roomId': roomId,
+      'roomId': roomId.toUpperCase(),
     });
   }
 
@@ -59,7 +59,7 @@ class SocketMethods {
     });
   }
 
-  void stopCreateRoomSuccesListener() {
+  void stopCreateRoomSuccessListener() {
     _socketClient.off('createRoomSuccess');
   }
 
@@ -69,6 +69,10 @@ class SocketMethods {
       StoreProvider.of<AppState>(context, listen: false).dispatch(const SetInitGame(1));
       Navigator.pushNamed(context, '/online');
     });
+  }
+
+  void stopJoinRoomSuccessListener() {
+    _socketClient.off('joinRoomSuccess');
   }
 
   void errorOccurredListener(BuildContext context) {
@@ -81,6 +85,10 @@ class SocketMethods {
     });
   }
 
+  void stopErrorOccurredListener() {
+    _socketClient.off('errorOccurred');
+  }
+
   void updatePlayersStateListener(BuildContext context) {
     _socketClient.on('updatePlayers', (dynamic players) {
       StoreProvider.of<AppState>(context, listen: false)
@@ -90,10 +98,18 @@ class SocketMethods {
     });
   }
 
+  void stopUpdatePlayersStateListener() {
+    _socketClient.off('updatePlayers');
+  }
+
   void updateRoomListener(BuildContext context) {
     _socketClient.on('updateRoom', (dynamic room) {
       StoreProvider.of<AppState>(context, listen: false).dispatch(SetRoom(room as Map<String, dynamic>));
     });
+  }
+
+  void stopUpdateRoomListener() {
+    _socketClient.off('updateRoom');
   }
 
   void tappedListener(BuildContext context) {
@@ -229,6 +245,10 @@ class SocketMethods {
     });
   }
 
+  void stopTappedListener() {
+    _socketClient.off('tapped');
+  }
+
   void setReadyForUserListener(BuildContext context) {
     _socketClient.on('setReadyForUser', (dynamic data) {
       final AppUser user = AppUser.fromJson(data['user'] as Map<String, dynamic>);
@@ -238,6 +258,10 @@ class SocketMethods {
         StoreProvider.of<AppState>(context, listen: false).dispatch(const SetPlayerTwoReady(value: true));
       }
     });
+  }
+
+  void stopSetReadyForUserListener() {
+    _socketClient.off('setReadyForUser');
   }
 
 }

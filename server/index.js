@@ -2,8 +2,7 @@
 
 const express = require('express');
 const http = require('http');
-// const cors=require('cors');
-// const bodyParser=require('body-parser');
+const crypto = require('crypto');
 const config = require('./config');
 
 const app = express();
@@ -12,17 +11,10 @@ const server = http.createServer(app);
 const Room = require('./models/room');
 const io = require('socket.io')(server);
 
-
-const userRoutes = require('./routes/user-route');
-const roomRoutes = require('./routes/room-routes');
-
 const firebase = require('./db');
 const firestore = firebase.firestore();
 
 app.use(express.json());
-
-app.use('/api', roomRoutes.routes);
-app.use('/api', userRoutes.routes);
 
 io.on('connection', (socket) => {
     console.log('connected!');
@@ -38,18 +30,16 @@ io.on('connection', (socket) => {
             }
 
             let room = new Room();
-            room.roomId = socket.id;
+            const roomId = crypto.randomBytes(3).toString('hex').toUpperCase();
+            room.roomId = roomId;
             room.numberOfRounds = numberOfRounds;
             room.currentRound = 1;
             room.players = [user];
             room.isJoin = true;
             room.turn = turn;
 
-
             await firestore.collection('rooms').doc(`${room.roomId}`).set(JSON.parse(JSON.stringify(room)));
             console.log('Room created successfully');
-
-            const roomId = room.roomId.toString();
 
             socket.join(roomId);
 

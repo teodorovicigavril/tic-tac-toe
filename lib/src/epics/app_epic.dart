@@ -197,7 +197,14 @@ class AppEpic {
               context: action.context,
               barrierDismissible: false,
               builder: (BuildContext context) {
-                return getAlertDialog('You won!', context, action.difficulty, store.state.score, action.initialPlayer);
+                return getAlertDialog(
+                  'You won!',
+                  context,
+                  action.difficulty,
+                  store.state.score,
+                  action.initialPlayer,
+                  action.width,
+                );
               },
             );
             return;
@@ -226,7 +233,14 @@ class AppEpic {
               context: action.context,
               barrierDismissible: false,
               builder: (BuildContext context) {
-                return getAlertDialog('It s a TIE!', context, action.difficulty, store.state.score, action.initialPlayer);
+                return getAlertDialog(
+                  'It s a TIE!',
+                  context,
+                  action.difficulty,
+                  store.state.score,
+                  action.initialPlayer,
+                  action.width,
+                );
               },
             );
             return;
@@ -287,7 +301,14 @@ class AppEpic {
                 context: action.context,
                 barrierDismissible: false,
                 builder: (BuildContext context) {
-                  return getAlertDialog('You lose!', context, action.difficulty, store.state.score, action.initialPlayer);
+                  return getAlertDialog(
+                    'You lose!',
+                    context,
+                    action.difficulty,
+                    store.state.score,
+                    action.initialPlayer,
+                    action.width,
+                  );
                 },
               );
               return;
@@ -302,7 +323,14 @@ class AppEpic {
                 context: action.context,
                 barrierDismissible: false,
                 builder: (BuildContext context) {
-                  return getAlertDialog('It s a TIE!', context, action.difficulty, store.state.score, action.initialPlayer);
+                  return getAlertDialog(
+                    'It s a TIE!',
+                    context,
+                    action.difficulty,
+                    store.state.score,
+                    action.initialPlayer,
+                    action.width,
+                  );
                 },
               );
               return;
@@ -351,10 +379,16 @@ class AppEpic {
   }
 }
 
-AlertDialog getAlertDialog(String title, BuildContext context, int difficulty, int score, int playerTurn) {
+AlertDialog getAlertDialog(
+  String title,
+  BuildContext context,
+  int difficulty,
+  int score,
+  int playerTurn,
+  double width,
+) {
   return AlertDialog(
     backgroundColor: const Color.fromRGBO(16, 13, 34, 1),
-    actionsAlignment: MainAxisAlignment.spaceEvenly,
     title: Center(
       child: Text(
         title,
@@ -371,8 +405,7 @@ AlertDialog getAlertDialog(String title, BuildContext context, int difficulty, i
         ),
       ),
     ),
-    content:
-    Text(
+    content: Text(
       'Your score is $score, this will be automatically added to your scores!',
       style: const TextStyle(
         color: Colors.white,
@@ -381,107 +414,106 @@ AlertDialog getAlertDialog(String title, BuildContext context, int difficulty, i
         shadows: <Shadow>[
           Shadow(
             blurRadius: 40,
-            color: Colors.red,
+            color: Colors.green,
           ),
         ],
       ),
     ),
+    actionsAlignment: MainAxisAlignment.center,
     actions: <Widget>[
-      Container(
-        margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-        decoration: const BoxDecoration(
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.blue,
-              blurRadius: 5,
-            ),
-          ],
-        ),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          style: ElevatedButton.styleFrom(
-            minimumSize: Size(
-              MediaQuery.of(context).size.width,
-              50,
-            ),
+      Center(
+        child: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.blue,
+                blurRadius: 5,
+              ),
+            ],
           ),
-          child: const Text(
-            'See Board',
-            style: TextStyle(
-              fontSize: 16,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            style: ElevatedButton.styleFrom(
+              minimumSize: Size(width * .3, 50),
             ),
-          ),
-        ),
-      ),
-      Container(
-        margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-        decoration: const BoxDecoration(
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.blue,
-              blurRadius: 5,
-            ),
-          ],
-        ),
-        child: ElevatedButton(
-          onPressed: () {
-            StoreProvider.of<AppState>(context).dispatch(SetInitGame(playerTurn, difficulty));
-
-            if (playerTurn == 2) {
-              StoreProvider.of<AppState>(context).dispatch(
-                SetTurnTableStart(
-                  index: -1,
-                  difficulty: difficulty,
-                  piece: const Tuple2<int, int>(-1, -1),
-                  opponentStarts: true,
-                  context: context,
-                  initialPlayer: playerTurn,
-                ),
-              );
-            }
-
-            Navigator.of(context).pop();
-          },
-          style: ElevatedButton.styleFrom(
-            minimumSize: Size(
-              MediaQuery.of(context).size.width,
-              50,
-            ),
-          ),
-          child: const Text(
-            'Try again',
-            style: TextStyle(
-              fontSize: 16,
+            child: const Text(
+              'See Board',
+              style: TextStyle(
+                fontSize: 16,
+              ),
             ),
           ),
         ),
       ),
-      Container(
-        margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-        decoration: const BoxDecoration(
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.blue,
-              blurRadius: 5,
+      Center(
+        child: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.blue,
+                blurRadius: 5,
+              ),
+            ],
+          ),
+          child: ElevatedButton(
+            onPressed: () {
+              StoreProvider.of<AppState>(context).dispatch(SetInitGame(playerTurn, difficulty));
+
+              if (playerTurn == 2) {
+                StoreProvider.of<AppState>(context).dispatch(
+                  SetTurnTableStart(
+                    index: -1,
+                    difficulty: difficulty,
+                    piece: const Tuple2<int, int>(-1, -1),
+                    opponentStarts: true,
+                    context: context,
+                    initialPlayer: playerTurn,
+                    width: width,
+                  ),
+                );
+              }
+
+              Navigator.of(context).pop();
+            },
+            style: ElevatedButton.styleFrom(
+              minimumSize: Size(width * .3, 50),
             ),
-          ],
-        ),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-          },
-          style: ElevatedButton.styleFrom(
-            minimumSize: Size(
-              MediaQuery.of(context).size.width,
-              50,
+            child: const Text(
+              'Try again',
+              style: TextStyle(
+                fontSize: 16,
+              ),
             ),
           ),
-          child: const Text(
-            'Leave',
-            style: TextStyle(
-              fontSize: 16,
+        ),
+      ),
+      Center(
+        child: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.blue,
+                blurRadius: 5,
+              ),
+            ],
+          ),
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+            },
+            style: ElevatedButton.styleFrom(
+              minimumSize: Size(width * .3, 50),
+            ),
+            child: const Text(
+              'Leave',
+              style: TextStyle(
+                fontSize: 16,
+              ),
             ),
           ),
         ),

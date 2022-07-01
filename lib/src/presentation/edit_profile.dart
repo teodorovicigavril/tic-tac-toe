@@ -72,9 +72,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
       Navigator.pop(context);
       Navigator.pop(context);
 
-      final SnackBar snackBar = SnackBar(
-        backgroundColor: Colors.blueAccent.withOpacity(0.4),
-        content: const Text(
+      const SnackBar snackBar = SnackBar(
+        backgroundColor: Colors.blueAccent,
+        content: Text(
           'Account Updated Successfully!',
           style: TextStyle(
             color: Colors.white,
@@ -82,7 +82,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             fontSize: 16,
           ),
         ),
-        duration: const Duration(seconds: 3),
+        duration: Duration(seconds: 3),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(snackBar);

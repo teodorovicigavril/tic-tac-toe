@@ -40,6 +40,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
           opponentStarts: true,
           context: context,
           initialPlayer: 2,
+          width: -1,
         ),
       );
     }
@@ -74,6 +75,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                     margin: const EdgeInsets.only(left: 8, right: 8, top: 56),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
                                           playerTurn == 1 && gameStatus == 0
@@ -101,7 +103,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                           children: <Widget>[
                                             Center(
                                               child: Container(
-                                                height: 94,
+                                                height: width / 4 + 8,
                                                 color: Colors.blueAccent.withOpacity(0.2),
                                                 width: width - 24,
                                               ),
@@ -146,6 +148,9 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                             ),
                                           ],
                                         ),
+                                        SizedBox(
+                                          height: height * .03,
+                                        ),
                                         PlayerOnePiecesContainer(
                                           builder: (BuildContext context, List<int> playerOnePieces) {
                                             return PlayerTwoPiecesContainer(
@@ -155,6 +160,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                                     return GameStatusContainer(
                                                       builder: (BuildContext context, int gameStatus) {
                                                         return GridView.builder(
+                                                          padding: EdgeInsets.zero,
                                                           physics: const NeverScrollableScrollPhysics(),
                                                           shrinkWrap: true,
                                                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -183,7 +189,10 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                                                                     4 *
                                                                                     (table[index].item2) >
                                                                                 0
-                                                                            ? (width - 50) / 6 / 4 * (table[index].item2)
+                                                                            ? (width - 50) /
+                                                                                6 /
+                                                                                4 *
+                                                                                (table[index].item2)
                                                                             : 1,
                                                                         decoration: BoxDecoration(
                                                                           shape: BoxShape.circle,
@@ -213,6 +222,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                                                       difficulty: difficulty,
                                                                       opponentStarts: false,
                                                                       initialPlayer: initPlayerTurn,
+                                                                      width: width,
                                                                     ),
                                                                   );
                                                                 }
@@ -236,7 +246,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                           children: <Widget>[
                                             Center(
                                               child: Container(
-                                                height: 94,
+                                                height: width / 4 + 8,
                                                 color: Colors.blueAccent.withOpacity(0.2),
                                                 width: width - 24,
                                               ),
@@ -270,9 +280,10 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                                         child: DottedBorder(
                                                           borderType: BorderType.Circle,
                                                           dashPattern: const <double>[10, 10],
-                                                          color: piece.item1 == 1 && piece.item2 == playerOnePieces[index]
-                                                              ? Colors.white
-                                                              : Colors.transparent,
+                                                          color:
+                                                              piece.item1 == 1 && piece.item2 == playerOnePieces[index]
+                                                                  ? Colors.white
+                                                                  : Colors.transparent,
                                                           strokeWidth: 2,
                                                           child: Padding(
                                                             padding: const EdgeInsets.all(3),
@@ -392,6 +403,7 @@ class _DifficultyOfflinePageState extends State<DifficultyOfflinePage> {
                                                                           opponentStarts: true,
                                                                           context: context,
                                                                           initialPlayer: initPlayerTurn,
+                                                                          width: width,
                                                                         ),
                                                                       );
                                                                     }

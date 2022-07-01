@@ -12,7 +12,6 @@ class ScoreBoard extends StatelessWidget {
         final List<dynamic> dynamicPlayers = room['players'] as List<dynamic>;
         final List<AppUser> players = dynamicPlayers.map<AppUser>((final dynamic user) => AppUser.fromJson(user as Map<String, dynamic>)).toList();
         final AppUser playerOne = players[0];
-        print('playerONEE: $playerOne');
         final AppUser playerTwo = players[1];
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
